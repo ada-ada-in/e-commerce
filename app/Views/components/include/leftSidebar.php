@@ -1,6 +1,6 @@
 <div class="left-side-bar">
 			<div class="brand-logo">
-				<a href="">
+				<a href="<?= url_to('admin') ?>">
 					<img src="/assets/deskapp/vendors/images/deskapp-logo.svg" alt="" class="dark-logo" />
 					<img
 						src="/assets/deskapp/vendors/images/deskapp-logo-white.svg"
@@ -16,19 +16,16 @@
 				<div class="sidebar-menu">
 					<ul id="accordion-menu">
 					<li class="dropdown">
-							<a href="" class="dropdown-toggle no-arrow">
+							<a href="<?= url_to('admin') ?>" class="dropdown-toggle no-arrow">
 								<span class="micon bi bi-house"></span
 								><span class="mtext">Dashboard</span>
 							</a>
 						</li>
 						<li class="dropdown">
-							<a href="javascript:;" class="dropdown-toggle">
+							<a href="<?= url_to('arsip') ?>" class="dropdown-toggle no-arrow">
 								<span class="micon bi bi-textarea-resize"></span
 								><span class="mtext">Arsip</span>
 							</a>
-							<ul class="submenu">
-								<li><a href="form-basic.html">Form Basic</a></li>
-							</ul>
 						</li>
 						<li class="dropdown">
 							<a href="javascript:;" class="dropdown-toggle">
@@ -41,13 +38,13 @@
 							</ul>
 						</li>
 						<li class="dropdown">
-							<a href="javascript:;" class="dropdown-toggle no-arrow">
+							<a href="<?= url_to('disposisi') ?>" class="dropdown-toggle no-arrow">
 								<span class="micon bi bi-table"></span
 								><span class="mtext">Disposisi</span>
 							</a>
 						</li>
 						<li class="dropdown">
-							<a href="pengguna" class="dropdown-toggle no-arrow">
+							<a href="<?= url_to('pengguna') ?>" class="dropdown-toggle no-arrow">
 								<span class="micon dw dw-user1"></span
 								><span class="mtext">Pengguna</span>
 							</a>

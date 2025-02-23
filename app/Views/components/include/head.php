@@ -41,6 +41,16 @@
 			href="/assets/deskapp/vendors/styles/icon-font.min.css"
 		/>
 		<link rel="stylesheet" type="text/css" href="/assets/deskapp/vendors/styles/style.css" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/assets/deskapp/src/plugins/datatables/css/dataTables.bootstrap4.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="/assets/deskapp/src/plugins/datatables/css/responsive.bootstrap4.min.css"
+		/>
 
 
     <?= $this->rendersection('stylesheets') ?>

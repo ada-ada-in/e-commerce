@@ -6,7 +6,7 @@ class PagesController extends BaseController
 {
     public function admin(): string
     {
-        return view('layouth/admin_layout');
+        return view('pages/dashboard');
     }
     public function suratMasuk(): string
     {
@@ -15,5 +15,24 @@ class PagesController extends BaseController
     public function suratKeluar(): string
     {
         return view('pages/surat-keluar');
+    }
+    public function pengguna(): string
+    {
+        return view('pages/pengguna');
+    }
+    public function disposisi(): string
+    {
+        return view('pages/disposisi');
+    }
+    public function arsip(): string
+    {
+        return view('pages/arsip');
+    }
+
+
+    // auth
+    public function login(): string
+    {
+        return view('auth/login');
     }
 }

@@ -1,8 +1,6 @@
-<script src=" /scripts/core.js"></script>
-		<script src="/assets/deskapp/vendors/scripts/script.min.js"></script>
-		<script src="/assets/deskapp/vendors/scripts/process.js"></script>
-		<script src="/assets/deskapp/vendors/scripts/layout-settings.js"></script>
-		<script src="/assets/deskapp/vendors/scripts/core.js"></script>
+<?= $this->section('script') ?>
+
+        <script src="/assets/deskapp/vendors/scripts/core.js"></script>
 		<script src="/assets/deskapp/vendors/scripts/script.min.js"></script>
 		<script src="/assets/deskapp/vendors/scripts/process.js"></script>
 		<script src="/assets/deskapp/vendors/scripts/layout-settings.js"></script>
@@ -21,15 +19,4 @@
 		<!-- Datatable Setting js -->
 		<script src="/assets/deskapp/vendors/scripts/datatable-setting.js"></script>
 
-		<script src="/assets/deskapp/src/plugins/apexcharts/apexcharts.min.js"></script>
-		<script src="/assets/deskapp/vendors/scripts/apexcharts-setting.js"></script>
-		<!-- Google Tag Manager (noscript) -->
-		<noscript
-			><iframe
-				src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
-				height="0"
-				width="0"
-				style="display: none; visibility: hidden"
-			></iframe
-		></noscript>
-		<!-- End Google Tag Manager (noscript) -->
+<?= $this->endSection() ?>
