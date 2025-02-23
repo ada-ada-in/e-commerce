@@ -20,7 +20,7 @@
                                     </ol>
                                 </nav>
                             </div>
-                            <div class="col-md-2 col-sm-4 text-right">
+                            <div class="col-md-3 col-sm-4 text-right">
                                 <div class="form-group">
                                     <label>Datedpicker Range View</label>
                                     <input class="form-control datetimepicker-range" placeholder="Select Month" type="text" />
@@ -32,37 +32,56 @@
 
 
 					<div class="card-box mb-30">
-						<div class="pb-20">
+						<div class="pb-20 table-responsive">
 							<table class="data-table table stripe hover data-table-export nowrap">
 								<thead>
 									<tr>
-										<th class="table-plus datatable-nosort">Name</th>
-										<th>Age</th>
-										<th>Office</th>
-										<th>Address</th>
-										<th>Start Date</th>
+										<th class="table-plus datatable-nosort">No.</th>
+										<th>Nomor Surat</th>
+										<th>Jenis Surat</th>
+										<th>Pengirim</th>
+										<th>Penerima</th>
+										<th>Perihal</th>
+										<th>Tanggal Surat</th>
+										<th>File Surat</th>
+										<th>Kategori</th>
 										<th class="datatable-nosort">Action</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td class="table-plus">Gloria F. Mead</td>
-										<td>25</td>
-										<td>Sagittarius</td>
-										<td>2829 Trainer Avenue Peoria, IL 61602</td>
-										<td>29-03-2018</td>
+										<td class="table-plus">1</td>
+										<td>123/ADM/24</td>
+										<td>Surat Keputusan</td>
+										<td>Dinas Pendidikan</td>
+										<td>Kepala Sekolah</td>
+										<td>Pemberitahuan Libur Nasional</td>
+										<td>2024-01-10</td>
+										<td>keputusan123.pdf</td>
+										<td>Surat Masuk</td>
 										<td>
-											<div class="grid gap-2">
-
-													<a  href="" class="g-col-2"
-														><i class="dw dw-eye "></i> View</a
+											<div class="dropdown">
+												<a
+													class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+													href="#"
+													role="button"
+													data-toggle="dropdown"
+												>
+													<i class="dw dw-more"></i>
+												</a>
+												<div
+													class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
+												>
+													<a class="dropdown-item" href="#"
+														><i class="dw dw-eye"></i> View</a
 													>
-													<a  href="#" class="g-col-2 mx-3"
+													<a class="dropdown-item" href="#"
 														><i class="dw dw-edit2"></i> Edit</a
 													>
-													<a  href="#" class="g-col-2"
+													<a class="dropdown-item" href="#"
 														><i class="dw dw-delete-3"></i> Delete</a
 													>
+												</div>
 											</div>
 										</td>
 									</tr>
