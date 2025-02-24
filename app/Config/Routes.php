@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\PagesController;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -14,10 +15,12 @@ $routes->group('admin', static function($routes) {
     $routes->get('disposisi', 'PagesController::disposisi', ['as' => 'disposisi']);
     $routes->get('pengguna', 'PagesController::pengguna', ['as' => 'pengguna']);
     $routes->get('arsip', 'PagesController::arsip', ['as' => 'arsip']);
+    $routes->get('profile', 'PagesController::profile', ['as' => 'profile']);
 });
 
 
 // auth
 $routes->group('auth', static function($routes){
     $routes->get('login', 'PagesController::login', ['as' => 'login']);
+    $routes->get('register', 'PagesController::register', ['as' => 'register']);
 });

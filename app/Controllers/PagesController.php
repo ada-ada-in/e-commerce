@@ -28,11 +28,18 @@ class PagesController extends BaseController
     {
         return view('pages/arsip');
     }
+    public function profile(): string 
+    {
+        return view('pages/profile');
+    }
 
 
     // auth
     public function login(): string
     {
         return view('auth/login');
+    }
+    public function register(): string {
+        return view('auth/register');
     }
 }
