@@ -19,13 +19,7 @@ class UserModel extends Model
     protected bool $updateOnlyChanged = true;
 
     protected array $casts = [
-        'username' => 'string', 
-        'email' => 'string',
-        'namalengkap' => 'string',
-        'role' => 'string',
-        'password' => 'string',
         'is_active' => 'boolean',
-        'handphone' => 'string'
     ];
     protected array $castHandlers = [];
 

@@ -35,6 +35,11 @@ class CreateTableUsers extends Migration
                 'constraint' => '100',
                 'null'       => false,
             ],
+            'handphone' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '15',
+                'null'       => false,
+            ],
             'role'        => [
                 'type'       => 'VARCHAR',
                 'constraint' => '10',

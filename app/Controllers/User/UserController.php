@@ -1,7 +1,7 @@
 <?php
-namespace App\Auth\Controllers;
+namespace App\Controllers\User;
 use CodeIgniter\RESTful\ResourceController;
-use App\Services\RegisterServices\RegisterServices;
+use App\Services\RegisterServices;
 
 class UserController extends ResourceController {
 
@@ -14,16 +14,30 @@ class UserController extends ResourceController {
 
     public function register()
     {
-        $data = $this->request->getPost();
-        $result = $this->registerServices->registerUser($data);
+        try {
+            $data = $this->request->getJSON(true);
 
-        if (!$result['status']) {
-            return $this->fail($result['errors']);
+    
+            if (empty($data)) {
+                return $this->fail(['error' => 'No data received.', 'debug' => $this->request->getBody()]);
+            }
+    
+            $result = $this->registerServices->registerUser($data);
+    
+            if (!$result['status']) {
+                return $this->fail($result['errors']);
+            }
+    
+            return $this->respondCreated([
+                'data' => $data,
+                'message' => $result['message']
+            ]);
+    
+        } catch (\Exception $e) {
+            return $this->fail(['error' => 'Failed to parse JSON', 'message' => $e->getMessage()]);
         }
-
-        return $this->respondCreated(['message' => $result['message']]);
     }
-
+    
 }
 
 

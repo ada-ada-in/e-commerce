@@ -1,7 +1,5 @@
 <?php
 
-use App\Controllers\PagesController;
-use App\Controllers\MigrationController;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -31,6 +29,6 @@ $routes->group('auth', static function($routes){
 // users 
 $routes->group('users', static function($routes){
     // routes api
-    $routes->post('', 'User');
+    $routes->post('', 'User\UserController::register', ['as' => 'register']);
 });
 

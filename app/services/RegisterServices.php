@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\RegisterServices;
+namespace App\Services;
 use App\Models\UserModel;
 
 
@@ -23,15 +23,15 @@ class RegisterServices {
             ],
             'password'    => [
                 'label' => 'password',
-                'rules' => 'required|min_lengt(6)'
+                'rules' => 'required|min_length[6]'
             ],
             'namalengkap' => [
                 'label' => 'namalengkap',
-                'rules' => 'required|min_length(3)'
+                'rules' => 'required|min_length[3]'
             ],
             'handphone'   => [
                 'label' => 'handphone',
-                'rules' => 'required|min_length(12)'
+                'rules' => 'required|min_length[12]'
             ],
             'confirm_password' => [
                 'label' => 'confirm_password',

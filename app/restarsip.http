@@ -1,0 +1,12 @@
+POST http://localhost:8081/users
+content-type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "123456",
+  "confirm_password": "123456",
+  "namalengkap": "Test User",
+  "handphone": "081234567890"
+}
+
