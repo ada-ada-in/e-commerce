@@ -19,13 +19,17 @@ class UserController extends ResourceController {
 
     
             if (empty($data)) {
-                return $this->fail(['error' => 'No data received.', 'debug' => $this->request->getBody()]);
+                return $this->fail([
+                    'error' => 'No data received.', 'debug' => $this->request->getBody()
+                ]);
             }
     
             $result = $this->registerServices->registerUser($data);
     
-            if (!$result['status']) {
-                return $this->fail($result['errors']);
+            if ($result['status'] == false) {
+                return $this->fail(
+                    $result['errors']
+                );
             }
     
             return $this->respondCreated([
@@ -34,7 +38,9 @@ class UserController extends ResourceController {
             ]);
     
         } catch (\Exception $e) {
-            return $this->fail(['error' => 'Failed to parse JSON', 'message' => $e->getMessage()]);
+            return $this->fail([
+                'message' => $e->getMessage()
+            ]);
         }
     }
     

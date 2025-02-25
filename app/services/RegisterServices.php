@@ -12,7 +12,8 @@ class RegisterServices {
     }
 
     public function registerUser(array $data){
-        $rules = [
+
+    $rules = [
             'username'    => [
                 'label' => 'username',
                 'rules' => 'required|min_length[3]'
