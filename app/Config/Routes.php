@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\PagesController;
+use App\Controllers\MigrationController;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -9,6 +10,7 @@ use CodeIgniter\Router\RouteCollection;
 
 // admin
 $routes->group('admin', static function($routes) {
+    // Views
     $routes->get('', 'PagesController::admin', ['as' => 'admin']);
     $routes->get('surat-masuk', 'PagesController::suratMasuk', ['as' => 'suratMasuk']);
     $routes->get('surat-keluar', 'PagesController::suratKeluar', ['as' => 'suratKeluar']);
@@ -19,8 +21,16 @@ $routes->group('admin', static function($routes) {
 });
 
 
-// auth
+//  auth
 $routes->group('auth', static function($routes){
+    // Views
     $routes->get('login', 'PagesController::login', ['as' => 'login']);
     $routes->get('register', 'PagesController::register', ['as' => 'register']);
 });
+
+// users 
+$routes->group('users', static function($routes){
+    // routes api
+    $routes->post('', 'User');
+});
+
