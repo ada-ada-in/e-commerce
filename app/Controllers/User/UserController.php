@@ -39,7 +39,7 @@ class UserController extends ResourceController {
     
         } catch (\Exception $e) {
             return $this->fail([
-                'message' => $e->getMessage()
+                 $e->getMessage()
             ]);
         }
     }

@@ -30,5 +30,6 @@ $routes->group('auth', static function($routes){
 $routes->group('users', static function($routes){
     // routes api
     $routes->post('', 'User\UserController::register', ['as' => 'register']);
+    $routes->post('login', 'Auth\LoginController::login',['as' => 'login']);
 });
 

@@ -16,11 +16,11 @@ class RegisterServices {
     $rules = [
             'username'    => [
                 'label' => 'username',
-                'rules' => 'required|min_length[3]'
+                'rules' => 'required|min_length[3]|is_unique[users.username]'
             ],
             'email'       => [
                 'label' => 'email',
-                'rules' => 'required|valid_email'
+                'rules' => 'required|valid_email|is_unique[users.email]'
             ],
             'password'    => [
                 'label' => 'password',

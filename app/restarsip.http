@@ -1,12 +1,23 @@
-POST http://localhost:8081/users
+# POST http://localhost:8081/users
+# content-type: application/json
+
+# {
+#   "username": "aaa",
+#   "email": "aaa@example.com",
+#   "password": "123456",
+#   "confirm_password": "123456",
+#   "namalengkap": "Test User",
+#   "handphone": "081234567890"
+# }
+
+
+POST http://localhost:8081/users/login
 content-type: application/json
 
 {
-  "username": "testuser",
-  "email": "test@example.com",
+  "username": "aaa",
   "password": "123456",
-  "confirm_password": "123456",
-  "namalengkap": "Test User",
-  "handphone": "081234567890"
 }
+
+
 
