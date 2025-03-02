@@ -2,10 +2,10 @@
 # content-type: application/json
 
 # {
-#   "username": "aaa",
-#   "email": "aaa@example.com",
-#   "password": "123456",
-#   "confirm_password": "123456",
+#   "username": "admin",
+#   "email": "admin@example.com",
+#   "password": "admin123",
+#   "confirm_password": "admin123",
 #   "namalengkap": "Test User",
 #   "handphone": "081234567890"
 # }
@@ -15,8 +15,8 @@ POST http://localhost:8081/users/login
 content-type: application/json
 
 {
-  "username": "aaa",
-  "password": "123456",
+  "username": "admin",
+  "password": "admin123"
 }
 
 

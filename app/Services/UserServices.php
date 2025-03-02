@@ -3,7 +3,7 @@ namespace App\Services;
 use App\Models\UserModel;
 
 
-class RegisterServices {
+class UserServices {
     protected $userModel;
 
     public function __construct()

@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers\User;
 use CodeIgniter\RESTful\ResourceController;
-use App\Services\RegisterServices;
+use App\Services\UserServices;
 
 class UserController extends ResourceController {
 
@@ -9,7 +9,7 @@ class UserController extends ResourceController {
 
     public function __construct()
     {
-        $this->registerServices = new RegisterServices();
+        $this->registerServices = new UserServices();
     }
 
     public function register()
