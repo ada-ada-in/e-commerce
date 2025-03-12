@@ -1,0 +1,73 @@
+<?php
+namespace App\Services;
+use App\Models\UserModel;
+
+
+class UserServices {
+    protected $userModel;
+
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+    }
+
+    public function registerUser(array $data){
+
+    $rules = [
+            'username'    => [
+                'label' => 'username',
+                'rules' => 'required|min_length[3]|is_unique[users.username]'
+            ],
+            'email'       => [
+                'label' => 'email',
+                'rules' => 'required|valid_email|is_unique[users.email]'
+            ],
+            'password'    => [
+                'label' => 'password',
+                'rules' => 'required|min_length[6]'
+            ],
+            'namalengkap' => [
+                'label' => 'namalengkap',
+                'rules' => 'required|min_length[3]'
+            ],
+            'handphone'   => [
+                'label' => 'handphone',
+                'rules' => 'required|min_length[12]'
+            ],
+            'confirm_password' => [
+                'label' => 'confirm_password',
+                'rules' => 'required|matches[password]'
+            ]
+        ];
+
+        $validation = \Config\Services::validation();
+        $validation->setRules($rules);
+
+        if(!$validation->run($data)){
+            return [
+                'status' => false,
+                'errors' => $validation->getErrors()
+            ];
+        }
+
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+        $this->userModel->insert([
+            'username'    => $data['username'],
+            'email'       => $data['email'],
+            'password'    => $data['password'],
+            'namalengkap' => $data['namalengkap'],
+            'handphone'   => $data['handphone'],
+        ]);
+
+
+        return [
+            'status' => true,
+            'message' => 'user register success'
+        ];
+
+     }
+}
+
+
+?>
