@@ -6,11 +6,11 @@ class PagesController extends BaseController
 {
     public function admin(): string
     {
-        return view('pages/dashboard');
+        return view('layouth/main_layout');
     }
-    public function suratMasuk(): string
+    public function dashboard(): string
     {
-        return view('pages/surat-masuk');
+        return view('pages/dashboard');
     }
     public function suratKeluar(): string
     {

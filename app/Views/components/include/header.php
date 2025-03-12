@@ -1,184 +1,102 @@
 <div class="header">
-			<div class="header-left">
-				<div class="menu-icon bi bi-list"></div>
-				<div
-					class="search-toggle-icon bi bi-search"
-					data-toggle="header_search"
-				></div>
-				<div class="header-search">
-					<form>
-						<div class="form-group mb-0">
-							<i class="dw dw-search2 search-icon"></i>
-							<input
-								type="text"
-								class="form-control search-input"
-								placeholder="Search Here"
-							/>
-							<div class="dropdown">
-								<a
-									class="dropdown-toggle no-arrow"
-									href=""
-									role="button"
-									data-toggle="dropdown"
-								>
-									<i class="ion-arrow-down-c"></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-right">
-									<div class="form-group row">
-										<label class="col-sm-12 col-md-2 col-form-label"
-											>From</label
-										>
-										<div class="col-sm-12 col-md-10">
-											<input
-												class="form-control form-control-sm form-control-line"
-												type="text"
-											/>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-12 col-md-2 col-form-label">To</label>
-										<div class="col-sm-12 col-md-10">
-											<input
-												class="form-control form-control-sm form-control-line"
-												type="text"
-											/>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-12 col-md-2 col-form-label"
-											>Subject</label
-										>
-										<div class="col-sm-12 col-md-10">
-											<input
-												class="form-control form-control-sm form-control-line"
-												type="text"
-											/>
-										</div>
-									</div>
-									<div class="text-right">
-										<button class="btn btn-primary">Search</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="header-right">
-				<div class="dashboard-setting user-notification">
-					<div class="dropdown">
-						<a
-							class="dropdown-toggle no-arrow"
-							href="javascript:;"
-							data-toggle="right-sidebar"
-						>
-							<i class="dw dw-settings2"></i>
-						</a>
-					</div>
-				</div>
-				<div class="user-notification">
-					<div class="dropdown">
-						<a
-							class="dropdown-toggle no-arrow"
-							href="#"
-							role="button"
-							data-toggle="dropdown"
-						>
-							<i class="icon-copy dw dw-notification"></i>
-							<span class="badge notification-active"></span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right">
-							<div class="notification-list mx-h-350 customscroll">
-								<ul>
-									<li>
-										<a href="#">
-											<img src="/assets/deskapp/vendors/images/img.jpg" alt="" />
-											<h3>John Doe</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="/assets/deskapp/vendors/images/photo1.jpg" alt="" />
-											<h3>Lea R. Frith</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="/assets/deskapp/vendors/images/photo2.jpg" alt="" />
-											<h3>Erik L. Richards</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="/assets/deskapp/vendors/images/photo3.jpg" alt="" />
-											<h3>John Doe</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="/assets/deskapp/vendors/images/photo4.jpg" alt="" />
-											<h3>Renee I. Hansen</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<img src="/assets/deskapp/vendors/images/img.jpg" alt="" />
-											<h3>Vicki M. Coleman</h3>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit, sed...
-											</p>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="user-info-dropdown">
-					<div class="dropdown">
-						<a
-							class="dropdown-toggle"
-							href="#"
-							role="button"
-							data-toggle="dropdown"
-						>
-							<span class="user-icon">
-								<img src="/assets/deskapp/vendors/images/photo1.jpg" alt="" />
-							</span>
-							<span class="user-name">Ross C. Lopez</span>
-						</a>
-						<div
-							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-						>
-							<a class="dropdown-item" href="<?= url_to('profile') ?>"
-								><i class="dw dw-user1"></i> Profile</a
-							>
-							<a class="dropdown-item" href="login.html"
-								><i class="dw dw-logout"></i> Log Out</a
-							>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="search_bar dropdown">
+                                <span class="search_icon p-3 c-pointer" data-toggle="dropdown">
+                                    <i class="mdi mdi-magnify"></i>
+                                </span>
+                                <div class="dropdown-menu p-0 m-0">
+                                    <form>
+                                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="navbar-nav header-right">
+                            <li class="nav-item dropdown notification_dropdown">
+                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-bell"></i>
+                                    <div class="pulse-css"></div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <ul class="list-unstyled">
+                                        <li class="media dropdown-item">
+                                            <span class="success"><i class="ti-user"></i></span>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <p><strong>Martin</strong> has added a <strong>customer</strong> Successfully
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <span class="notify-time">3:20 am</span>
+                                        </li>
+                                        <li class="media dropdown-item">
+                                            <span class="primary"><i class="ti-shopping-cart"></i></span>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <p><strong>Jennifer</strong> purchased Light Dashboard 2.0.</p>
+                                                </a>
+                                            </div>
+                                            <span class="notify-time">3:20 am</span>
+                                        </li>
+                                        <li class="media dropdown-item">
+                                            <span class="danger"><i class="ti-bookmark"></i></span>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <p><strong>Robin</strong> marked a <strong>ticket</strong> as unsolved.
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <span class="notify-time">3:20 am</span>
+                                        </li>
+                                        <li class="media dropdown-item">
+                                            <span class="primary"><i class="ti-heart"></i></span>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <p><strong>David</strong> purchased Light Dashboard 1.0.</p>
+                                                </a>
+                                            </div>
+                                            <span class="notify-time">3:20 am</span>
+                                        </li>
+                                        <li class="media dropdown-item">
+                                            <span class="success"><i class="ti-image"></i></span>
+                                            <div class="media-body">
+                                                <a href="#">
+                                                    <p><strong> James.</strong> has added a<strong>customer</strong> Successfully
+                                                    </p>
+                                                </a>
+                                            </div>
+                                            <span class="notify-time">3:20 am</span>
+                                        </li>
+                                    </ul>
+                                    <a class="all-notification" href="#">See all notifications <i
+                                            class="ti-arrow-right"></i></a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown header-profile">
+                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="./app-profile.html" class="dropdown-item">
+                                        <i class="icon-user"></i>
+                                        <span class="ml-2">Profile </span>
+                                    </a>
+                                    <a href="./email-inbox.html" class="dropdown-item">
+                                        <i class="icon-envelope-open"></i>
+                                        <span class="ml-2">Inbox </span>
+                                    </a>
+                                    <a href="./page-login.html" class="dropdown-item">
+                                        <i class="icon-key"></i>
+                                        <span class="ml-2">Logout </span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
