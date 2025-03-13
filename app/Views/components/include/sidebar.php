@@ -32,8 +32,9 @@
                                 class="icon-rocket"></i><span class="nav-text">Delivery</span></a>
                         <ul aria-expanded="false">
                             <li><a href="./chart-flot.html">Data</a></li>
-                            <li><a href="./chart-morris.html">Track</a></li>
-                            <li><a href="./chart-morris.html">Refund</a></li>
+                            <li><a href="./chart-morris.html">Order</a></li>
+                            <li><a href="./chart-morris.html">Send</a></li>
+                            <li><a href="./chart-morris.html">Pick Up</a></li>
 
                         </ul>
                     </li>
