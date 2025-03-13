@@ -4,22 +4,18 @@
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>Hi Admin, welcome back!</h4>
+                            <h4>Product Page</h4>
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Market</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Product</a></li>
                         </ol>
                     </div>
                 </div>
 
-                <?= view('components/dashboard/card')  ?>
-
-                <?= view('components/dashboard/chart') ?>
-
-                <?= view('components/dashboard/datatable') ?>
+                <?= view('components/product/table')  ?>
 
 
 <?= $this->endSection() ?> 
