@@ -16,4 +16,34 @@ class PagesController extends BaseController
     {
         return view('pages/product');
     }
+    public function category(): string {
+        return view('pages/category');
+    }
+    public function paid(): string {
+        return view('pages/paid');
+    }
+    public function pending(): string {
+        return view('pages/pending');
+    }
+    public function due(): string {
+        return view('pages/due');
+    }
+    public function data(): string {
+        return view('pages/data');
+    }
+    public function order(): string {
+        return view('pages/order');
+    }
+    public function send(): string {
+        return view('pages/send');
+    }
+    public function pickup(): string {
+        return view('pages/pickup');
+    }   
+    public function report(): string {
+        return view('pages/report');
+    }
+    public function users(): string {
+        return view('pages/users');
+    }
 }
