@@ -1,164 +1,63 @@
 
 <!DOCTYPE html>
-<html>
-	<head>
-		<!-- Basic Page Info -->
-		<meta charset="utf-8" />
-		<title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+<html lang="en" class="h-100">
 
-		<!-- Site favicon -->
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="/assets/deskapp/vendors/images/apple-touch-icon.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="/assets/deskapp/vendors/images/favicon-32x32.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="16x16"
-			href="/assets/deskapp/vendors/images/favicon-16x16.png"
-		/>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MM Barokah 4 Putra</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+    <link href="/assets/focus2/css/style.css" rel="stylesheet">
 
-		<!-- Mobile Specific Metas -->
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, maximum-scale=1"
-		/>
+</head>
 
-		<!-- Google Font -->
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-			rel="stylesheet"
-		/>
-		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="/assets/deskapp/vendors/styles/core.css" />
-		<link
-			rel="stylesheet"
-			type="text/css"
-			href="/assets/deskapp/vendors/styles/icon-font.min.css"
-		/>
-		<link rel="stylesheet" type="text/css" href="/assets/deskapp/vendors/styles/style.css" />
-	</head>
-	<body class="login-page">
-		<div
-			class="login-wrap d-flex align-items-center flex-wrap justify-content-center"
-		>
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-md-6 col-lg-7">
-						<img src="/assets/deskapp/vendors/images/login-page-img.png" alt="" />
-					</div>
-					<div class="col-md-6 col-lg-5">
-						<div class="login-box bg-white box-shadow border-radius-10">
-							<div class="login-title">
-								<h2 class="text-center text-primary">Register</h2>
-							</div>
-							<form>
-								<div class="input-group custom">
-									<input
-										type="text"
-										class="form-control form-control-lg"
-										placeholder="Username"
-									/>
-									<div class="input-group-append custom">
-										<span class="input-group-text"
-											><i class="icon-copy dw dw-user1"></i
-										></span>
-									</div>
-								</div>
-                                <div class="input-group custom">
-									<input
-										type="email"
-										class="form-control form-control-lg"
-										placeholder="Email"
-									/>
-									<div class="input-group-append custom">
-										<span class="input-group-text"
-											><i class="icon-copy dw dw-email1"></i
-										></span>
-									</div>
-								</div>
-                                <div class="input-group custom">
-									<input
-										type="text"
-										class="form-control form-control-lg"
-										placeholder="Nama Lengkap"
-									/>
-									<div class="input-group-append custom">
-										<span class="input-group-text"
-											><i class="icon-copy dw dw-user1"></i
-										></span>
-									</div>
-								</div>
-								<div class="input-group custom">
-									<input
-										type="password"
-										class="form-control form-control-lg"
-										placeholder="**********"
-									/>
-									<div class="input-group-append custom">
-										<span class="input-group-text"
-											><i class="dw dw-padlock1"></i
-										></span>
-									</div>
-								</div>
-                                <div class="input-group custom">
-									<input
-										type="Confirm Password"
-										class="form-control form-control-lg"
-										placeholder="**********"
-									/>
-									<div class="input-group-append custom">
-										<span class="input-group-text"
-											><i class="dw dw-padlock1"></i
-										></span>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="input-group mb-0">
-											<!--
-											use code for form submit
-											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
-										-->
-											<a
-												class="btn btn-primary btn-lg btn-block"
-												href="index.html"
-												>Create Account</a
-											>
-										</div>
-										<div
-											class="font-16 weight-600 pt-10 pb-10 text-center"
-											data-color="#707373"
-										>
-											OR
-										</div>
-										<div class="input-group mb-0">
-											<a
-												class="btn btn-outline-primary btn-lg btn-block"
-												href="register.html"
-												>Login</a
-											>
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<body class="h-100">
+    <div class="authincation h-100">
+        <div class="container-fluid h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+                                    <h4 class="text-center mb-4">Sign up your account</h4>
+                                    <form action="index.html">
+                                        <div class="form-group">
+                                            <label><strong>Username</strong></label>
+                                            <input type="text" class="form-control" placeholder="username">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>Email</strong></label>
+                                            <input type="email" class="form-control" placeholder="hello@example.com">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>Password</strong></label>
+                                            <input type="password" class="form-control" value="Password">
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <button type="submit" class="btn btn-primary btn-block">Sign me up</button>
+                                        </div>
+                                    </form>
+                                    <div class="new-account mt-3">
+                                        <p>Already have an account? <a class="text-primary" href="<?= base_url('auth/login') ?>">Sign in</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-		<!-- js -->
-		<script src="/assets/deskapp/vendors/scripts/core.js"></script>
-		<script src="/assets/deskapp/vendors/scripts/script.min.js"></script>
-		<script src="/assets/deskapp/vendors/scripts/process.js"></script>
-		<script src="/assets/deskapp/vendors/scripts/layout-settings.js"></script>
-	</body>
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="/assets/focus2/vendor/global/global.min.js"></script>
+    <script src="/assets/focus2/js/quixnav-init.js"></script>
+    <!--endRemoveIf(production)-->
+</body>
+
 </html>

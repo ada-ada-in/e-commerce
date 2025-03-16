@@ -20,4 +20,11 @@ $routes->group('admin', static function($routes) {
     $routes->get('pickup', 'PagesController::pickup', ['as' => 'pickup']);
     $routes->get('report', 'PagesController::report', ['as' => 'report']);
     $routes->get('users', 'PagesController::users', ['as' => 'users']);
+    $routes->get('profile', 'PagesController::profile', ['as' => 'profile']);
+});
+
+// auth
+$routes->group('auth', static function($routes) {
+    $routes->get('login', 'PagesController::login', ['as' => 'login']);
+    $routes->get('register', 'PagesController::register', ['as' => 'register']);
 });

@@ -46,4 +46,13 @@ class PagesController extends BaseController
     public function users(): string {
         return view('pages/users');
     }
+    public function profile(): string {
+        return view('pages/profile');
+    }
+    public function login(): string {
+        return view('auth/login');
+    }
+    public function register(): string {
+        return view('auth/register');
+    }
 }
