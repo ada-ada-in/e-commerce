@@ -34,7 +34,13 @@ $routes->group('auth', static function($routes) {
 // api
 $routes->group('api/v1', static function($routes) {
     $routes->group('auth', static function($routes) {
-        $routes->post('login', 'Api\V1\auth\AuthController::login', ['as' => 'auth.login']);
-        $routes->post('register', 'Api\V1\auth\AuthController::register', ['as' => 'auth.register']);
+        $routes->post('login', 'Api\V1\auth\AuthController::login', ['as' => 'api.auth.login']);
+        $routes->post('register', 'Api\V1\auth\AuthController::register', ['as' => 'api.auth.register']);
+    });
+    $routes->group('users', static function($routes) {
+        $routes->get('', 'Api\V1\User\UserController::getDataUser', ['as' => 'api.users.getDataUser']);
+        $routes->get('(:num)', 'Api\V1\User\UserController::getDataUserById/$1', ['as' => 'api.users.getDataUserById']);
+        $routes->delete('(:num)', 'Api\V1\User\UserController::deleteDataUserById/$1', ['as' => 'api.userss.deleteDataUserById']);
+        $routes->put('(:num)', 'Api\V1\User\UserController::updateDataUserById/$1', ['as' => 'api.users.updateDataUserById']);
     });
 });
