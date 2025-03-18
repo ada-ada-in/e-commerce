@@ -1,7 +1,6 @@
 <?php
 namespace App\Services;
 use App\Models\UserModel;
-use CodeIgniter\Commands\Database\Seed;
 
 class UserServices {
     protected $userModel;
