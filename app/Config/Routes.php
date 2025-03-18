@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // admin
+// $routes->group('admin', ['filter' => 'auth'], static function($routes) {
 $routes->group('admin', static function($routes) {
     $routes->get('dashboard', 'PagesController::dashboard', ['as' => 'dashboard']);
     $routes->get('product', 'PagesController::product', ['as' => 'product']);
@@ -27,4 +28,13 @@ $routes->group('admin', static function($routes) {
 $routes->group('auth', static function($routes) {
     $routes->get('login', 'PagesController::login', ['as' => 'login']);
     $routes->get('register', 'PagesController::register', ['as' => 'register']);
+});
+
+
+// api
+$routes->group('api/v1', static function($routes) {
+    $routes->group('auth', static function($routes) {
+        $routes->post('login', 'Api\V1\auth\AuthController::login', ['as' => 'auth.login']);
+        $routes->post('register', 'Api\V1\auth\AuthController::register', ['as' => 'auth.register']);
+    });
 });

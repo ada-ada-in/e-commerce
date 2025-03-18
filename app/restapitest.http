@@ -1,0 +1,24 @@
+
+# POST http://localhost:8081/api/v1/auth/register
+# content-type: application/json
+
+# {
+#   "name": "user1",
+#   "email": "user1@example.com",
+#   "password": "user123",
+#   "confirm_password": "user123",
+#   "address": "address Example",
+#   "phone": "081234567890"
+# }
+
+
+POST http://localhost:8081/api/v1/auth/login
+content-type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "user123"
+}
+
+
+
