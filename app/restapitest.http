@@ -44,19 +44,41 @@
 #   "phone": "081234567890"
 # }
 
-PUT http://localhost:8081/api/v1/users/4
-content-type: application/json
+# PUT http://localhost:8081/api/v1/users/4
+# content-type: application/json
 
-{
-  "name": "user4",
-  "email": "user2@example.com",
-  "password": "user123",
-  "confirm_password": "user123",
-  "address": "address Example",
-  "phone": "081234567890"
-}
+# {
+#   "name": "user4",
+#   "email": "user2@example.com",
+#   "password": "user123",
+#   "confirm_password": "user123",
+#   "address": "address Example",
+#   "phone": "081234567890"
+# }
 
+# CATEGORY
 
+# POST http://localhost:8081/api/v1/category
+# content-type: application/json
 
+# {
+#   "name": "name categories example",
+#   "description": "description categories example"
+# }
 
+# DELETE http://localhost:8081/api/v1/category/1
+# content-type: application/json
 
+# GET http://localhost:8081/api/v1/category
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/category/3
+# content-type: application/json
+
+# PUT http://localhost:8081/api/v1/category/3
+# content-type: application/json
+
+# {
+#   "name": "edit categories example",
+#   "description": "edit description categories example"
+# }

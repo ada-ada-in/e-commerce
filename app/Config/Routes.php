@@ -37,10 +37,20 @@ $routes->group('api/v1', static function($routes) {
         $routes->post('login', 'Api\V1\auth\AuthController::login', ['as' => 'api.auth.login']);
         $routes->post('register', 'Api\V1\auth\AuthController::register', ['as' => 'api.auth.register']);
     });
+
     $routes->group('users', static function($routes) {
         $routes->get('', 'Api\V1\User\UserController::getDataUser', ['as' => 'api.users.getDataUser']);
         $routes->get('(:num)', 'Api\V1\User\UserController::getDataUserById/$1', ['as' => 'api.users.getDataUserById']);
         $routes->delete('(:num)', 'Api\V1\User\UserController::deleteDataUserById/$1', ['as' => 'api.userss.deleteDataUserById']);
         $routes->put('(:num)', 'Api\V1\User\UserController::updateDataUserById/$1', ['as' => 'api.users.updateDataUserById']);
     });
+
+    $routes->group('category', static function($routes) {
+        $routes->post('', 'Api\V1\Category\CategoryController::addCategory', ['as' => 'api.category.addCategory']);
+        $routes->delete('(:num)', 'Api\V1\Category\CategoryController::deleteCategory/$1', ['as' => 'api.category.deleteCategory']);
+        $routes->get('', 'Api\V1\Category\CategoryController::getDataCategory', ['as' => 'api.category.getDataCategory']);
+        $routes->get('(:num)', 'Api\V1\Category\CategoryController::getDataCategoryById/$1', ['as' => 'api.category.getDataCategoryById']);
+        $routes->put('(:num)', 'Api\V1\Category\CategoryController::updateDataCategoryById/$1', ['as' => 'api.category.updateDataCategoryById']);
+    });
+    
 });

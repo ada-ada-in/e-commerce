@@ -1,7 +1,6 @@
 <?php
 namespace App\Controllers\Api\V1\Auth;
 
-use App\Models\UserModel;
 use CodeIgniter\RESTful\ResourceController;
 use App\Services\AuthServices;
 
