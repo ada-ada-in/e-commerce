@@ -135,16 +135,17 @@ class TransactionServices {
         }
     
         $updateData = [
-            'name'    => $data['name'] ?? $existingCategory['name'],
-            'description'   => $data['description'] ?? $existingCategory['description'],
+            'user_id'    => $data['user_id'] ?? $existingCategory['user_id'],
+            'total_price'   => $data['total_price'] ?? $existingCategory['total_price'],
+            'status'   => $data['status'] ?? $existingCategory['status'],
         ];
 
     
         $transactionData->update($id, $updateData);
     
-        $updateCategory = $transactionData->find($id);
+        $updateTransaction = $transactionData->find($id);
     
-        return $updateCategory;
+        return $updateTransaction;
     }
      
 }

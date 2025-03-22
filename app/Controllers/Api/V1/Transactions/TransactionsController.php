@@ -1,10 +1,10 @@
 <?php
-namespace App\Controllers\Api\V1\transactions;
+namespace App\Controllers\Api\V1\Transactions;
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Services\TransactionServices;
 
-class TransactiosController extends ResourceController {
+class TransactionsController extends ResourceController {
 
     protected $transactionServices;
 

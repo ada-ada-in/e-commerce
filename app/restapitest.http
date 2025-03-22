@@ -82,3 +82,32 @@
 #   "name": "edit categories example",
 #   "description": "edit description categories example"
 # }
+
+# Transactions
+
+# POST http://localhost:8081/api/v1/transactions
+# content-type: application/json
+
+# {
+#   "user_id": 4,
+#   "total_price": 50000,
+#   "status": "paid"
+# }
+
+# DELETE http://localhost:8081/api/v1/transactions/1
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/transactions
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/transactions/3
+# content-type: application/json
+
+# PUT http://localhost:8081/api/v1/transactions/3
+# content-type: application/json
+
+# {
+#   "user_id": 4,
+#   "total_price": 20000,
+#   "status": "paid"
+# }
