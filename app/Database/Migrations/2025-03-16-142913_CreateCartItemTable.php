@@ -13,6 +13,7 @@ class CreateCartItemTable extends Migration
             'product_id'     => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true],
             'user_id'     => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true],
             'quantity' => ['type' => 'INT', 'constraint' => 11],
+            'total_price' => ['type' => 'INT', 'constraint' => 11],
             'created_at'  => ['type' => 'DATETIME', 'null' => true],
             'updated_at'  => ['type' => 'DATETIME', 'null' => true]
         ]);

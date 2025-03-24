@@ -60,5 +60,13 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('(:num)', 'Api\V1\Transactions\TransactionsController::getDataTransactionById/$1', ['as' => 'api.transactions.getDataTransactionById']);
         $routes->put('(:num)', 'Api\V1\Transactions\TransactionsController::updateDataTransactionyById/$1', ['as' => 'api.transactions.updateDataTransactionyById']);
     }); 
+
+    $routes->group('cartitems', static function($routes) {
+        $routes->post('', 'Api\V1\CartItems\CartItemsController::addCartItem', ['as' => 'api.cartItem.addCartItem']);
+        $routes->delete('(:num)', 'Api\V1\CartItems\CartItemsController::deleteCartItem/$1', ['as' => 'api.cartItem.deleteCartItem']);
+        $routes->get('', 'Api\V1\CartItems\CartItemsController::getDataCartItem', ['as' => 'api.cartItem.getDataCartItem']);
+        $routes->get('(:num)', 'Api\V1\CartItems\CartItemsController::getDataCartItemById/$1', ['as' => 'api.cartItem.getDataCartItemById']);
+        $routes->put('(:num)', 'Api\V1\CartItems\CartItemsController::updateDataCategoryById/$1', ['as' => 'api.cartItem.updateDataCategoryById']);
+    }); 
     
 });

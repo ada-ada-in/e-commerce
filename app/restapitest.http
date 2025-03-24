@@ -32,18 +32,6 @@
 # DELETE http://localhost:8081/api/v1/users/2
 # content-type: application/json
 
-# POST http://localhost:8081/api/v1/auth/register
-# content-type: application/json
-
-# {
-#   "name": "user1",
-#   "email": "user1@example.com",
-#   "password": "user123",
-#   "confirm_password": "user123",
-#   "address": "address Example",
-#   "phone": "081234567890"
-# }
-
 # PUT http://localhost:8081/api/v1/users/4
 # content-type: application/json
 
@@ -111,3 +99,66 @@
 #   "total_price": 20000,
 #   "status": "paid"
 # }
+
+# Transactions
+
+# POST http://localhost:8081/api/v1/transactions
+# content-type: application/json
+
+# {
+#   "user_id": 4,
+#   "total_price": 50000,
+#   "status": "paid"
+# }
+
+# DELETE http://localhost:8081/api/v1/transactions/1
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/transactions
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/transactions/3
+# content-type: application/json
+
+# PUT http://localhost:8081/api/v1/transactions/3
+# content-type: application/json
+
+# {
+#   "user_id": 4,
+#   "total_price": 20000,
+#   "status": "paid"
+# }
+
+
+# Cart Items
+
+# POST http://localhost:8081/api/v1/cartitems
+# content-type: application/json
+
+# {
+#   "product_id": 1,
+#   "user_id": 1,
+#   "quantity": 1,
+#   "total_price": 200000
+# }
+
+# DELETE http://localhost:8081/api/v1/cartitems/1
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/cartitems
+# content-type: application/json
+
+
+# GET http://localhost:8081/api/v1/cartitems/2
+# content-type: application/json
+
+PUT http://localhost:8081/api/v1/cartitems/2
+content-type: application/json
+
+{
+  "product_id": 1,
+  "user_id": 1,
+  "quantity": 3,
+  "total_price": 200000
+}
+
