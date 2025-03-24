@@ -74,10 +74,10 @@
 # Transactions
 
 # POST http://localhost:8081/api/v1/transactions
-# content-type: application/json
+# content-type: application/json; charset=UTF-8
 
 # {
-#   "user_id": 4,
+#   "user_id": 1,
 #   "total_price": 50000,
 #   "status": "paid"
 # }
@@ -152,13 +152,44 @@
 # GET http://localhost:8081/api/v1/cartitems/2
 # content-type: application/json
 
-PUT http://localhost:8081/api/v1/cartitems/2
-content-type: application/json
+# PUT http://localhost:8081/api/v1/cartitems/2
+# content-type: application/json
 
-{
-  "product_id": 1,
-  "user_id": 1,
-  "quantity": 3,
-  "total_price": 200000
-}
+# {
+#   "product_id": 1,
+#   "user_id": 1,
+#   "quantity": 3,
+#   "total_price": 200000
+# }
+
+# Payment
+
+# POST http://localhost:8081/api/v1/payments
+# content-type: application/json
+
+# {
+#   "transactions_id": 1,
+#   "payment_methode": "BCA",
+#   "payment_status": "success"
+# }
+
+# DELETE http://localhost:8081/api/v1/payments/1
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/payments
+# content-type: application/json
+
+
+# GET http://localhost:8081/api/v1/payments/2
+# content-type: application/json
+
+# PUT http://localhost:8081/api/v1/payments/2
+# content-type: application/json
+
+# {
+#   "transactions_id": 1,
+#   "payment_methode": "MANDIRI",
+#   "payment_status": "success"
+# }
+
 
