@@ -76,5 +76,13 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('(:num)', 'Api\V1\Payment\PaymentController::getDataPaymentById/$1', ['as' => 'api.payment.getDataPaymentById']);
         $routes->put('(:num)', 'Api\V1\Payment\PaymentController::updateDataTransactionyById/$1', ['as' => 'api.payment.updateDataTransactionyById']);
     }); 
+
+    $routes->group('products', static function($routes) {
+        $routes->post('', 'Api\V1\Product\ProductController::addProduct', ['as' => 'api.product.addProduct']);
+        $routes->delete('(:num)', 'Api\V1\Product\ProductController::deleteProduct/$1', ['as' => 'api.product.deleteProduct']);
+        $routes->get('', 'Api\V1\Product\ProductController::getDataProduct', ['as' => 'api.product.getDataProduct']);
+        $routes->get('(:num)', 'Api\V1\Product\ProductController::getDataProductById/$1', ['as' => 'api.product.getDataProductById']);
+        $routes->put('(:num)', 'Api\V1\Product\ProductController::updateDataProductById/$1', ['as' => 'api.product.updateDataProductyById']);
+    }); 
     
 });

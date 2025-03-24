@@ -193,3 +193,19 @@
 # }
 
 
+# Product
+
+# post dan put lakukan di postman, karena di file ini tidak mundukung format file
+
+# DELETE http://localhost:8081/api/v1/products/11
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/products
+# content-type: application/json
+
+
+# GET http://localhost:8081/api/v1/products/7
+# content-type: application/json
+
+
+
