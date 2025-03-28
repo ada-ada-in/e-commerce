@@ -136,10 +136,9 @@
 # content-type: application/json
 
 # {
-#   "product_id": 1,
+#   "product_id": 7,
 #   "user_id": 1,
-#   "quantity": 1,
-#   "total_price": 200000
+#   "quantity": 2
 # }
 
 # DELETE http://localhost:8081/api/v1/cartitems/1
@@ -152,14 +151,13 @@
 # GET http://localhost:8081/api/v1/cartitems/2
 # content-type: application/json
 
-# PUT http://localhost:8081/api/v1/cartitems/2
+# PUT http://localhost:8081/api/v1/cartitems/3
 # content-type: application/json
 
 # {
-#   "product_id": 1,
+#   "product_id": 7,
 #   "user_id": 1,
-#   "quantity": 3,
-#   "total_price": 200000
+#   "quantity":5
 # }
 
 # Payment
