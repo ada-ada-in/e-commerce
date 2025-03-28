@@ -209,3 +209,21 @@
 
 
 
+# Stok In
+
+# POST http://localhost:8081/api/v1/stokin
+# content-type: application/json
+
+# {
+#   "product_id": 7,
+#   "quantity": 1
+# }
+
+# DELETE http://localhost:8081/api/v1/stokin/2
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/stokin
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/stokin/3
+# content-type: application/json

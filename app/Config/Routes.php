@@ -84,5 +84,12 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('(:num)', 'Api\V1\Product\ProductController::getDataProductById/$1', ['as' => 'api.product.getDataProductById']);
         $routes->put('(:num)', 'Api\V1\Product\ProductController::updateDataProductById/$1', ['as' => 'api.product.updateDataProductyById']);
     }); 
+
+    $routes->group('stokin', static function($routes) {
+        $routes->post('', 'Api\V1\StokIn\StokInController::addStokIn', ['as' => 'api.stokin.addStokIn']);
+        $routes->delete('(:num)', 'Api\V1\StokIn\StokInController::deleteStokIn/$1', ['as' => 'api.stokin.deleteStokIn']);
+        $routes->get('', 'Api\V1\StokIn\StokInController::getDataStokIn', ['as' => 'api.stokin.getDataStokIn']);
+        $routes->get('(:num)', 'Api\V1\StokIn\StokInController::getDataStokInById/$1', ['as' => 'api.stokin.getDataStokInById']);
+    }); 
     
 });

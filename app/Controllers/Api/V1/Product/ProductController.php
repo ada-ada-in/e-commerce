@@ -50,7 +50,7 @@ class ProductController extends ResourceController {
                 'file_name' => $imageName,
                 'data' => $result
             ]);
-    
+     
         } catch (\Exception $e) {
             return $this->fail([
                 'error' => 'An error occurred.',
