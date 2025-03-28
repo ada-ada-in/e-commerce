@@ -91,5 +91,14 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('', 'Api\V1\StokIn\StokInController::getDataStokIn', ['as' => 'api.stokin.getDataStokIn']);
         $routes->get('(:num)', 'Api\V1\StokIn\StokInController::getDataStokInById/$1', ['as' => 'api.stokin.getDataStokInById']);
     }); 
+
+    $routes->group('transactionsitems', static function($routes) {
+        $routes->post('', 'Api\V1\TransactionsItems\TransactionsItemsController::addTransactionItems', ['as' => 'api.transactionsitems.addTransactionItems']);
+        $routes->delete('(:num)', 'Api\V1\TransactionsItems\TransactionsItemsController::deleteTransactionItems/$1', ['as' => 'api.transactionsitems.deleteTransactionItems']);
+        $routes->get('', 'Api\V1\TransactionsItems\TransactionsItemsController::getDataTransactionItems', ['as' => 'api.transactionsitems.getDataTransactionItems']);
+        $routes->get('(:num)', 'Api\V1\TransactionsItems\TransactionsItemsController::getDataTransactionItemsById/$1', ['as' => 'api.transactionsitems.getDataTransactionItemsById']);
+        $routes->put('(:num)', 'Api\V1\TransactionsItems\TransactionsItemsController::updateDataTransactionsItemsyById/$1', ['as' => 'api.transactionsitems.updateDataTransactionsItemsyById']);
+    }); 
+    
     
 });
