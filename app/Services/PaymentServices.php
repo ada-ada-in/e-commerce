@@ -25,7 +25,7 @@ class PaymentServices {
             ],
             'payment_status'       => [
                 'label' => 'payment_status',
-                'rules' => 'required|in_list[pending,success,canceled]'
+                'rules' => 'required|in_list[transfer,cod,onsite]'
             ],
         ];
 

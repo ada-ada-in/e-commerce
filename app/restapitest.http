@@ -255,3 +255,41 @@
 #   "product_id": 7,
 #   "quantity": 10
 # }
+
+
+
+
+# Delivery
+
+# POST http://localhost:8081/api/v1/delivery
+# content-type: application/json
+
+# {
+#   "transactions_id": 1,
+#   "status":"order"
+# }
+
+# DELETE http://localhost:8081/api/v1/delivery/1
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/delivery
+# content-type: application/json
+
+
+# GET http://localhost:8081/api/v1/delivery/trackingnumber
+# content-type: application/json
+
+# {
+#   "tracking_number": 24588285.00
+}
+
+# GET http://localhost:8081/api/v1/delivery/3
+# content-type: application/json
+
+# PUT http://localhost:8081/api/v1/delivery/3
+# content-type: application/json
+
+# {
+#   "transactions_id": 1,
+#   "status":"send"
+# }
