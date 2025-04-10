@@ -1,77 +1,77 @@
 
-# AUTH
+# # AUTH
 
 # POST http://localhost:8081/api/v1/auth/register
 # content-type: application/json
 
 # {
-#   "name": "user1",
-#   "email": "user1@example.com",
-#   "password": "user123",
-#   "confirm_password": "user123",
-#   "address": "address Example",
-#   "phone": "081234567890"
+#    "name": "user1",
+#    "email": "user1@example.com",
+#    "password": "user123",
+#    "confirm_password": "user123",
+#    "address": "address Example",
+#    "phone": "081234567890"
 # }
 
-# POST http://localhost:8081/api/v1/auth/login
-# content-type: application/json
+# # POST http://localhost:8081/api/v1/auth/login
+# # content-type: application/json
 
-# {
-#   "email": "user@example.com",
-#   "password": "user123"
-# }
+# # {
+# #   "email": "user@example.com",
+# #   "password": "user123"
+# # }
 
-# USERS
+# # USERS
 
-# GET http://localhost:8081/api/v1/users
-# content-type: application/json
+# # GET http://localhost:8081/api/v1/users
+# # content-type: application/json
 
-# GET http://localhost:8081/api/v1/users/1
-# content-type: application/json
+# # GET http://localhost:8081/api/v1/users/1
+# # content-type: application/json
 
-# DELETE http://localhost:8081/api/v1/users/2
-# content-type: application/json
+# # DELETE http://localhost:8081/api/v1/users/2
+# # content-type: application/json
 
-# PUT http://localhost:8081/api/v1/users/4
-# content-type: application/json
+# # PUT http://localhost:8081/api/v1/users/4
+# # content-type: application/json
 
-# {
-#   "name": "user4",
-#   "email": "user2@example.com",
-#   "password": "user123",
-#   "confirm_password": "user123",
-#   "address": "address Example",
-#   "phone": "081234567890"
-# }
+# # {
+# #   "name": "user4",
+# #   "email": "user2@example.com",
+# #   "password": "user123",
+# #   "confirm_password": "user123",
+# #   "address": "address Example",
+# #   "phone": "081234567890"
+# # }
 
-# CATEGORY
+# # CATEGORY
 
-# POST http://localhost:8081/api/v1/category
-# content-type: application/json
+# # POST http://localhost:8081/api/v1/category
+# # content-type: application/json
 
-# {
-#   "name": "name categories example",
-#   "description": "description categories example"
-# }
+# # {
+# #   "name": "name categories example",
+# #   "description": "description categories example"
+# # }
 
-# DELETE http://localhost:8081/api/v1/category/1
-# content-type: application/json
+# # DELETE http://localhost:8081/api/v1/category/1
+# # content-type: application/json
 
-# GET http://localhost:8081/api/v1/category
-# content-type: application/json
+# # GET http://localhost:8081/api/v1/category
+# # content-type: application/json
 
-# GET http://localhost:8081/api/v1/category/3
-# content-type: application/json
+# # GET http://localhost:8081/api/v1/category/3
+# # content-type: application/json
 
-# PUT http://localhost:8081/api/v1/category/3
-# content-type: application/json
+# # PUT http://localhost:8081/api/v1/category/3
+# # content-type: application/json
 
-# {
-#   "name": "edit categories example",
-#   "description": "edit description categories example"
-# }
+# # {
+# #   "name": "edit categories example",
+# #   "description": "edit description categories example"
+# # }
 
-# Transactions
+# # Transactions
 
 # POST http://localhost:8081/api/v1/transactions
 # content-type: application/json; charset=UTF-8
@@ -82,214 +82,250 @@
 #   "status": "paid"
 # }
 
-# DELETE http://localhost:8081/api/v1/transactions/1
-# content-type: application/json
+# # DELETE http://localhost:8081/api/v1/transactions/1
+# # content-type: application/json
 
 # GET http://localhost:8081/api/v1/transactions
 # content-type: application/json
 
-# GET http://localhost:8081/api/v1/transactions/3
-# content-type: application/json
+# # GET http://localhost:8081/api/v1/transactions/3
+# # content-type: application/json
 
-# PUT http://localhost:8081/api/v1/transactions/3
-# content-type: application/json
+# # PUT http://localhost:8081/api/v1/transactions/3
+# # content-type: application/json
 
-# {
-#   "user_id": 4,
-#   "total_price": 20000,
-#   "status": "paid"
+# # {
+# #   "user_id": 4,
+# #   "total_price": 20000,
+# #   "status": "paid"
+# # }
+
+# # Transactions
+
+# # POST http://localhost:8081/api/v1/transactions
+# # content-type: application/json
+
+# # {
+# #   "user_id": 4,
+# #   "total_price": 50000,
+# #   "status": "paid"
+# # }
+
+# # DELETE http://localhost:8081/api/v1/transactions/1
+# # content-type: application/json
+
+# # GET http://localhost:8081/api/v1/transactions
+# # content-type: application/json
+
+# # GET http://localhost:8081/api/v1/transactions/3
+# # content-type: application/json
+
+# # PUT http://localhost:8081/api/v1/transactions/3
+# # content-type: application/json
+
+# # {
+# #   "user_id": 4,
+# #   "total_price": 20000,
+# #   "status": "paid"
+# # }
+
+
+# # Cart Items
+
+# # POST http://localhost:8081/api/v1/cartitems
+# # content-type: application/json
+
+# # {
+# #   "product_id": 7,
+# #   "user_id": 1,
+# #   "quantity": 2
+# # }
+
+# # DELETE http://localhost:8081/api/v1/cartitems/1
+# # content-type: application/json
+
+# # GET http://localhost:8081/api/v1/cartitems
+# # content-type: application/json
+
+
+# # GET http://localhost:8081/api/v1/cartitems/2
+# # content-type: application/json
+
+# # PUT http://localhost:8081/api/v1/cartitems/3
+# # content-type: application/json
+
+# # {
+# #   "product_id": 7,
+# #   "user_id": 1,
+# #   "quantity":5
+# # }
+
+# # Payment
+
+# # POST http://localhost:8081/api/v1/payments
+# # content-type: application/json
+
+# # {
+# #   "transactions_id": 1,
+# #   "payment_methode": "BCA",
+# #   "payment_status": "success"
+# # }
+
+# # DELETE http://localhost:8081/api/v1/payments/1
+# # content-type: application/json
+
+# # GET http://localhost:8081/api/v1/payments
+# # content-type: application/json
+
+
+# # GET http://localhost:8081/api/v1/payments/2
+# # content-type: application/json
+
+# # PUT http://localhost:8081/api/v1/payments/2
+# # content-type: application/json
+
+# # {
+# #   "transactions_id": 1,
+# #   "payment_methode": "MANDIRI",
+# #   "payment_status": "success"
+# # }
+
+
+# # Product
+
+# # post dan put lakukan di postman, karena di file ini tidak mundukung format file
+
+# # DELETE http://localhost:8081/api/v1/products/11
+# # content-type: application/json
+
+# # GET http://localhost:8081/api/v1/products
+# # content-type: application/json
+
+
+# # GET http://localhost:8081/api/v1/products/7
+# # content-type: application/json
+
+
+
+# # Stok In
+
+# # POST http://localhost:8081/api/v1/stokin
+# # content-type: application/json
+
+# # {
+# #   "product_id": 7,
+# #   "quantity": 1
+# # }
+
+# # DELETE http://localhost:8081/api/v1/stokin/2
+# # content-type: application/json
+
+# # GET http://localhost:8081/api/v1/stokin
+# # content-type: application/json
+
+# # GET http://localhost:8081/api/v1/stokin/3
+# # content-type: application/json
+
+
+# # Transactions Items
+
+# # POST http://localhost:8081/api/v1/transactionsitems
+# # content-type: application/json
+
+# # {
+# #   "transactions_id": 1,
+# #   "product_id": 7,
+# #   "quantity": 6
+# # }
+
+# # DELETE http://localhost:8081/api/v1/transactionsitems/1
+# # content-type: application/json
+
+# # GET http://localhost:8081/api/v1/transactionsitems
+# # content-type: application/json
+
+# # GET http://localhost:8081/api/v1/transactionsitems/3
+# # content-type: application/json
+
+# # PUT http://localhost:8081/api/v1/transactionsitems/3
+# # content-type: application/json
+
+# # {
+# #   "transactions_id": 1,
+# #   "product_id": 7,
+# #   "quantity": 10
+# # }
+
+
+
+# # Delivery
+
+# # POST http://localhost:8081/api/v1/delivery
+# # content-type: application/json
+
+# # {
+# #   "transactions_id": 1,
+# #   "status":"order"
+# # }
+
+# # DELETE http://localhost:8081/api/v1/delivery/1
+# # content-type: application/json
+
+# # GET http://localhost:8081/api/v1/delivery
+# # content-type: application/json
+
+
+# # GET http://localhost:8081/api/v1/delivery/trackingnumber
+# # content-type: application/json
+
+# # {
+# #   "tracking_number": 24588285.00
 # }
 
-# Transactions
+# # GET http://localhost:8081/api/v1/delivery/3
+# # content-type: application/json
 
-# POST http://localhost:8081/api/v1/transactions
-# content-type: application/json
+# # PUT http://localhost:8081/api/v1/delivery/3
+# # content-type: application/json
 
-# {
-#   "user_id": 4,
-#   "total_price": 50000,
-#   "status": "paid"
-# }
-
-# DELETE http://localhost:8081/api/v1/transactions/1
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/transactions
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/transactions/3
-# content-type: application/json
-
-# PUT http://localhost:8081/api/v1/transactions/3
-# content-type: application/json
-
-# {
-#   "user_id": 4,
-#   "total_price": 20000,
-#   "status": "paid"
-# }
+# # {
+# #   "transactions_id": 1,
+# #   "status":"send"
+# # }
 
 
-# Cart Items
+# # payment
 
-# POST http://localhost:8081/api/v1/cartitems
-# content-type: application/json
-
-# {
-#   "product_id": 7,
-#   "user_id": 1,
-#   "quantity": 2
-# }
-
-# DELETE http://localhost:8081/api/v1/cartitems/1
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/cartitems
-# content-type: application/json
+POST http://localhost:8081/api/v1/payments
+content-type: application/json
 
 
-# GET http://localhost:8081/api/v1/cartitems/2
-# content-type: application/json
-
-# PUT http://localhost:8081/api/v1/cartitems/3
-# content-type: application/json
-
-# {
-#   "product_id": 7,
-#   "user_id": 1,
-#   "quantity":5
-# }
-
-# Payment
-
-# POST http://localhost:8081/api/v1/payments
-# content-type: application/json
-
-# {
-#   "transactions_id": 1,
-#   "payment_methode": "BCA",
-#   "payment_status": "success"
-# }
-
-# DELETE http://localhost:8081/api/v1/payments/1
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/payments
-# content-type: application/json
-
-
-# GET http://localhost:8081/api/v1/payments/2
-# content-type: application/json
-
-# PUT http://localhost:8081/api/v1/payments/2
-# content-type: application/json
-
-# {
-#   "transactions_id": 1,
-#   "payment_methode": "MANDIRI",
-#   "payment_status": "success"
-# }
-
-
-# Product
-
-# post dan put lakukan di postman, karena di file ini tidak mundukung format file
-
-# DELETE http://localhost:8081/api/v1/products/11
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/products
-# content-type: application/json
-
-
-# GET http://localhost:8081/api/v1/products/7
-# content-type: application/json
-
-
-
-# Stok In
-
-# POST http://localhost:8081/api/v1/stokin
-# content-type: application/json
-
-# {
-#   "product_id": 7,
-#   "quantity": 1
-# }
-
-# DELETE http://localhost:8081/api/v1/stokin/2
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/stokin
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/stokin/3
-# content-type: application/json
-
-
-# Transactions Items
-
-# POST http://localhost:8081/api/v1/transactionsitems
-# content-type: application/json
-
-# {
-#   "transactions_id": 1,
-#   "product_id": 7,
-#   "quantity": 6
-# }
-
-# DELETE http://localhost:8081/api/v1/transactionsitems/1
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/transactionsitems
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/transactionsitems/3
-# content-type: application/json
-
-# PUT http://localhost:8081/api/v1/transactionsitems/3
-# content-type: application/json
-
-# {
-#   "transactions_id": 1,
-#   "product_id": 7,
-#   "quantity": 10
-# }
-
-
-
-
-# Delivery
-
-# POST http://localhost:8081/api/v1/delivery
-# content-type: application/json
-
-# {
-#   "transactions_id": 1,
-#   "status":"order"
-# }
-
-# DELETE http://localhost:8081/api/v1/delivery/1
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/delivery
-# content-type: application/json
-
-
-# GET http://localhost:8081/api/v1/delivery/trackingnumber
-# content-type: application/json
-
-# {
-#   "tracking_number": 24588285.00
+{
+  "transactions_id": 1,
+  "payment_methode": "transfer"
 }
 
-# GET http://localhost:8081/api/v1/delivery/3
-# content-type: application/json
+# # DELETE http://localhost:8081/api/v1/delivery/1
+# # content-type: application/json
 
-# PUT http://localhost:8081/api/v1/delivery/3
-# content-type: application/json
+# # GET http://localhost:8081/api/v1/delivery
+# # content-type: application/json
 
-# {
-#   "transactions_id": 1,
-#   "status":"send"
+
+# # GET http://localhost:8081/api/v1/delivery/trackingnumber
+# # content-type: application/json
+
+# # {
+# #   "tracking_number": 24588285.00
 # }
+
+# # GET http://localhost:8081/api/v1/delivery/3
+# # content-type: application/json
+
+# # PUT http://localhost:8081/api/v1/delivery/3
+# # content-type: application/json
+
+# # {
+# #   "transactions_id": 1,
+# #   "status":"send"
+# # }

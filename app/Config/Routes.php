@@ -109,6 +109,9 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('(:num)', 'Api\V1\Delivery\DeliveryController::getDataDeliveryById/$1', ['as' => 'api.Delivery.getDataDeliveryById']);
         $routes->put('(:num)', 'Api\V1\Delivery\DeliveryController::updateDataCategoryById/$1', ['as' => 'api.Delivery.updateDataCategoryById']);
     }); 
-    
+
+    $routes->group('payments', static function($routes) {
+        $routes->post('', 'Api\V1\Payment\PaymentController::addPayment', ['as' => 'api.payment.addPayment']);
+    }); 
     
 });

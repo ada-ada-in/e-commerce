@@ -28,14 +28,15 @@ class PaymentController extends ResourceController {
             $result = $this->PaymentServices->addPaymentServices($data);
     
             if ($result['status'] == false) {
-                return $this->fail(
-                    $result['errors']
-                );
+                $errorData = isset($result['errors']) ? $result['errors'] : (isset($result['message']) ? $result['message'] : 'Unknown error');
+                return $this->fail($errorData);
             }
     
             return $this->respondCreated([
                 'data' => $data,
-                'message' => $result['message']
+                'message' => $result['message'],
+                'snap_token' => $result['snap_token'],
+                'redirect_url' => $result['redirect_url']
             ]);
     
         } catch (\Exception $e) {
