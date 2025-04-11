@@ -40,6 +40,7 @@ $routes->group('api/v1', static function($routes) {
 
     $routes->group('users', static function($routes) {
         $routes->get('', 'Api\V1\User\UserController::getDataUser', ['as' => 'api.users.getDataUser']);
+        $routes->get('countuser', 'Api\V1\User\UserController::countUser', ['as' => 'api.users.countUser']);
         $routes->get('(:num)', 'Api\V1\User\UserController::getDataUserById/$1', ['as' => 'api.users.getDataUserById']);
         $routes->delete('(:num)', 'Api\V1\User\UserController::deleteDataUserById/$1', ['as' => 'api.userss.deleteDataUserById']);
         $routes->put('(:num)', 'Api\V1\User\UserController::updateDataUserById/$1', ['as' => 'api.users.updateDataUserById']);
@@ -56,6 +57,8 @@ $routes->group('api/v1', static function($routes) {
     $routes->group('transactions', static function($routes) {
         $routes->post('', 'Api\V1\Transactions\TransactionsController::addTransaction', ['as' => 'api.transactions.addTransaction']);
         $routes->delete('(:num)', 'Api\V1\Transactions\TransactionsController::deleteTransaction/$1', ['as' => 'api.transactions.deleteTransaction']);
+        $routes->get('counttransactions', 'Api\V1\Transactions\TransactionsController::countTransaction', ['as' => 'api.transactions.countTransaction']);
+        $routes->get('countprofit', 'Api\V1\Transactions\TransactionsController::countProfit', ['as' => 'api.transactions.countProfit']);
         $routes->get('', 'Api\V1\Transactions\TransactionsController::getDataTransaction', ['as' => 'api.transactions.getDataTransaction']);
         $routes->get('(:num)', 'Api\V1\Transactions\TransactionsController::getDataTransactionById/$1', ['as' => 'api.transactions.getDataTransactionById']);
         $routes->put('(:num)', 'Api\V1\Transactions\TransactionsController::updateDataTransactionyById/$1', ['as' => 'api.transactions.updateDataTransactionyById']);
@@ -81,6 +84,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->post('', 'Api\V1\Product\ProductController::addProduct', ['as' => 'api.product.addProduct']);
         $routes->delete('(:num)', 'Api\V1\Product\ProductController::deleteProduct/$1', ['as' => 'api.product.deleteProduct']);
         $routes->get('', 'Api\V1\Product\ProductController::getDataProduct', ['as' => 'api.product.getDataProduct']);
+        $routes->get('countproduct', 'Api\V1\Product\ProductController::countProduct', ['as' => 'api.product.countProduct']);
         $routes->get('(:num)', 'Api\V1\Product\ProductController::getDataProductById/$1', ['as' => 'api.product.getDataProductById']);
         $routes->put('(:num)', 'Api\V1\Product\ProductController::updateDataProductById/$1', ['as' => 'api.product.updateDataProductyById']);
     }); 

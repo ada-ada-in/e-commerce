@@ -94,6 +94,24 @@ class UserController extends ResourceController {
             ], 500);
         }
     }
+
+    public function countUser(){
+        try{
+            $countData = $this->userServices->countUserServices();
+
+            return $this->respondCreated([
+                'status' => true,
+                'data' => $countData,
+                'message' => 'Data retrieved succesfully'
+            ]);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
     
 }
 ?>

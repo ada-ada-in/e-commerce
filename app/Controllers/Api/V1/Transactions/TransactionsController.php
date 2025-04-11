@@ -128,8 +128,58 @@ class TransactionsController extends ResourceController {
             ], 500);
         }
     }
+
+    public function countTransaction(){
+
+        try{
+            $data = $this->transactionServices->countTransactionsServices();
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ], 400);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => $data,
+                'message' => 'Data retrieved succesfully'
+            ],200);
+
+        }catch(\Error $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
+    public function countProfit(){
+        try{
+            $data = $this->transactionServices->countProfitServices();
+
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ]);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => 'Rp ' . number_format((float) $data, 0, ',', '.'),
+                'message' => 'Data retrieved succesfully'
+            ], 200);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
  
 }
-
 
 ?>

@@ -5,10 +5,10 @@
 # content-type: application/json
 
 # {
-#    "name": "user1",
-#    "email": "user1@example.com",
-#    "password": "user123",
-#    "confirm_password": "user123",
+#    "name": "admin",
+#    "email": "admin@example.com",
+#    "password": "admin123",
+#    "confirm_password": "admin123",
 #    "address": "address Example",
 #    "phone": "081234567890"
 # }
@@ -25,6 +25,10 @@
 
 # # GET http://localhost:8081/api/v1/users
 # # content-type: application/json
+
+# GET http://localhost:8081/api/v1/users/countuser
+# content-type: application/json
+
 
 # # GET http://localhost:8081/api/v1/users/1
 # # content-type: application/json
@@ -46,13 +50,13 @@
 
 # # CATEGORY
 
-# # POST http://localhost:8081/api/v1/category
-# # content-type: application/json
+# POST http://localhost:8081/api/v1/category
+# content-type: application/json
 
-# # {
-# #   "name": "name categories example",
-# #   "description": "description categories example"
-# # }
+# {
+#   "name": "name categories example",
+#   "description": "description categories example"
+# }
 
 # # DELETE http://localhost:8081/api/v1/category/1
 # # content-type: application/json
@@ -102,20 +106,26 @@
 
 # # Transactions
 
-# # POST http://localhost:8081/api/v1/transactions
-# # content-type: application/json
+# POST http://localhost:8081/api/v1/transactions
+# content-type: application/json
 
-# # {
-# #   "user_id": 4,
-# #   "total_price": 50000,
-# #   "status": "paid"
-# # }
+# {
+#   "user_id": 1,
+#   "total_price": 50000,
+#   "status": "paid"
+# }
 
 # # DELETE http://localhost:8081/api/v1/transactions/1
 # # content-type: application/json
 
 # # GET http://localhost:8081/api/v1/transactions
 # # content-type: application/json
+
+# GET http://localhost:8081/api/v1/transactions/counttransactions
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/transactions/countprofit
+# content-type: application/json
 
 # # GET http://localhost:8081/api/v1/transactions/3
 # # content-type: application/json
@@ -201,6 +211,8 @@
 # # GET http://localhost:8081/api/v1/products
 # # content-type: application/json
 
+# GET http://localhost:8081/api/v1/products/countproduct
+# content-type: application/json
 
 # # GET http://localhost:8081/api/v1/products/7
 # # content-type: application/json
@@ -296,14 +308,14 @@
 
 # # payment
 
-POST http://localhost:8081/api/v1/payments
-content-type: application/json
+# POST http://localhost:8081/api/v1/payments
+# content-type: application/json
 
 
-{
-  "transactions_id": 1,
-  "payment_methode": "transfer"
-}
+# {
+#   "transactions_id": 1,
+#   "payment_methode": "transfer"
+# }
 
 # # DELETE http://localhost:8081/api/v1/delivery/1
 # # content-type: application/json

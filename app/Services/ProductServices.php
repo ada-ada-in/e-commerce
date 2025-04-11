@@ -147,62 +147,71 @@ class ProductServices {
         return $data;
     }
 
-public function updateDataByProductIdServices($id, array $data)
-{
-    if (!$id) {
+    public function updateDataByProductIdServices($id, array $data)
+    {
+        if (!$id) {
+            return [
+                'status'  => false,
+                'message' => 'ID is required'
+            ];
+        }
+
+        $productData = new ProductModel();
+
+        $existingProduct = $productData->find($id);
+        if (!$existingProduct) {
+            return [
+                'status'  => false,
+                'message' => 'Product not found'
+            ];
+        }
+
+        $updateData = [
+            'category_id'  => $data['category_id'] ?? $existingProduct['category_id'],
+            'name'         => $data['name'] ?? $existingProduct['name'],
+            'description'  => $data['description'] ?? $existingProduct['description'],
+            'price'        => $data['price'] ?? $existingProduct['price'],
+            'stock'        => $data['stock'] ?? $existingProduct['stock'],
+        ];
+
+        if (!empty($data['image_url'])) {
+            $updateData['image_url'] = $data['image_url'];
+        }
+
+        if ($updateData == $existingProduct) {
+            return [
+                'status'  => false,
+                'message' => 'No changes detected, update skipped'
+            ];
+        }
+
+        $result = $productData->update($id, $updateData);
+
+        if (!$result) {
+            return [
+                'status'  => false,
+                'message' => 'Failed to update product',
+                'debug_query' => $productData->db->getLastQuery()->getQuery()
+            ];
+        }
+
+        $updatedProduct = $productData->find($id);
+
         return [
-            'status'  => false,
-            'message' => 'ID is required'
+            'status'  => true,
+            'message' => 'Product updated successfully',
+            'data'    => $updatedProduct
         ];
     }
 
-    $productData = new ProductModel();
+    public function countProductServices() {
+        $countData = new ProductModel();
+        
+        $data = $countData->countAllResults();
 
-    $existingProduct = $productData->find($id);
-    if (!$existingProduct) {
-        return [
-            'status'  => false,
-            'message' => 'Product not found'
-        ];
+        return $data;
+
     }
-
-    $updateData = [
-        'category_id'  => $data['category_id'] ?? $existingProduct['category_id'],
-        'name'         => $data['name'] ?? $existingProduct['name'],
-        'description'  => $data['description'] ?? $existingProduct['description'],
-        'price'        => $data['price'] ?? $existingProduct['price'],
-        'stock'        => $data['stock'] ?? $existingProduct['stock'],
-    ];
-
-    if (!empty($data['image_url'])) {
-        $updateData['image_url'] = $data['image_url'];
-    }
-
-    if ($updateData == $existingProduct) {
-        return [
-            'status'  => false,
-            'message' => 'No changes detected, update skipped'
-        ];
-    }
-
-    $result = $productData->update($id, $updateData);
-
-    if (!$result) {
-        return [
-            'status'  => false,
-            'message' => 'Failed to update product',
-            'debug_query' => $productData->db->getLastQuery()->getQuery()
-        ];
-    }
-
-    $updatedProduct = $productData->find($id);
-
-    return [
-        'status'  => true,
-        'message' => 'Product updated successfully',
-        'data'    => $updatedProduct
-    ];
-}
 
     
      

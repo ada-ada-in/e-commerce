@@ -147,6 +147,40 @@ class TransactionServices {
     
         return $updateTransaction;
     }
+
+    public function countTransactionsServices(){
+        $transactionData = new TransactionsModel();
+        $data = $transactionData->where('status', 'paid')->countAllResults(false);
+    
+        if ($data == 0) {
+            return [
+                'status' => false,
+                'message' => 'Data order is empty'
+            ];
+        }
+
+        return $data;
+    }
+
+    public function countProfitServices(){
+        $transactionData = new TransactionsModel();
+        $data = $transactionData
+            ->selectSum('total_price')
+            ->where('status', 'paid')
+            ->first();
+    
+        $total = $data['total_price'] ?? 0;
+    
+        if ($total == 0) {
+            return [
+                'status' => false,
+                'message' => 'No profit data available',
+            ];
+        }
+
+        return $total;
+    
+    }
      
 }
 

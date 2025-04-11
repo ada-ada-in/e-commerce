@@ -114,7 +114,15 @@ class UserServices {
     
         return $updatedUser;
     }
+
+    public function countUserServices(){
+        $userData = new UserModel();
+
+        $count = $userData->where('role', 'user')->countAllResults();
+
+        return $count;
     
+    }
     
 }
 

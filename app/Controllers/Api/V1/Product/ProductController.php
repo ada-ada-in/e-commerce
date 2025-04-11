@@ -155,6 +155,25 @@ class ProductController extends ResourceController {
             ], 500);
         }
     }
+
+    public function countProduct(){
+        try{
+
+            $data = $this->productServices->countProductServices();
+
+            return $this->respond([
+                'status' => false,
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ]);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'messge' => $e->getMessage()
+            ], 500);
+        }
+    }
     
  
 }
