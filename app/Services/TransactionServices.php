@@ -1,8 +1,7 @@
 <?php
 namespace App\Services;
 use App\Models\TransactionsModel;
-
-
+use PDO;
 
 class TransactionServices {
     protected $transactionsModel;
@@ -80,7 +79,7 @@ class TransactionServices {
      {
          
          $transactionData = new TransactionsModel();
-         $data = $transactionData->findAll();
+         $data = $transactionData->orderBy('created_at', 'DESC')->findAll();
  
          if(empty($data)){
              return [
@@ -91,7 +90,6 @@ class TransactionServices {
  
          return $data;
      }
-
      public function getDataTransactionsByIdServices($id){
 
         if (!$id) {
@@ -181,6 +179,45 @@ class TransactionServices {
         return $total;
     
     }
+
+    public function chartMonthGraphServices()
+    {
+        $transactionData = new TransactionsModel();
+        $currentYear = date('Y'); // tahun sekarang, misal 2025
+    
+        $results = $transactionData
+            ->select("MONTH(created_at) as month, status, COUNT(*) as total")
+            ->whereIn('status', ['paid', 'pending', 'canceled'])
+            ->where("YEAR(created_at)", $currentYear) // tambahkan filter tahun
+            ->groupBy(['MONTH(created_at)', 'status'])
+            ->orderBy('MONTH(created_at)', 'ASC')
+            ->findAll();
+    
+        // Inisialisasi data bulan
+        $monthlyData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $monthlyData[$i] = [
+                'month' => date('F', mktime(0, 0, 0, $i, 10)),
+                'paid' => 0,
+                'pending' => 0,
+                'canceled' => 0,
+            ];
+        }
+    
+        // Masukkan data hasil query ke array
+        foreach ($results as $row) {
+            $month = (int) $row['month'];
+            $status = $row['status'];
+            $monthlyData[$month][$status] = (int) $row['total'];
+        }
+    
+        // Ubah ke format array numerik untuk frontend (misalnya chart.js)
+        $chartData = array_values($monthlyData);
+    
+        return $chartData;
+    }
+    
+    
      
 }
 

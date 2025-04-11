@@ -1,92 +1,130 @@
-(function($) {
-    "use strict"
+(function ($) {
+  "use strict";
 
+  $.ajax({
+    url: "/api/v1/transactions/chartmonthgraph",
+    method: "GET",
+    success: function (response) {
+      console.log(response);
 
-    var data = {
-        labels: ['facebook', 'twitter', 'youtube', 'google plus'],
-        series: [{
-                    value: 20,
-                    className: "bg-facebook"
-                },
-                {
-                    value: 10,
-                    className: "bg-twitter"
-                },
-                {
-                    value: 30,
-                    className: "bg-youtube"
-                },
-                {
-                    value: 40,
-                    className: "bg-google-plus"
-                }
-            ]
-            //        colors: ["#333", "#222", "#111"]
-    };
+      const months = [];
+      const paid = [];
+      const pending = [];
+      const canceled = [];
 
-    var options = {
-        labelInterpolationFnc: function(value) {
-            return value[0]
-        }
-    };
+      response.data.forEach((item) => {
+        months.push(item.month);
+        paid.push(item.paid);
+        pending.push(item.pending);
+        canceled.push(item.canceled);
+      });
 
-    var responsiveOptions = [
-        ['screen and (min-width: 640px)', {
-            chartPadding: 30,
-            labelOffset: 100,
-            labelDirection: 'explode',
-            labelInterpolationFnc: function(value) {
-                return value;
-            }
-        }],
-        ['screen and (min-width: 1024px)', {
-            labelOffset: 80,
-            chartPadding: 20
-        }]
-    ];
+      // Chart Bar
+      const chartData = {
+        labels: months,
+        series: [paid, pending, canceled],
+      };
 
-    new Chartist.Pie('.ct-pie-chart', data, options, responsiveOptions);
+      // Hitung nilai maksimal di tiap bulan
+      const maxPerMonth = response.data.map((item) =>
+        Math.max(item.paid, item.pending, item.canceled)
+      );
+      const maxDataValue = Math.max(...maxPerMonth);
 
+      // Sesuaikan jarak bar chart
+      let seriesBarDistance;
+      if (maxDataValue >= 100) {
+        seriesBarDistance = 5;
+      } else if (maxDataValue >= 50) {
+        seriesBarDistance = 10;
+      } else {
+        seriesBarDistance = 20;
+      }
 
-    /*----------------------------------*/
+      const options = {
+        seriesBarDistance: seriesBarDistance,
+      };
 
-    var data = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        series: [
-            [5, 4, 3, 7, 5, 10, 3, 4, 8, 10, 6, 8],
-            [3, 2, 9, 5, 4, 6, 4, 6, 7, 8, 7, 4],
-            [4, 6, 3, 9, 6, 5, 2, 8, 3, , 5, 4],
-        ]
-    };
-
-    var options = {
-        seriesBarDistance: 10
-    };
-
-    var responsiveOptions = [
-        ['screen and (max-width: 640px)', {
+      const responsiveOptions = [
+        [
+          "screen and (max-width: 720px)",
+          {
             seriesBarDistance: 5,
             axisX: {
-                labelInterpolationFnc: function(value) {
-                    return value[0];
-                }
-            }
-        }]
-    ];
+              labelInterpolationFnc: function (value) {
+                return value[0];
+              },
+            },
+          },
+        ],
+      ];
 
-    new Chartist.Bar('.ct-bar-chart', data, options, responsiveOptions);
+      new Chartist.Bar(".ct-bar-chart", chartData, options, responsiveOptions);
 
+      // ==== Pie Chart ====
 
-    $('.year-calendar').pignoseCalendar({
-        theme: 'blue' // light, dark, blue
-    });
+      // Jumlahkan total Paid, Pending, dan Canceled
+      const totalPaid = paid.reduce((a, b) => a + b, 0);
+      const totalPending = pending.reduce((a, b) => a + b, 0);
+      const totalCanceled = canceled.reduce((a, b) => a + b, 0);
 
+      const pieData = {
+        labels: ["Paid", "Pending", "Canceled"],
+        series: [
+          {
+            value: totalPaid,
+            className: "bg-facebook",
+          },
+          {
+            value: totalPending,
+            className: "bg-twitter",
+          },
+          {
+            value: totalCanceled,
+            className: "bg-youtube",
+          },
+        ],
+      };
 
+      const pieOptions = {
+        labelInterpolationFnc: function (value) {
+          return value;
+        },
+      };
 
+      const pieResponsiveOptions = [
+        [
+          "screen and (min-width: 320px)",
+          {
+            chartPadding: 30,
+            labelOffset: 100,
+            labelDirection: "explode",
+            labelInterpolationFnc: function (value) {
+              return value;
+            },
+          },
+        ],
+        [
+          "screen and (min-width: 1024px)",
+          {
+            labelOffset: 80,
+            chartPadding: 20,
+          },
+        ],
+      ];
 
+      new Chartist.Pie(
+        ".ct-pie-chart",
+        pieData,
+        pieOptions,
+        pieResponsiveOptions
+      );
+    },
+    error: function (err) {
+      console.error("Gagal ambil data chart bulanan:", err);
+    },
+  });
 
-
+  // Optional: scrollbar custom
+  const wt2 = new PerfectScrollbar(".widget-todo2");
 })(jQuery);
-
-
-const wt2 = new PerfectScrollbar('.widget-todo2');

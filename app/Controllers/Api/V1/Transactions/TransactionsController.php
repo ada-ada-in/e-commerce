@@ -76,11 +76,11 @@ class TransactionsController extends ResourceController {
     
         } catch (\Exception $e) {
             return $this->fail([
-                 $e->getMessage()
-            ]);
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
-
     
     public function getDataTransactionById($id){
         try {
@@ -169,6 +169,31 @@ class TransactionsController extends ResourceController {
             return $this->respond([
                 'status' => true,
                 'data' => 'Rp ' . number_format((float) $data, 0, ',', '.'),
+                'message' => 'Data retrieved succesfully'
+            ], 200);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
+
+    public function chartMonthGraph(){
+        try{
+            $data = $this->transactionServices->chartMonthGraphServices();
+
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ]);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => $data,
                 'message' => 'Data retrieved succesfully'
             ], 200);
 

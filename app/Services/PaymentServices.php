@@ -6,9 +6,6 @@ use App\Models\PaymentModel;
 use App\Models\UserModel;
 use App\Models\TransactionsModel;
 
-
-
-
 class PaymentServices {
     protected $paymentModel;
     protected $transactionModel;
@@ -82,7 +79,7 @@ class PaymentServices {
                 'order_id' => $midtransParams['transaction_details']['order_id'],
                 'transactions_id' => $data['transactions_id'],
                 'payment_methode' => $data['payment_methode'],
-                'payment_status' => 'pending',
+                'payment_status' => $data['payment_status'] || 'pending',
                 'snap_token' => $snapToken
             ]);
     
@@ -142,6 +139,17 @@ class PaymentServices {
  
          return $data;
      }
+
+     public function getLatestPaymentServices(){
+        $paymentData = new PaymentModel();
+        $data = $paymentData
+        ->orderBy('created_at', 'DESC')
+        ->limit(6)                      
+        ->findAll();     
+        
+        return $data;
+    }
+
 
      public function getDataPaymentByIdServices($id){
 

@@ -112,7 +112,7 @@
 # {
 #   "user_id": 1,
 #   "total_price": 50000,
-#   "status": "paid"
+#   "status": "pending"
 # }
 
 # # DELETE http://localhost:8081/api/v1/transactions/1
@@ -122,6 +122,9 @@
 # # content-type: application/json
 
 # GET http://localhost:8081/api/v1/transactions/counttransactions
+# content-type: application/json
+
+# GET http://localhost:8081/api/v1/transactions/chartmonthgraph
 # content-type: application/json
 
 # GET http://localhost:8081/api/v1/transactions/countprofit
@@ -172,14 +175,14 @@
 
 # # Payment
 
-# # POST http://localhost:8081/api/v1/payments
-# # content-type: application/json
+POST http://localhost:8081/api/v1/payments
+content-type: application/json
 
-# # {
-# #   "transactions_id": 1,
-# #   "payment_methode": "BCA",
-# #   "payment_status": "success"
-# # }
+{
+  "transactions_id": 1,
+  "payment_methode": "BCA",
+  "payment_status": "success"
+}
 
 # # DELETE http://localhost:8081/api/v1/payments/1
 # # content-type: application/json
@@ -187,6 +190,8 @@
 # # GET http://localhost:8081/api/v1/payments
 # # content-type: application/json
 
+# GET http://localhost:8081/api/v1/payments/getlatestpayment
+# content-type: application/json
 
 # # GET http://localhost:8081/api/v1/payments/2
 # # content-type: application/json
