@@ -70,6 +70,10 @@ class PaymentServices {
                 'phone'      => $user['phone']
             ]
         ];
+        
+        if ($data['payment_status'] !== 'success' && $data['payment_status'] !== 'failed') {
+            $data['payment_status'] = 'pending';
+        }
 
         try{
 
@@ -79,7 +83,7 @@ class PaymentServices {
                 'order_id' => $midtransParams['transaction_details']['order_id'],
                 'transactions_id' => $data['transactions_id'],
                 'payment_methode' => $data['payment_methode'],
-                'payment_status' => $data['payment_status'] || 'pending',
+                'payment_status' => $data['payment_status'],
                 'snap_token' => $snapToken
             ]);
     

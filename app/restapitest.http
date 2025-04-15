@@ -1,17 +1,17 @@
 
 # # AUTH
 
-# POST http://localhost:8081/api/v1/auth/register
-# content-type: application/json
+POST http://localhost:8080/api/v1/auth/register
+content-type: application/json
 
-# {
-#    "name": "admin",
-#    "email": "admin@example.com",
-#    "password": "admin123",
-#    "confirm_password": "admin123",
-#    "address": "address Example",
-#    "phone": "081234567890"
-# }
+{
+   "name": "user1",
+   "email": "user1@example.com",
+   "password": "user23",
+   "confirm_password": "user123",
+   "address": "address Example",
+   "phone": "081234567890"
+}
 
 # # POST http://localhost:8081/api/v1/auth/login
 # # content-type: application/json
@@ -23,8 +23,8 @@
 
 # # USERS
 
-# # GET http://localhost:8081/api/v1/users
-# # content-type: application/json
+# GET http://localhost:8080/api/v1/users
+# content-type: application/json
 
 # GET http://localhost:8081/api/v1/users/countuser
 # content-type: application/json
@@ -106,13 +106,13 @@
 
 # # Transactions
 
-# POST http://localhost:8081/api/v1/transactions
+# POST http://localhost:8080/api/v1/transactions
 # content-type: application/json
 
 # {
 #   "user_id": 1,
 #   "total_price": 50000,
-#   "status": "pending"
+#   "status": "canceled"
 # }
 
 # # DELETE http://localhost:8081/api/v1/transactions/1
@@ -175,14 +175,14 @@
 
 # # Payment
 
-POST http://localhost:8081/api/v1/payments
-content-type: application/json
+# POST http://localhost:8080/api/v1/payments
+# content-type: application/json
 
-{
-  "transactions_id": 1,
-  "payment_methode": "BCA",
-  "payment_status": "success"
-}
+# {
+#   "transactions_id": 1,
+#   "payment_methode": "BCA",
+#   "payment_status": "failed"
+# }
 
 # # DELETE http://localhost:8081/api/v1/payments/1
 # # content-type: application/json
@@ -213,8 +213,8 @@ content-type: application/json
 # # DELETE http://localhost:8081/api/v1/products/11
 # # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/products
-# # content-type: application/json
+# GET http://localhost:8080/api/v1/products
+# content-type: application/json
 
 # GET http://localhost:8081/api/v1/products/countproduct
 # content-type: application/json

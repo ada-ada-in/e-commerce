@@ -41,7 +41,6 @@
                         success: function (response) {
                         const transactions = response.data;
                         console.log(transactions);
-
                         const tbody = $('#latest-transactions');
                         tbody.empty(); 
 
@@ -75,7 +74,7 @@
                         switch (status.toLowerCase()) {
                         case 'paid': return 'success';
                         case 'pending': return 'warning';
-                        case 'canceled': return 'danger';
+                        case 'failed': return 'danger';
                         default: return 'secondary';
                         }
                     }
