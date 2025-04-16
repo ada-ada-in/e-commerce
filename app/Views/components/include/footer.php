@@ -10,7 +10,6 @@
 		<script src="/assets/deskapp/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
 		<script src="/assets/deskapp/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
 		<script src="/assets/deskapp/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<!-- buttons for Export datatable -->
 		<script src="/assets/deskapp/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
 		<script src="/assets/deskapp/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
@@ -43,5 +42,5 @@
 
     <script src="assets/focus2/vendor/moment/moment.min.js"></script>
     <script src="assets/focus2/vendor/pg-calendar/js/pignose.calendar.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="assets/focus2/js/dashboard/dashboard-2.js"></script>

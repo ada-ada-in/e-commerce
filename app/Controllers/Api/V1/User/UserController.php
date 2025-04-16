@@ -25,7 +25,8 @@ class UserController extends ResourceController {
                  $e->getMessage()
             ]);
         }
-    }
+    } 
+    
 
     public function getDataUserById($id){
         try {
@@ -51,6 +52,8 @@ class UserController extends ResourceController {
         try {
     
             $deletedData = $this->userServices->deleteDataUserByIdServices($id);
+
+            session()->setFlashdata('success', 'User berhasil dihapus!');
     
             return $this->respondDeleted([
                 'status'  => true,
@@ -80,6 +83,8 @@ class UserController extends ResourceController {
             }
     
             $updatedData = $this->userServices->updateDataByUserIdServices($id, $data);
+
+            session()->setFlashdata('success', 'User berhasil diupdate!');
     
             return $this->respondUpdated([
                 'status'  => true,

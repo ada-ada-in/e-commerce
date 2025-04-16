@@ -8,5 +8,5 @@
            $(row).addClass('selected')
         } 
     });
-
+ 
 })(jQuery);

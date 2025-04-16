@@ -34,6 +34,9 @@ class AuthController extends ResourceController {
                     $result['errors']
                 );
             }
+
+            session()->setFlashdata('success', 'User berhasil ditambahkan!');
+
     
             return $this->respondCreated([
                 'data' => $data,
@@ -62,11 +65,16 @@ class AuthController extends ResourceController {
 
             $result = $this->registerServices->loginServices($data);
 
+            
+
             if ($result['status'] == false) {
                 return $this->fail(
                     $result['message']
                 );
             }
+
+            session()->setFlashdata('success', 'Login berhasil!');
+
     
             return $this->respondCreated([
                 'data' => $data,
@@ -74,6 +82,8 @@ class AuthController extends ResourceController {
             ]);
 
         } catch (\Exception $e) {
+            session()->setFlashdata('error', $e->getMessage());
+
             return $this->failServerError($e->getMessage());
         }
     }

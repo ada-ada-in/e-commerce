@@ -10,11 +10,12 @@ class UserServices {
         $this->userModel = new UserModel();
     }
 
+
     public function getUserDataServices()
     {
         
         $userData = new UserModel();
-        $data = $userData->findAll();
+        $data = $userData->orderBy('created_at', 'DESC')->findAll();
 
         if(empty($data)){
             return [
@@ -25,6 +26,7 @@ class UserServices {
 
         return $data;
     }
+    
 
     public function getDataUserByIdServices($id){
 
@@ -91,6 +93,7 @@ class UserServices {
                 'message' => 'User not found'
             ];
         }
+
     
         if (!empty($data['password'])) {
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
