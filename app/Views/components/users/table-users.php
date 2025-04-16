@@ -15,8 +15,8 @@
                                     <i class="icon-printer"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Excel</a></li>
-                                    <li><a class="dropdown-item" href="#">PDF</a></li>
+                                    <li><button class="dropdown-item" id="downloadExcel">Excel</button></li>
+                                    <li><button class="dropdown-item" id="downloadPDF">PDF</button></li>
                                     </ul>
                                     
                                 </div>
