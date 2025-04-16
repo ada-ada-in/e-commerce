@@ -4,6 +4,7 @@
                         <div class="card border border-0">
                             <div class="card-header bg-white">
                                 <h4 class="card-title">Category Datatable</h4>
+                                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari kategori...">
                                 <div>
                                     <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     +
@@ -23,36 +24,25 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="example" class="display table table-striped table-responsive-sm" style="min-width: 845px">
+                                    <table class="display table table-striped table-responsive-sm" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th hidden>id</th>
+                                                <th>Nomor</th>
+                                                <th>Nama Kategori</th>
+                                                <th>Deskripsi</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>2011/07/25</td>
-                                                <td>$170,750</td>
-                                            </tr>
+                                        <tbody id="category-data">
+                                            <!-- data category -->
                                         </tbody>
                                     </table>
+                                    <div>
+                                        <button id="prevPage" class="btn btn-outline-primary btn-sm">Prev</button>
+                                        <span id="pageInfo" class="mx-2"></span>
+                                        <button id="nextPage" class="btn btn-outline-primary btn-sm">Next</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -60,3 +50,5 @@
                 </div>
 
 <?= view('components/category/add-modal-category') ?>
+<?= view('components/category/edit-modal-category') ?>
+<?= view('components/category/script-category') ?>

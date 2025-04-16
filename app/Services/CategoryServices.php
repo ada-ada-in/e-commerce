@@ -75,7 +75,7 @@ class CategoryServices {
      {
          
          $categoryData = new CategoryModel();
-         $data = $categoryData->findAll();
+         $data = $categoryData->orderBy('created_at', 'DESC')->findAll();
  
          if(empty($data)){
              return [

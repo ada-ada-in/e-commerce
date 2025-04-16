@@ -1,17 +1,17 @@
 
 # # AUTH
 
-POST http://localhost:8080/api/v1/auth/register
-content-type: application/json
+# POST http://localhost:8080/api/v1/auth/register
+# content-type: application/json
 
-{
-   "name": "user1",
-   "email": "user1@example.com",
-   "password": "user123",
-   "confirm_password": "user123",
-   "address": "address Example",
-   "phone": "081234567890"
-}
+# {
+#    "name": "user1",
+#    "email": "user1@example.com",
+#    "password": "user123",
+#    "confirm_password": "user123",
+#    "address": "address Example",
+#    "phone": "081234567890"
+# }
 
 # # POST http://localhost:8081/api/v1/auth/login
 # # content-type: application/json
@@ -50,13 +50,13 @@ content-type: application/json
 
 # # CATEGORY
 
-# POST http://localhost:8081/api/v1/category
-# content-type: application/json
+POST http://localhost:8080/api/v1/category
+content-type: application/json
 
-# {
-#   "name": "name categories example",
-#   "description": "description categories example"
-# }
+{
+  "name": "yaya",
+  "description": "description categories example"
+}
 
 # # DELETE http://localhost:8081/api/v1/category/1
 # # content-type: application/json
