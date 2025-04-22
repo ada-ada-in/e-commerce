@@ -61,6 +61,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('countprofit', 'Api\V1\Transactions\TransactionsController::countProfit', ['as' => 'api.transactions.countProfit']);
         $routes->get('chartmonthgraph', 'Api\V1\Transactions\TransactionsController::chartMonthGraph', ['as' => 'api.transactions.chartMonthGraph']);
         $routes->get('', 'Api\V1\Transactions\TransactionsController::getDataTransaction', ['as' => 'api.transactions.getDataTransaction']);
+        $routes->get('paid', 'Api\V1\Transactions\TransactionsController::getDataPaidTransaction', ['as' => 'api.transactions.getDataPaidTransaction']);
         $routes->get('(:num)', 'Api\V1\Transactions\TransactionsController::getDataTransactionById/$1', ['as' => 'api.transactions.getDataTransactionById']);
         $routes->put('(:num)', 'Api\V1\Transactions\TransactionsController::updateDataTransactionyById/$1', ['as' => 'api.transactions.updateDataTransactionyById']);
     }); 

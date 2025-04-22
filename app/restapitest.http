@@ -50,13 +50,13 @@
 
 # # CATEGORY
 
-POST http://localhost:8080/api/v1/category
-content-type: application/json
+# POST http://localhost:8080/api/v1/category
+# content-type: application/json
 
-{
-  "name": "yaya",
-  "description": "description categories example"
-}
+# {
+#   "name": "yaya",
+#   "description": "description categories example"
+# }
 
 # # DELETE http://localhost:8081/api/v1/category/1
 # # content-type: application/json
@@ -106,17 +106,20 @@ content-type: application/json
 
 # # Transactions
 
-# POST http://localhost:8080/api/v1/transactions
-# content-type: application/json
+POST http://localhost:8080/api/v1/transactions
+content-type: application/json
 
-# {
-#   "user_id": 1,
-#   "total_price": 50000,
-#   "status": "canceled"
-# }
+{
+  "user_id": 1,
+  "total_price": 50000,
+  "status": "pending"
+}
 
 # # DELETE http://localhost:8081/api/v1/transactions/1
 # # content-type: application/json
+
+# GET http://localhost:8080/api/v1/transactions/paid
+# content-type: application/json
 
 # # GET http://localhost:8081/api/v1/transactions
 # # content-type: application/json
@@ -179,9 +182,9 @@ content-type: application/json
 # content-type: application/json
 
 # {
-#   "transactions_id": 1,
+#   "transactions_id": 16,
 #   "payment_methode": "BCA",
-#   "payment_status": "failed"
+#   "payment_status": "pending"
 # }
 
 # # DELETE http://localhost:8081/api/v1/payments/1

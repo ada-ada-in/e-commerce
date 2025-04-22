@@ -4,6 +4,8 @@
                         <div class="card border border-0">
                             <div class="card-header bg-white">
                                 <h4 class="card-title">Product Datatable</h4>
+                                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari produk...">
+
                                 <div>
                                     <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     +
@@ -23,10 +25,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="example" class="display table table-striped table-responsive-sm" style="min-width: 845px">
+                                    <table class="display table table-striped table-responsive-sm" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>Nama Produk</th>
+                                                <th>Nomor</th>
+                                                <th>Nama Barang</th>
                                                 <th>Stok</th>
                                                 <th>Harga</th>
                                                 <th>Kategori</th>
@@ -39,10 +42,17 @@
                                            <!-- data product  -->
                                         </tbody>
                                     </table>
+                                    <div>
+                                        <button id="prevPage" class="btn btn-outline-primary btn-sm">Prev</button>
+                                        <span id="pageInfo" class="mx-2"></span>
+                                        <button id="nextPage" class="btn btn-outline-primary btn-sm">Next</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+<?= view('components/product/edit-modal-product') ?>
 <?= view('components/product/add-modal-product') ?>
+<?= view('components/product/script-product') ?>

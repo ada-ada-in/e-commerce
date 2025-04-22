@@ -26,7 +26,7 @@
                                     <table id="example" class="display table table-striped table-responsive-sm" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
+                                                <th>Nama Customer</th>
                                                 <th>Position</th>
                                                 <th>Office</th>
                                                 <th>Age</th>

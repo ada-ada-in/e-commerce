@@ -43,4 +43,12 @@ class ProductModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getProductsWithCategory()
+{
+    return $this->select('product.*, categories.name as category_name')
+                ->join('categories', 'categories.id = product.category_id')
+                ->findAll();
+}
+
 }

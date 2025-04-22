@@ -20,6 +20,7 @@
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon icon-chart-bar-33"></i><span class="nav-text">Transactions</span></a>
                         <ul aria-expanded="false">
+                            <li><a href="<?= base_url('admin/data') ?>">Data</a></li>
                             <li><a href="<?= base_url('admin/paid') ?>">Paid</a></li>
                             <li><a href="<?= base_url('admin/pending') ?>">Pending</a></li>
                             <li><a href="<?= base_url('admin/due') ?>">Due</a></li>

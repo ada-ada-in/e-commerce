@@ -17,12 +17,9 @@ class ProductController extends ResourceController {
     public function addProduct()
     {
         try {
-            $data = $this->request->getPost();
             $image = $this->request->getFile('image');
+            $data = $this->request->getPost();
 
-            if (!$image) {
-                return $this->fail(['error' => 'No file uploaded.'], 400);
-            }
             
             if (!$image->isValid()) {
                 return $this->fail([
@@ -41,12 +38,11 @@ class ProductController extends ResourceController {
             $imageName = $image->getRandomName();
             $image->move(FCPATH . 'uploads/', $imageName);
 
-            $data['image_url'] = 'uploads/' . $imageName;            $result = $this->productServices->addProductServices($data);
-
-            
+            $data['image_url'] = 'uploads/' . $imageName;            
+            $result = $this->productServices->addProductServices($data);
             
             return $this->respondCreated([
-                'message' => 'File uploaded successfully',
+                'message' => 'add product success',
                 'file_name' => $imageName,
                 'data' => $result
             ]);

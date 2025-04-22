@@ -35,7 +35,10 @@ class TransactionsController extends ResourceController {
     
             return $this->respondCreated([
                 'data' => $data,
-                'message' => $result['message']
+                'message' => $result['message'],
+                'snap_token' => $result['snap_token'],
+                'redirect_url' => $result['redirect_url'],
+                'order_id' => $result['order_id'],
             ]);
     
         } catch (\Exception $e) {
@@ -68,6 +71,24 @@ class TransactionsController extends ResourceController {
 
         try {
             $data = $this->transactionServices->getDataTransactionServices();
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getDataPaidTransaction(){
+
+        try {
+            $data = $this->transactionServices->getDataTransactionPaidServices();
     
             return $this->respond([
                 'data' => $data,

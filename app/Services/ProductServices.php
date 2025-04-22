@@ -1,11 +1,13 @@
 <?php
 namespace App\Services;
 use App\Models\ProductModel;
+use App\Models\CategoryModel;
 
 
 
 class ProductServices {
     protected $productModel;
+    protected $categoryModel;
 
     public function __construct()
     { 
@@ -51,6 +53,12 @@ class ProductServices {
             ];
         }
 
+        if($data['category_id'] == 'undifiend' || empty($data['category_id'])){
+            return [
+                'status' => false,
+                'errors' => ['product' => 'category empty or not found']
+            ];        }
+
         $this->productModel->insert([
             'category_id' => $data['category_id'],
             'name' => $data['name'],
@@ -60,10 +68,7 @@ class ProductServices {
             'image_url'   => $data['image_url'],
             ]);
     
-        return [
-            'status' => true,
-            'message' => 'Add product success'
-        ];
+        return;
      }
 
      public function deleteDataProductByIdServices($id)
@@ -112,14 +117,25 @@ class ProductServices {
      {
          
          $productData = new ProductModel();
-         $data = $productData->findAll();
+         $categoryModel = new CategoryModel();
+
+
+         $data = $productData->orderBy('created_at', 'DESC')->getProductsWithCategory();
+         
  
          if(empty($data)){
-             return [
+             return [       
                  'status'  => true,
                  'message' => 'product is empty'
              ];
          }
+
+         foreach ($data as &$item) {
+            if (isset($item['price'])) {
+                $item['price'] = 'Rp ' . number_format($item['price'], 0, ',', '.');
+            }
+        }
+         
  
          return $data;
      }
