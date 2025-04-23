@@ -21,7 +21,7 @@ class PagesController extends BaseController
     }
     public function paid(): string {
         return view('pages/paid');
-    }
+    }   
     public function pending(): string {
         return view('pages/pending');
     }

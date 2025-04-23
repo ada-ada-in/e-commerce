@@ -16,9 +16,11 @@
                                     <table class="table student-data-table m-t-20">
                                         <thead>
                                             <tr>
+                                                <th>No.</th>
                                                 <th>Payment Methode</th>
                                                 <th>Order Id</th>
                                                 <th>Status</th>
+                                                <th>Total Harga</th>
                                                 <th>Date</th>
                                             </tr>
                                         </thead>
@@ -35,7 +37,7 @@
                 <script>
                     $(function () {
                     $.ajax({
-                        url: '/api/v1/payments/getlatestpayment', 
+                        url: '/api/v1/transactions/getlatesttransactions', 
                         type: 'GET',
                         dataType: 'json',
                         success: function (response) {
@@ -44,16 +46,18 @@
                         const tbody = $('#latest-transactions');
                         tbody.empty(); 
 
-                        transactions.forEach(function (trx) {
-                            const paymentMethod = trx.payment_methode || '-';
+                        transactions.forEach(function (trx, i) {
                             const orderId = trx.order_id || '-';
-                            const status = trx.payment_status || 'unknown';
+                            const status = trx.status || 'unknown';
+                            const total = trx.total_price || 'unknown';
                             const createdAt = trx.created_at || '';
 
                             const row = `
                             <tr>
-                                <td>${paymentMethod}</td>
+                                <td>${i+1}</td>
                                 <td>${orderId}</td>
+                                <td>${status}</td>
+                                <td>${total}</td>
                                 <td>
                                 <span class="badge badge-${getStatusClass(status)}">
                                     ${capitalize(status)}
@@ -72,9 +76,9 @@
 
                     function getStatusClass(status) {
                         switch (status.toLowerCase()) {
-                        case 'paid': return 'success';
+                        case 'settlement': return 'primary';
                         case 'pending': return 'warning';
-                        case 'failed': return 'danger';
+                        case 'cancel': return 'danger';
                         default: return 'secondary';
                         }
                     }

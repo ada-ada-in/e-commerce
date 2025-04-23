@@ -109,6 +109,24 @@ class TransactionServices {
     }
 }
 
+
+    public function getLatestTransactionServices(){
+        $transactionData = new TransactionsModel();
+        $data = $transactionData
+        ->orderBy('created_at', 'DESC')
+        ->limit(6)                      
+        ->findAll();     
+
+        if(!$data || empty($data)){
+            return [
+                'status' => false,
+                'errors' => ['exception' => 'cannot get latest data transactions']
+            ];
+        }
+        
+        return $data;
+    }
+
     
 
      public function deleteDataTransactionsByIdServices($id){
@@ -134,11 +152,12 @@ class TransactionServices {
      }
 
 
+
      public function getDataTransactionServices()
      {
          
          $transactionData = new TransactionsModel();
-         $data = $transactionData->orderBy('created_at', 'DESC')->findAll();
+         $data = $transactionData->orderBy('created_at', 'DESC')->select('transactions.*, users.name as transactions_name, users.email as transactions_email, users.phone as transactions_phone' )->join('users', 'users.id = transactions.user_id')->findAll();
  
          if(empty($data)){
              return [
@@ -228,7 +247,7 @@ class TransactionServices {
 
     public function countTransactionsServices(){
         $transactionData = new TransactionsModel();
-        $data = $transactionData->where('status', 'paid')->countAllResults(false);
+        $data = $transactionData->where('status', 'settlement')->countAllResults(false);
     
         if ($data == 0) {
             return [
@@ -244,7 +263,7 @@ class TransactionServices {
         $transactionData = new TransactionsModel();
         $data = $transactionData
             ->selectSum('total_price')
-            ->where('status', 'paid')
+            ->where('status', 'settlement')
             ->first();
     
         $total = $data['total_price'] ?? 0;
@@ -267,7 +286,7 @@ class TransactionServices {
     
         $results = $transactionData
             ->select("MONTH(created_at) as month, status, COUNT(*) as total")
-            ->whereIn('status', ['paid', 'pending', 'canceled'])
+            ->whereIn('status', ['settlement', 'pending', 'cancel'])
             ->where("YEAR(created_at)", $currentYear) // tambahkan filter tahun
             ->groupBy(['MONTH(created_at)', 'status'])
             ->orderBy('MONTH(created_at)', 'ASC')
@@ -278,9 +297,9 @@ class TransactionServices {
         for ($i = 1; $i <= 12; $i++) {
             $monthlyData[$i] = [
                 'month' => date('F', mktime(0, 0, 0, $i, 10)),
-                'paid' => 0,
+                'settlement' => 0,
                 'pending' => 0,
-                'canceled' => 0,
+                'cancel' => 0,
             ];
         }
     

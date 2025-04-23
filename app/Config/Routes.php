@@ -58,6 +58,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->post('', 'Api\V1\Transactions\TransactionsController::addTransaction', ['as' => 'api.transactions.addTransaction']);
         $routes->delete('(:num)', 'Api\V1\Transactions\TransactionsController::deleteTransaction/$1', ['as' => 'api.transactions.deleteTransaction']);
         $routes->get('counttransactions', 'Api\V1\Transactions\TransactionsController::countTransaction', ['as' => 'api.transactions.countTransaction']);
+        $routes->get('getlatesttransactions', 'Api\V1\Transactions\TransactionsController::getLatestTransaction', ['as' => 'api.payment.getLatestTransaction']);
         $routes->get('countprofit', 'Api\V1\Transactions\TransactionsController::countProfit', ['as' => 'api.transactions.countProfit']);
         $routes->get('chartmonthgraph', 'Api\V1\Transactions\TransactionsController::chartMonthGraph', ['as' => 'api.transactions.chartMonthGraph']);
         $routes->get('', 'Api\V1\Transactions\TransactionsController::getDataTransaction', ['as' => 'api.transactions.getDataTransaction']);

@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TransactionsModel extends Model
+class PaymentModel extends Model
 {
-    protected $table            = 'transactions';
+    protected $table            = 'payment';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['user_id', 'total_price', 'status', 'order_id', 'snap_token', 'fraud_status', 'expire_time'];
+    protected $allowedFields    = ['transactions_id', 'payment_methode', 'payment_status', 'snap_token', 'order_id'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -43,7 +43,5 @@ class TransactionsModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-
 
 }

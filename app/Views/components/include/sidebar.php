@@ -30,10 +30,10 @@
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
                                 class="icon-rocket"></i><span class="nav-text">Delivery</span></a>
                         <ul aria-expanded="false">
-                            <li><a href="<?= base_url('admin/data') ?>">Data</a></li>
                             <li><a href="<?= base_url('admin/order') ?>">Order</a></li>
                             <li><a href="<?= base_url('admin/send') ?>">Send</a></li>
                             <li><a href="<?= base_url('admin/pickup') ?>">Pick Up</a></li>
+                            <li><a href="<?= base_url('admin/order') ?>">Complete Delivery</a></li>
 
                         </ul>
                     </li>

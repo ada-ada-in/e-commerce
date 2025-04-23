@@ -13,9 +13,9 @@
   
         response.data.forEach((item) => {
           months.push(item.month);
-          paid.push(item.paid);
+          paid.push(item.settlement);
           pending.push(item.pending);
-          canceled.push(item.canceled);
+          canceled.push(item.cancel);
         });
   
         // Chart Bar
@@ -68,7 +68,7 @@
         const totalCanceled = canceled.reduce((a, b) => a + b, 0);
   
         const pieData = {
-          labels: ["Paid", "Pending", "Canceled"],
+          labels: ["settlement", "Pending", "Canceled"],
           series: [
             {
               value: totalPaid,

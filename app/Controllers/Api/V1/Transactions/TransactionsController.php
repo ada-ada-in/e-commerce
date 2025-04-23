@@ -102,6 +102,25 @@ class TransactionsController extends ResourceController {
             ], 500);
         }
     }
+
+
+    public function getLatestTransaction(){
+
+        try {
+            $data = $this->transactionServices->getLatestTransactionServices();
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
     
     public function getDataTransactionById($id){
         try {

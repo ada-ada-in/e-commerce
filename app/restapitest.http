@@ -13,7 +13,7 @@
 #    "phone": "081234567890"
 # }
 
-# # POST http://localhost:8081/api/v1/auth/login
+# # POST http://localhost:8080/api/v1/auth/login
 # # content-type: application/json
 
 # # {
@@ -26,17 +26,17 @@
 # GET http://localhost:8080/api/v1/users
 # content-type: application/json
 
-# GET http://localhost:8081/api/v1/users/countuser
+# GET http://localhost:8080/api/v1/users/countuser
 # content-type: application/json
 
 
-# # GET http://localhost:8081/api/v1/users/1
+# # GET http://localhost:8080/api/v1/users/1
 # # content-type: application/json
 
-# # DELETE http://localhost:8081/api/v1/users/2
+# # DELETE http://localhost:8080/api/v1/users/2
 # # content-type: application/json
 
-# # PUT http://localhost:8081/api/v1/users/4
+# # PUT http://localhost:8080/api/v1/users/4
 # # content-type: application/json
 
 # # {
@@ -58,16 +58,16 @@
 #   "description": "description categories example"
 # }
 
-# # DELETE http://localhost:8081/api/v1/category/1
+# # DELETE http://localhost:8080/api/v1/category/1
 # # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/category
+# # GET http://localhost:8080/api/v1/category
 # # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/category/3
+# # GET http://localhost:8080/api/v1/category/3
 # # content-type: application/json
 
-# # PUT http://localhost:8081/api/v1/category/3
+# # PUT http://localhost:8080/api/v1/category/3
 # # content-type: application/json
 
 # # {
@@ -77,7 +77,7 @@
 
 # # Transactions
 
-# POST http://localhost:8081/api/v1/transactions
+# POST http://localhost:8080/api/v1/transactions
 # content-type: application/json; charset=UTF-8
 
 # {
@@ -86,16 +86,16 @@
 #   "status": "paid"
 # }
 
-# # DELETE http://localhost:8081/api/v1/transactions/1
+# # DELETE http://localhost:8080/api/v1/transactions/1
 # # content-type: application/json
 
-# GET http://localhost:8081/api/v1/transactions
+# GET http://localhost:8080/api/v1/transactions
 # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/transactions/3
+# # GET http://localhost:8080/api/v1/transactions/3
 # # content-type: application/json
 
-# # PUT http://localhost:8081/api/v1/transactions/3
+# # PUT http://localhost:8080/api/v1/transactions/3
 # # content-type: application/json
 
 # # {
@@ -106,37 +106,40 @@
 
 # # Transactions
 
-POST http://localhost:8080/api/v1/transactions
-content-type: application/json
+# POST http://localhost:8080/api/v1/transactions
+# content-type: application/json
 
-{
-  "user_id": 1,
-  "total_price": 50000,
-  "status": "pending"
-}
+# {
+#   "user_id": 1,
+#   "total_price": 50000,
+#   "status": "cancel"
+# }
 
-# # DELETE http://localhost:8081/api/v1/transactions/1
+# # DELETE http://localhost:8080/api/v1/transactions/1
 # # content-type: application/json
 
 # GET http://localhost:8080/api/v1/transactions/paid
 # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/transactions
+# GET http://localhost:8080/api/v1/transactions/getlatesttransactions
+# content-type: application/json
+
+GET http://localhost:8080/api/v1/transactions
+content-type: application/json
+
+# GET http://localhost:8080/api/v1/transactions/counttransactions
+# content-type: application/json
+
+# GET http://localhost:8080/api/v1/transactions/chartmonthgraph
+# content-type: application/json
+
+# GET http://localhost:8080/api/v1/transactions/countprofit
+# content-type: application/json
+
+# # GET http://localhost:8080/api/v1/transactions/3
 # # content-type: application/json
 
-# GET http://localhost:8081/api/v1/transactions/counttransactions
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/transactions/chartmonthgraph
-# content-type: application/json
-
-# GET http://localhost:8081/api/v1/transactions/countprofit
-# content-type: application/json
-
-# # GET http://localhost:8081/api/v1/transactions/3
-# # content-type: application/json
-
-# # PUT http://localhost:8081/api/v1/transactions/3
+# # PUT http://localhost:8080/api/v1/transactions/3
 # # content-type: application/json
 
 # # {
@@ -148,7 +151,7 @@ content-type: application/json
 
 # # Cart Items
 
-# # POST http://localhost:8081/api/v1/cartitems
+# # POST http://localhost:8080/api/v1/cartitems
 # # content-type: application/json
 
 # # {
@@ -157,17 +160,17 @@ content-type: application/json
 # #   "quantity": 2
 # # }
 
-# # DELETE http://localhost:8081/api/v1/cartitems/1
+# # DELETE http://localhost:8080/api/v1/cartitems/1
 # # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/cartitems
+# # GET http://localhost:8080/api/v1/cartitems
 # # content-type: application/json
 
 
-# # GET http://localhost:8081/api/v1/cartitems/2
+# # GET http://localhost:8080/api/v1/cartitems/2
 # # content-type: application/json
 
-# # PUT http://localhost:8081/api/v1/cartitems/3
+# # PUT http://localhost:8080/api/v1/cartitems/3
 # # content-type: application/json
 
 # # {
@@ -187,19 +190,19 @@ content-type: application/json
 #   "payment_status": "pending"
 # }
 
-# # DELETE http://localhost:8081/api/v1/payments/1
+# # DELETE http://localhost:8080/api/v1/payments/1
 # # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/payments
+# # GET http://localhost:8080/api/v1/payments
 # # content-type: application/json
 
-# GET http://localhost:8081/api/v1/payments/getlatestpayment
+# GET http://localhost:8080/api/v1/payments/getlatestpayment
 # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/payments/2
+# # GET http://localhost:8080/api/v1/payments/2
 # # content-type: application/json
 
-# # PUT http://localhost:8081/api/v1/payments/2
+# # PUT http://localhost:8080/api/v1/payments/2
 # # content-type: application/json
 
 # # {
@@ -213,23 +216,23 @@ content-type: application/json
 
 # # post dan put lakukan di postman, karena di file ini tidak mundukung format file
 
-# # DELETE http://localhost:8081/api/v1/products/11
+# # DELETE http://localhost:8080/api/v1/products/11
 # # content-type: application/json
 
 # GET http://localhost:8080/api/v1/products
 # content-type: application/json
 
-# GET http://localhost:8081/api/v1/products/countproduct
+# GET http://localhost:8080/api/v1/products/countproduct
 # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/products/7
+# # GET http://localhost:8080/api/v1/products/7
 # # content-type: application/json
 
 
 
 # # Stok In
 
-# # POST http://localhost:8081/api/v1/stokin
+# # POST http://localhost:8080/api/v1/stokin
 # # content-type: application/json
 
 # # {
@@ -237,19 +240,19 @@ content-type: application/json
 # #   "quantity": 1
 # # }
 
-# # DELETE http://localhost:8081/api/v1/stokin/2
+# # DELETE http://localhost:8080/api/v1/stokin/2
 # # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/stokin
+# # GET http://localhost:8080/api/v1/stokin
 # # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/stokin/3
+# # GET http://localhost:8080/api/v1/stokin/3
 # # content-type: application/json
 
 
 # # Transactions Items
 
-# # POST http://localhost:8081/api/v1/transactionsitems
+# # POST http://localhost:8080/api/v1/transactionsitems
 # # content-type: application/json
 
 # # {
@@ -258,16 +261,16 @@ content-type: application/json
 # #   "quantity": 6
 # # }
 
-# # DELETE http://localhost:8081/api/v1/transactionsitems/1
+# # DELETE http://localhost:8080/api/v1/transactionsitems/1
 # # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/transactionsitems
+# # GET http://localhost:8080/api/v1/transactionsitems
 # # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/transactionsitems/3
+# # GET http://localhost:8080/api/v1/transactionsitems/3
 # # content-type: application/json
 
-# # PUT http://localhost:8081/api/v1/transactionsitems/3
+# # PUT http://localhost:8080/api/v1/transactionsitems/3
 # # content-type: application/json
 
 # # {
@@ -280,7 +283,7 @@ content-type: application/json
 
 # # Delivery
 
-# # POST http://localhost:8081/api/v1/delivery
+# # POST http://localhost:8080/api/v1/delivery
 # # content-type: application/json
 
 # # {
@@ -288,24 +291,24 @@ content-type: application/json
 # #   "status":"order"
 # # }
 
-# # DELETE http://localhost:8081/api/v1/delivery/1
+# # DELETE http://localhost:8080/api/v1/delivery/1
 # # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/delivery
+# # GET http://localhost:8080/api/v1/delivery
 # # content-type: application/json
 
 
-# # GET http://localhost:8081/api/v1/delivery/trackingnumber
+# # GET http://localhost:8080/api/v1/delivery/trackingnumber
 # # content-type: application/json
 
 # # {
 # #   "tracking_number": 24588285.00
 # }
 
-# # GET http://localhost:8081/api/v1/delivery/3
+# # GET http://localhost:8080/api/v1/delivery/3
 # # content-type: application/json
 
-# # PUT http://localhost:8081/api/v1/delivery/3
+# # PUT http://localhost:8080/api/v1/delivery/3
 # # content-type: application/json
 
 # # {
@@ -316,7 +319,7 @@ content-type: application/json
 
 # # payment
 
-# POST http://localhost:8081/api/v1/payments
+# POST http://localhost:8080/api/v1/payments
 # content-type: application/json
 
 
@@ -325,24 +328,24 @@ content-type: application/json
 #   "payment_methode": "transfer"
 # }
 
-# # DELETE http://localhost:8081/api/v1/delivery/1
+# # DELETE http://localhost:8080/api/v1/delivery/1
 # # content-type: application/json
 
-# # GET http://localhost:8081/api/v1/delivery
+# # GET http://localhost:8080/api/v1/delivery
 # # content-type: application/json
 
 
-# # GET http://localhost:8081/api/v1/delivery/trackingnumber
+# # GET http://localhost:8080/api/v1/delivery/trackingnumber
 # # content-type: application/json
 
 # # {
 # #   "tracking_number": 24588285.00
 # }
 
-# # GET http://localhost:8081/api/v1/delivery/3
+# # GET http://localhost:8080/api/v1/delivery/3
 # # content-type: application/json
 
-# # PUT http://localhost:8081/api/v1/delivery/3
+# # PUT http://localhost:8080/api/v1/delivery/3
 # # content-type: application/json
 
 # # {
