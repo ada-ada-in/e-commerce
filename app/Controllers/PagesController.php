@@ -25,8 +25,8 @@ class PagesController extends BaseController
     public function pending(): string {
         return view('pages/pending');
     }
-    public function due(): string {
-        return view('pages/due');
+    public function cancel(): string {
+        return view('pages/cancel');
     }
     public function data(): string {
         return view('pages/data');

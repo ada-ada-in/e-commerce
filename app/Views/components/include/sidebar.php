@@ -23,7 +23,7 @@
                             <li><a href="<?= base_url('admin/data') ?>">Data</a></li>
                             <li><a href="<?= base_url('admin/paid') ?>">Paid</a></li>
                             <li><a href="<?= base_url('admin/pending') ?>">Pending</a></li>
-                            <li><a href="<?= base_url('admin/due') ?>">Due</a></li>
+                            <li><a href="<?= base_url('admin/cancel') ?>">Cancel</a></li>
                         </ul>
                     </li>
 

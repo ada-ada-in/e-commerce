@@ -3,8 +3,7 @@
                     <div class="col-12">
                         <div class="card border border-0">
                             <div class="card-header bg-white">
-                                <h4 class="card-title">Pending Datatable</h4>
-                                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari transaksi pending...">
+                                <h4 class="card-title">Cancel Datatable</h4>
                                 <div>
                                     <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,21 +31,16 @@
                                                 <th>Salary</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="transactions-pending-data">
-                                           <!-- data pending -->
+                                        <tbody id="transactions-cancel-data">
+                                           
                                         </tbody>
                                     </table>
-                                    <div>
-                                        <button id="prevPage" class="btn btn-outline-primary btn-sm">Prev</button>
-                                        <span id="pageInfo" class="mx-2"></span>
-                                        <button id="nextPage" class="btn btn-outline-primary btn-sm">Next</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-<?= view('components/pending/add-modal-pending') ?>
-<?= view('components/pending/edit-modal-pending') ?>
-<?= view('components/pending/script-pending') ?>
+<?= view('components/cancel/add-modal-cancel') ?> 
+<?= view('components/cancel/edit-modal-cancel') ?> 
+<?= view('components/cancel/script-cancel') ?> 

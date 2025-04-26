@@ -14,7 +14,7 @@ $routes->group('admin', static function($routes) {
     $routes->get('category', 'PagesController::category', ['as' => 'category']);
     $routes->get('paid', 'PagesController::paid', ['as' => 'paid']);
     $routes->get('pending', 'PagesController::pending', ['as' => 'pending']);
-    $routes->get('due', 'PagesController::due', ['as' => 'due']);
+    $routes->get('cancel', 'PagesController::cancel', ['as' => 'cancel']);
     $routes->get('data', 'PagesController::data', ['as' => 'data']);
     $routes->get('order', 'PagesController::order', ['as' => 'order']);
     $routes->get('send', 'PagesController::send', ['as' => 'send']);
@@ -63,6 +63,8 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('chartmonthgraph', 'Api\V1\Transactions\TransactionsController::chartMonthGraph', ['as' => 'api.transactions.chartMonthGraph']);
         $routes->get('', 'Api\V1\Transactions\TransactionsController::getDataTransaction', ['as' => 'api.transactions.getDataTransaction']);
         $routes->get('paid', 'Api\V1\Transactions\TransactionsController::getDataPaidTransaction', ['as' => 'api.transactions.getDataPaidTransaction']);
+        $routes->get('pending', 'Api\V1\Transactions\TransactionsController::getDataPendingTransaction', ['as' => 'api.transactions.getDataPendingTransaction']);
+        $routes->get('cancel', 'Api\V1\Transactions\TransactionsController::getDataCancelTransaction', ['as' => 'api.transactions.getDataCancelTransaction']);
         $routes->get('(:num)', 'Api\V1\Transactions\TransactionsController::getDataTransactionById/$1', ['as' => 'api.transactions.getDataTransactionById']);
         $routes->put('(:num)', 'Api\V1\Transactions\TransactionsController::updateDataTransactionyById/$1', ['as' => 'api.transactions.updateDataTransactionyById']);
     }); 

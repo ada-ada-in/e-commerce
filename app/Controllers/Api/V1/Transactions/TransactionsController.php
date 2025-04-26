@@ -103,6 +103,42 @@ class TransactionsController extends ResourceController {
         }
     }
 
+    public function getDataPendingTransaction(){
+
+        try {
+            $data = $this->transactionServices->getDataTransactionPendingServices();
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getDataCancelTransaction(){
+
+        try {
+            $data = $this->transactionServices->getDataTransactionCancelServices();
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
 
     public function getLatestTransaction(){
 

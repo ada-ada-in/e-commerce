@@ -174,19 +174,51 @@ class TransactionServices {
      {
          
          $transactionData = new TransactionsModel();
-         $data = $transactionData->orderBy('created_at', 'DESC')
-         ->where('status', 'paid')
-         
-         ->findAll(); 
+         $data = $transactionData->select('transactions.*, users.name as transactions_name, users.email as transactions_email, users.phone as transactions_phone')->join('users', 'users.id = transactions.user_id')->orderBy('created_at', 'DESC')
+         ->where('status', 'settlement')->findAll();
+
          if(empty($data)){
              return [
                  'status'  => true,
                  'message' => 'transaction is empty'
              ];
          }
- 
          return $data;
      }
+
+
+     public function getDataTransactionPendingServices()
+     {
+         
+         $transactionData = new TransactionsModel();
+         $data = $transactionData->select('transactions.*, users.name as transactions_name, users.email as transactions_email, users.phone as transactions_phone')->join('users', 'users.id = transactions.user_id')->orderBy('created_at', 'DESC')
+         ->where('status', 'pending')->findAll();
+
+         if(empty($data)){
+             return [
+                 'status'  => true,
+                 'message' => 'transaction is empty'
+             ];
+         }
+         return $data;
+     }
+
+     public function getDataTransactionCancelServices()
+     {
+         
+         $transactionData = new TransactionsModel();
+         $data = $transactionData->select('transactions.*, users.name as transactions_name, users.email as transactions_email, users.phone as transactions_phone')->join('users', 'users.id = transactions.user_id')->orderBy('created_at', 'DESC')
+         ->where('status', 'cancel')->findAll();
+
+         if(empty($data)){
+             return [
+                 'status'  => true,
+                 'message' => 'transaction is empty'
+             ];
+         }
+         return $data;
+     }
+
 
 
      public function getDataTransactionsByIdServices($id){

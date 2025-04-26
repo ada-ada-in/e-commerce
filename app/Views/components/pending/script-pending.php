@@ -21,11 +21,6 @@
                         <td>${transactions.transactions_email}</td>
                         <td>${transactions.transactions_phone}</td>
                         <td>${transactions.total_price}</td>
-                        <td>
-                        <span class="badge badge-${getStatusClass(transactions.status)}">
-                        ${transactions.status}
-                        </snap>
-                        </td>
                         <td>${transactions.updated_at}</td>
                         <td>
                             <button type="button" class="btn btn-primary px-3 btn-update" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="${transactions.id}">Edit</button>
@@ -36,10 +31,11 @@
                 `;
             });
 
-            $('#transactions-data').html(row);
+            $('#transactions-pending-data').html(row);
             $('#pageInfo').text(`Page ${currentPage} of ${Math.ceil(data.length / rowsPerPage)}`);
         }
 
+        
         function getStatusClass(status) {
                         switch (status.toLowerCase()) {
                         case 'settlement': return 'primary';
@@ -51,7 +47,7 @@
 
         function loadData() {
             $.ajax({
-                url: '/api/v1/transactions',
+                url: '/api/v1/transactions/pending',
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
@@ -61,25 +57,52 @@
                     displayTable(filteredData);
                 },
                 error: function (xhr, status, error) {
-                    console.error('Gagal mengambil data products:', error);
+                    console.error('Gagal mengambil data paid:', error);
                 }
             });
         }
 
         loadData();
 
-        $('#searchInput').on('input', function () {
-        const keyword = $(this).val().toLowerCase();
-        filteredData = transactions.filter(transactions =>
-            transactions.transactions_name.toLowerCase().includes(keyword) ||
-            transactions.transactions_email.toLowerCase().includes(keyword) ||
-            transactions.transactions_phone.toLowerCase().includes(keyword) ||
-            transactions.status.toLowerCase().includes(keyword) ||
-            transactions.order_id.toLowerCase().includes(keyword)
-        );
-        currentPage = 1;
-        displayTable(filteredData);
+    $('#transactions-edit').on('click', function () {
+        $.ajax({
+            url: '/api/v1/transactions',
+            type: 'GET',
+            success: function (response) {
+                const categoryData = response.data;
+                const selectElement = $('#transactions-edit');
+
+                selectElement.find('option:not(:first)').remove();
+
+                categoryData.forEach(function (transactions) {
+                    const option = $('<option>', {
+                        value: transactions.id,
+                        text: transactions.name
+                    });
+                    selectElement.append(option);
+                });
+            },
+            error: function () {
+                console.error('Gagal memuat data kategori.');
+            }
+        });
     });
+
+
+
+        $('#searchInput').on('input', function () {
+            const keyword = $(this).val().toLowerCase();
+            filteredData = transactions.filter(transactions =>
+                transactions.transactions_name.toLowerCase().includes(keyword) ||
+                transactions.transactions_email.toLowerCase().includes(keyword) ||
+                transactions.transactions_phone.toLowerCase().includes(keyword) ||
+                transactions.status.toLowerCase().includes(keyword) ||
+                transactions.order_id.toLowerCase().includes(keyword)
+            );
+            currentPage = 1;
+            displayTable(filteredData);
+        });
+
 
         $('#prevPage').on('click', function () {
             if (currentPage > 1) {
@@ -102,8 +125,8 @@
                     url: `/api/v1/transactions/${id}`,
                     type: 'DELETE',
                     success: function () {
-                        alert('Kategori berhasil dihapus!');
                         loadData(); 
+                        alert('Kategori berhasil dihapus!');
                     },
                     error: function (xhr, status, error) {
                         try {
@@ -167,51 +190,7 @@
             });
         });
 
-        $('#form-add-category').on('submit', function (e) {
-        e.preventDefault();
-        const form = $('#form-add-category');
-        const formData = {
-            name: form.find('input[name="category"]').val(),
-            description: form.find('input[name="description"]').val(),
-        };
-        $.ajax({
-            url: `/api/v1/category`,
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify(formData),
-            success: function (response) {
-                const message = response.message;
-                alert(message);
-                $('#form-add-category')[0].reset(); 
-                loadData();  
-                $('#staticBackdrop').modal('hide'); 
-            },
-            error: function (xhr, status, error) {
-                try {
-                    const response = JSON.parse(xhr.responseText);
-                    let errorMessage = '';
-                    if (response.messages) {
-                        for (const key in response.messages) {
-                            if (response.messages.hasOwnProperty(key)) {
-                                errorMessage += `${response.messages[key]}\n`;
-                            }
-                        }
-                    } else if (response.message) {
-                        errorMessage = response.message;
-                    } else {
-                        errorMessage = 'Terjadi kesalahan yang tidak diketahui.';
-                    }
-                    alert(errorMessage);
-                } catch (e) {
-                    console.error('Gagal parse response error:', e);
-                    alert('Terjadi kesalahan saat memproses respons error.');
-                }
-            }
-        });
-    });
-
-                $('#form-update-data').on('submit', function (e) {
+        $('#form-update-data').on('submit', function (e) {
                 e.preventDefault();
                 const id = $('input[name="id"]').val();
                 const form = $('#form-update-data');
@@ -228,8 +207,8 @@
                     contentType: 'application/json',
                     data: JSON.stringify(formData),
                     success: function (response) {
-                        alert(response.message);
                         loadData();
+                        alert(response.message);
                     },
                     error: function (xhr, status, error) {
                         try {
@@ -254,6 +233,8 @@
                     }
                 });
             });
+
+
 
 
         // Excel export functionality
@@ -295,5 +276,11 @@
 
             doc.save('users-data.pdf');
         });
-    });
+    })
+
+            $('#productFile').on('change', function () {
+            const fileName = $(this).val().split('\\').pop();
+            $('#fileLabel').text(fileName);
+        });
+
 </script>
