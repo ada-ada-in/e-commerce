@@ -10,13 +10,17 @@ class AuthFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
+        // tidak login redirect ke /
         if (! session()->get('isLoggedIn')) {
             return redirect()->to('/');
         }
 
+        // user login redirect ke /user
         if (session()->get('role') !== 'admin') {
             return redirect()->to('/user'); 
         }
+
+        // admin login redirect ke /admin/dashboard
         
     }
     
