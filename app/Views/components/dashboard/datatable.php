@@ -17,10 +17,9 @@
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>Payment Methode</th>
                                                 <th>Order Id</th>
-                                                <th>Status</th>
                                                 <th>Total Harga</th>
+                                                <th>Status</th>
                                                 <th>Date</th>
                                             </tr>
                                         </thead>
@@ -42,7 +41,6 @@
                         dataType: 'json',
                         success: function (response) {
                         const transactions = response.data;
-                        console.log(transactions);
                         const tbody = $('#latest-transactions');
                         tbody.empty(); 
 
@@ -56,7 +54,6 @@
                             <tr>
                                 <td>${i+1}</td>
                                 <td>${orderId}</td>
-                                <td>${status}</td>
                                 <td>${total}</td>
                                 <td>
                                 <span class="badge badge-${getStatusClass(status)}">

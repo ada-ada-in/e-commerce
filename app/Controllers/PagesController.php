@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 class PagesController extends BaseController
 {
+
+    // admin
+
     public function admin(): string
     {
         return view('layouth/main_layout');
@@ -52,10 +55,21 @@ class PagesController extends BaseController
     public function complete(): string {
         return view('pages/complete-delivery');
     }
+
+    // auth
+
     public function login(): string {
         return view('auth/login');
     }
     public function register(): string {
         return view('auth/register');
     }
+
+
+    // user
+
+    public function user(): string {
+        return view('pages/user/main');
+    }
+    
 }

@@ -26,6 +26,13 @@ $routes->group('admin', ['filter' => 'auth'], static function($routes) {
     $routes->get('complete', 'PagesController::complete', ['as' => 'complete']);
 });
 
+
+// user
+$routes->group('', static function($routes) {
+    $routes->get('/', 'PagesController::user', ['as' => 'user']);
+});
+
+
 // auth
 $routes->group('auth', static function($routes) {
     $routes->get('login', 'PagesController::login', ['as' => 'login']);
