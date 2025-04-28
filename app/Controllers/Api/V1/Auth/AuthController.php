@@ -95,6 +95,7 @@ class AuthController extends ResourceController {
             'status' => 'success',
             'message' => 'Logout berhasil'
         ]);
+        return redirect()->to('/');
     }
 }
 ?>

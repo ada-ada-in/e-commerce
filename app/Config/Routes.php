@@ -30,6 +30,7 @@ $routes->group('admin', ['filter' => 'auth'], static function($routes) {
 $routes->group('auth', static function($routes) {
     $routes->get('login', 'PagesController::login', ['as' => 'login']);
     $routes->get('register', 'PagesController::register', ['as' => 'register']);
+    $routes->get('logout', 'PagesController::logout', ['as' => 'logout']);
 });
 
 
@@ -38,6 +39,7 @@ $routes->group('api/v1', static function($routes) {
     $routes->group('auth', static function($routes) {
         $routes->post('login', 'Api\V1\auth\AuthController::login', ['as' => 'api.auth.login']);
         $routes->post('register', 'Api\V1\auth\AuthController::register', ['as' => 'api.auth.register']);
+        $routes->post('logout', 'Api\V1\auth\AuthController::logout', ['as' => 'api.auth.logout']);
     });
 
     $routes->group('users', static function($routes) {

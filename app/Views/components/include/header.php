@@ -1,3 +1,6 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
@@ -65,7 +68,7 @@
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Profile </span>
                                     </a>
-                                    <a href="./page-login.html" class="dropdown-item">
+                                    <a id="logout" onclick="() => logout()" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Logout </span>
                                     </a>
@@ -76,3 +79,5 @@
                 </nav>
             </div>
         </div>
+
+        <?= view('auth/script-auth') ?>
