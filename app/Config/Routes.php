@@ -6,9 +6,10 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
+
 // admin
-// $routes->group('admin', ['filter' => 'auth'], static function($routes) {
-$routes->group('admin', static function($routes) {
+$routes->group('admin', ['filter' => 'auth'], static function($routes) {
+// $routes->group('admin', static function($routes) {
     $routes->get('dashboard', 'PagesController::dashboard', ['as' => 'dashboard']);
     $routes->get('product', 'PagesController::product', ['as' => 'product']);
     $routes->get('category', 'PagesController::category', ['as' => 'category']);
@@ -19,9 +20,10 @@ $routes->group('admin', static function($routes) {
     $routes->get('order', 'PagesController::order', ['as' => 'order']);
     $routes->get('send', 'PagesController::send', ['as' => 'send']);
     $routes->get('pickup', 'PagesController::pickup', ['as' => 'pickup']);
-    $routes->get('report', 'PagesController::report', ['as' => 'report']);
+    $routes->get('report', 'PagesController ::report', ['as' => 'report']);
     $routes->get('users', 'PagesController::users', ['as' => 'users']);
     $routes->get('profile', 'PagesController::profile', ['as' => 'profile']);
+    $routes->get('complete', 'PagesController::complete', ['as' => 'complete']);
 });
 
 // auth
@@ -115,6 +117,10 @@ $routes->group('api/v1', static function($routes) {
         $routes->post('', 'Api\V1\Delivery\DeliveryController::addDelivery', ['as' => 'api.delivery.addDelivery']);
         $routes->delete('(:num)', 'Api\V1\Delivery\DeliveryController::deleteDelivery/$1', ['as' => 'api.Delivery.deleteDelivery']);
         $routes->get('', 'Api\V1\Delivery\DeliveryController::getDataDelivery', ['as' => 'api.Delivery.getDataDelivery']);
+        $routes->get('send', 'Api\V1\Delivery\DeliveryController::getDataSendDelivery', ['as' => 'api.Delivery.getDataSendDelivery']);
+        $routes->get('order', 'Api\V1\Delivery\DeliveryController::getDataOrderDelivery', ['as' => 'api.Delivery.getDataOrderDelivery']);
+        $routes->get('complete', 'Api\V1\Delivery\DeliveryController::getDataCompleteDelivery', ['as' => 'api.Delivery.getDataCompleteDelivery']);
+        $routes->get('pickup', 'Api\V1\Delivery\DeliveryController::getDataPickUpDelivery', ['as' => 'api.Delivery.getDataPickUpDelivery']);
         $routes->get('trackingnumber', 'Api\V1\Delivery\DeliveryController::getDataTrackingDelivery', ['as' => 'api.Delivery.getDataTrackingDelivery']);
         $routes->get('(:num)', 'Api\V1\Delivery\DeliveryController::getDataDeliveryById/$1', ['as' => 'api.Delivery.getDataDeliveryById']);
         $routes->put('(:num)', 'Api\V1\Delivery\DeliveryController::updateDataCategoryById/$1', ['as' => 'api.Delivery.updateDataCategoryById']);

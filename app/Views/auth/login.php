@@ -8,8 +8,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>MM Barokah 4 Putra</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href="/assets/focus2/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 </head>
 
@@ -23,14 +24,14 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <h4 class="text-center mb-4">Sign in your account</h4>
-                                    <form action="index.html">
+                                    <form id="form-login">
                                         <div class="form-group">
                                             <label><strong>Email</strong></label>
-                                            <input type="email" class="form-control" value="hello@example.com">
+                                            <input type="email" name="email" class="form-control" placeholder="hello@example.com">
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Password</strong></label>
-                                            <input type="password" class="form-control" value="Password">
+                                            <input type="password" name="password" class="form-control" placeholder="Password">
                                         </div>
                                         <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                             <div class="form-group">
@@ -63,6 +64,7 @@
     <!--**********************************
         Scripts
     ***********************************-->
+    <?= view('auth/script-auth') ?>
     <!-- Required vendors -->
     <script src="/assets/focus2/vendor/global/global.min.js"></script>
     <script src="/assets/focus2/js/quixnav-init.js"></script>

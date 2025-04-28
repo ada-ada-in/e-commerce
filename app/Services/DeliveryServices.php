@@ -18,6 +18,10 @@ class DeliveryServices {
             'status'    => [
                 'label' => 'status',
                 'rules' => 'required|in_list[order,pickup,send]'
+            ],
+            'address'    => [
+                'label' => 'status',
+                'rules' => 'required'
             ]
         ];
 
@@ -39,12 +43,13 @@ class DeliveryServices {
             'transactions_id'    => $data['transactions_id'],
             'tracking_number'    => $trackingNumber,
             'status'    => $data['status'],
+            'address'    => $data['address'],
             ]);
 
 
         return [
             'status' => true,
-            'message' => 'add payment success'
+            'message' => 'add delivery success'
         ];
 
      }
@@ -82,6 +87,72 @@ class DeliveryServices {
              return [
                  'status'  => true,
                  'message' => 'delivery is empty'
+             ];
+         }
+ 
+         return $data;
+     }
+
+     public function getDeliverySendServices()
+     {
+         
+         $deliveryData = new DeliveryModel();
+         $data = $deliveryData->where('status', 'send')->findAll();
+ 
+         if(empty($data)){
+             return [
+                 'status'  => true,
+                 'message' => 'delivery send is empty'
+             ];
+         }
+ 
+         return $data;
+     }
+
+     public function getDeliveryOrderServices()
+     {
+         
+         $deliveryData = new DeliveryModel();
+         $data = $deliveryData->where('status', 'order')->findAll();
+ 
+         if(empty($data)){
+             return [
+                 'status'  => true,
+                 'message' => 'delivery order is empty'
+             ];
+         }
+ 
+         return $data;
+     }
+
+
+     public function getDeliveryCompleteServices()
+     {
+         
+         $deliveryData = new DeliveryModel();
+         $data = $deliveryData->where('status', 'complete')->findAll();
+ 
+         if(empty($data)){
+             return [
+                 'status'  => true,
+                 'message' => 'delivery complete is empty'
+             ];
+         }
+ 
+         return $data;
+     }
+
+
+     public function getDeliveryPickUpServices()
+     {
+         
+         $deliveryData = new DeliveryModel();
+         $data = $deliveryData->where('status', 'pickup')->findAll();
+ 
+         if(empty($data)){
+             return [
+                 'status'  => true,
+                 'message' => 'delivery pickup is empty'
              ];
          }
  

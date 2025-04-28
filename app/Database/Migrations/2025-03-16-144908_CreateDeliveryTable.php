@@ -12,7 +12,8 @@ class CreateDeliveryTable extends Migration
             'id'    => ['type' => 'INT', 'constraint' => 11, 'auto_increment' => true, 'unsigned' => true],
             'transactions_id'     => ['type' => 'INT', 'constraint' => 11, 'unsigned' => true],
             'tracking_number' => ['type' => 'DECIMAL', 'constraint' => '10,2'],
-            'status' => ['type' => 'ENUM', 'constraint' => ["order", "pickup", "send"], 'default' => 'pickup'],
+            'address' => ['type' => 'VARCHAR', 'constraint' => 255],
+            'status' => ['type' => 'ENUM', 'constraint' => ["order", "pickup", "send", "complete"], 'default' => 'pickup'],
             'created_at'  => ['type' => 'DATETIME', 'null' => true],
             'updated_at'  => ['type' => 'DATETIME', 'null' => true]
         ]);

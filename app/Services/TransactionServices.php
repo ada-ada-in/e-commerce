@@ -2,17 +2,20 @@
 namespace App\Services;
 use App\Models\TransactionsModel;
 use App\Models\UserModel;
+use App\Services\DeliveryServices;
 use Config\Midtrans;
 
 class TransactionServices {
     protected $transactionsModel;
     protected $usermodel;
+    protected $deliveryservice;
 
 
     public function __construct()
     {
         $this->transactionsModel = new TransactionsModel();
         $this->usermodel = new UserModel();
+        $this->deliveryservice = new DeliveryServices();
         Midtrans::init();
     }
 
@@ -24,12 +27,20 @@ class TransactionServices {
             'rules' => 'required'
         ],
         'total_price' => [
-            'label' => 'Total Price',
+            'label' => 'total_price',
             'rules' => 'required|numeric'
         ],
         'status' => [
             'label' => 'Status',
             'rules' => 'required|in_list[pending,settlement,deny,cancel,expire,failure,refund,partial_refund,chargeback]'
+        ],
+        'address' => [
+            'label' => 'address',
+            'rules' => 'required'
+        ],
+        'status_delivery' => [
+            'label' => 'Status',
+            'rules' => 'required|in_list[order,pickup,send]'
         ]
     ];
 
@@ -91,6 +102,24 @@ class TransactionServices {
             'snap_token' => $snapToken
         ]);
 
+        $transactions_id = $this->transactionsModel->getInsertID();
+
+        $deliveryData = [
+            'transactions_id' => $transactions_id,
+            'status' => $data['status_delivery'],
+            'address' => $data['address']
+        ];
+
+        $deliveryResult = $this->deliveryservice->addDeliveryServices($deliveryData);
+
+        if (!$deliveryResult['status']) {
+            return [
+                'status' => false,
+                'message' => 'Transaction created, but failed to create delivery',
+                'errors' => $deliveryResult['errors']
+            ];
+        }
+
         return [
             'status' => true,
             'message' => 'Payment created successfully',
@@ -98,6 +127,7 @@ class TransactionServices {
             'redirect_url' => "https://app.sandbox.midtrans.com/snap/v2/vtweb/$snapToken",
             'order_id' => $orderId
         ];
+        
     } catch (\Exception $e) {
         log_message('error', 'Midtrans error: ' . $e->getMessage());
 
@@ -185,6 +215,7 @@ class TransactionServices {
          }
          return $data;
      }
+     
 
 
      public function getDataTransactionPendingServices()

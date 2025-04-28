@@ -49,6 +49,9 @@ class PagesController extends BaseController
     public function profile(): string {
         return view('pages/profile');
     }
+    public function complete(): string {
+        return view('pages/complete-delivery');
+    }
     public function login(): string {
         return view('auth/login');
     }

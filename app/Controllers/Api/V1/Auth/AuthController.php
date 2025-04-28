@@ -74,11 +74,12 @@ class AuthController extends ResourceController {
             }
 
             session()->setFlashdata('success', 'Login berhasil!');
-
+            
     
             return $this->respondCreated([
                 'data' => $data,
-                'message' => $result['message']
+                'message' => $result['message'],
+                'role' => $result['role']
             ]);
 
         } catch (\Exception $e) {

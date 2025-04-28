@@ -14,6 +14,7 @@ class DeliveryController extends ResourceController {
     }
 
 
+
     public function addDelivery(){
         try {
             $data = $this->request->getJSON(true);
@@ -45,6 +46,7 @@ class DeliveryController extends ResourceController {
         }
     }
 
+
     public function deleteDelivery($id){
         try {
     
@@ -64,6 +66,8 @@ class DeliveryController extends ResourceController {
         }
     }
 
+
+
     public function getDataDelivery(){
 
         try {
@@ -80,6 +84,80 @@ class DeliveryController extends ResourceController {
             ]);
         }
     }
+
+    public function getDataSendDelivery(){
+
+        try {
+            $data = $this->deliveryServices->getDeliverySendServices();
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                 $e->getMessage()
+            ]);
+        }
+
+
+    }    
+    
+    
+    public function getDataOrderDelivery(){
+
+        try {
+            $data = $this->deliveryServices->getDeliveryOrderServices();
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                 $e->getMessage()
+            ]);
+        }
+    }
+
+    
+    public function getDataPickUpDelivery(){
+
+        try {
+            $data = $this->deliveryServices->getDeliveryPickUpServices();
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                 $e->getMessage()
+            ]);
+        }
+    }
+
+
+    public function getDataCompleteDelivery(){
+
+        try {
+            $data = $this->deliveryServices->getDeliveryCompleteServices();
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                 $e->getMessage()
+            ]);
+        }
+    }
+
 
     public function getDataTrackingDelivery()
     {
@@ -113,9 +191,8 @@ class DeliveryController extends ResourceController {
             ], 500);
         }
     }
-    
 
-    
+
     public function getDataDeliveryById($id){
         try {
     
@@ -135,6 +212,7 @@ class DeliveryController extends ResourceController {
         }
     }
 
+    
     public function updateDataCategoryById($id)
     {
         try {

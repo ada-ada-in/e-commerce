@@ -3,8 +3,8 @@
                     <div class="col-12">
                         <div class="card border border-0">
                             <div class="card-header bg-white">
-                                <h4 class="card-title">Pick Up Datatable</h4>
-                                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari pengiriman...">
+                                <h4 class="card-title">Complete Datatable</h4>
+                                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari kategori...">
                                 <div>
                                     <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     +
@@ -24,20 +24,24 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table   class="display table table-striped table-responsive-sm" style="min-width: 845px">
+                                    <table class="display table table-striped table-responsive-sm" style="min-width: 845px">
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th hidden>id</th>
-                                                <th>Tracking Number</th>
-                                                <th>Address</th>
+                                                <th>No. Order</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Handphone</th>
+                                                <th>Total Harga</th>
                                                 <th>Status</th>
-                                                <th>Tanggal Delivery</th>
-                                                <th>Action</th>
+                                                <th>Tanggal Transaksi</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="pickup-data">
-                                           <!-- data send -->
+                                        <tbody id="delivery-complete">
+                                           
+                                                <!-- data complete -->
+                                            
                                         </tbody>
                                     </table>
                                     <div>
@@ -50,8 +54,3 @@
                         </div>
                     </div>
                 </div>
-
-
-                
-<?= view('components/pickup/script-pickup') ?>
-<?= view('components/pickup/edit-modal-pickup') ?>

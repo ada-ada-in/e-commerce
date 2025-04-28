@@ -5,21 +5,21 @@
 # content-type: application/json
 
 # {
-#    "name": "user1",
-#    "email": "user1@example.com",
+#    "name": "user2",
+#    "email": "user2@example.com",
 #    "password": "user123",
 #    "confirm_password": "user123",
 #    "address": "address Example",
 #    "phone": "081234567890"
 # }
 
-# # POST http://localhost:8080/api/v1/auth/login
-# # content-type: application/json
+POST http://localhost:8080/api/v1/auth/login
+content-type: application/json
 
-# # {
-# #   "email": "user@example.com",
-# #   "password": "user123"
-# # }
+{
+  "email": "user1@example.com",
+  "password": "user123"
+}
 
 # # USERS
 
@@ -75,7 +75,7 @@
 # #   "description": "edit description categories example"
 # # }
 
-# # Transactions
+# Transactions
 
 # POST http://localhost:8080/api/v1/transactions
 # content-type: application/json; charset=UTF-8
@@ -83,7 +83,9 @@
 # {
 #   "user_id": 1,
 #   "total_price": 50000,
-#   "status": "paid"
+#   "status": "settlement",
+#   "status_delivery": "order",
+#   "address": "thehok"
 # }
 
 # # DELETE http://localhost:8080/api/v1/transactions/1
@@ -112,7 +114,7 @@
 # {
 #   "user_id": 1,
 #   "total_price": 50000,
-#   "status": "cancel"
+#   "status": "settlement"
 # }
 
 # # DELETE http://localhost:8080/api/v1/transactions/1
@@ -124,8 +126,8 @@
 # GET http://localhost:8080/api/v1/transactions/pending
 # content-type: application/json
 
-GET http://localhost:8080/api/v1/transactions/cancel
-content-type: application/json
+# GET http://localhost:8080/api/v1/transactions/cancel
+# content-type: application/json
 
 # GET http://localhost:8080/api/v1/transactions/getlatesttransactions
 # content-type: application/json
@@ -289,19 +291,34 @@ content-type: application/json
 
 # # Delivery
 
-# # POST http://localhost:8080/api/v1/delivery
-# # content-type: application/json
+# POST http://localhost:8080/api/v1/delivery
+# content-type: application/json
 
-# # {
-# #   "transactions_id": 1,
-# #   "status":"order"
-# # }
+# {
+#   "transactions_id": 5,
+#   "status":"order"
+# }
 
 # # DELETE http://localhost:8080/api/v1/delivery/1
 # # content-type: application/json
 
-# # GET http://localhost:8080/api/v1/delivery
-# # content-type: application/json
+# GET http://localhost:8080/api/v1/delivery
+# content-type: application/json
+
+# GET http://localhost:8080/api/v1/delivery/send
+# content-type: application/json
+
+
+# GET http://localhost:8080/api/v1/delivery/order
+# content-type: application/json
+
+
+# GET http://localhost:8080/api/v1/delivery/pickup
+# content-type: application/json
+
+
+# GET http://localhost:8080/api/v1/delivery/complete
+# content-type: application/json
 
 
 # # GET http://localhost:8080/api/v1/delivery/trackingnumber

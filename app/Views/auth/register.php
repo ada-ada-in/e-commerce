@@ -7,8 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>MM Barokah 4 Putra</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link href="/assets/focus2/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 </head>
 
@@ -22,18 +23,30 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <h4 class="text-center mb-4">Sign up your account</h4>
-                                    <form action="index.html">
+                                    <form id="form-register">
                                         <div class="form-group">
                                             <label><strong>Username</strong></label>
-                                            <input type="text" class="form-control" placeholder="username">
+                                            <input type="text" name="name" class="form-control" placeholder="username">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>Alamat</strong></label>
+                                            <input type="text" name="address" class="form-control" placeholder="Kota Baru">
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Email</strong></label>
-                                            <input type="email" class="form-control" placeholder="hello@example.com">
+                                            <input type="email" name="email" class="form-control" placeholder="hello@example.com">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>Handphone</strong></label>
+                                            <input type="number" name="phone" class="form-control" placeholder="08xxxxxxxxx">
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Password</strong></label>
-                                            <input type="password" class="form-control" value="Password">
+                                            <input type="password" name="password" class="form-control" placeholder="password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>Confirm Password</strong></label>
+                                            <input type="password" name="confirm_password" class="form-control" placeholder="confirm password">
                                         </div>
                                         <div class="text-center mt-4">
                                             <button type="submit" class="btn btn-primary btn-block">Sign me up</button>
@@ -50,6 +63,7 @@
             </div>
         </div>
     </div>
+    <?= view('auth/script-auth') ?>
 
     <!--**********************************
         Scripts

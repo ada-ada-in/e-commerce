@@ -37,6 +37,8 @@ class Filters extends BaseFilters
         'auth' => \App\Filters\AuthFilter::class,
     ];
 
+    
+
     /**
      * List of special required filters.
      *

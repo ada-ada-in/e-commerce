@@ -33,16 +33,9 @@
                             <li><a href="<?= base_url('admin/order') ?>">Order</a></li>
                             <li><a href="<?= base_url('admin/send') ?>">Send</a></li>
                             <li><a href="<?= base_url('admin/pickup') ?>">Pick Up</a></li>
-                            <li><a href="<?= base_url('admin/order') ?>">Complete Delivery</a></li>
+                            <li><a href="<?= base_url('admin/complete') ?>">Complete Delivery</a></li>
 
                         </ul>
-                    </li>
-
-                    <li class="mt-2">
-                        <a href="<?= base_url('admin/report') ?>" aria-expanded="false">
-                            <i class="icon-docs"></i>
-                            <span class="nav-text">Report</span>
-                        </a>
                     </li>
 
                     <li class="mt-2">

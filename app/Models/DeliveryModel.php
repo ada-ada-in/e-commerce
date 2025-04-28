@@ -12,7 +12,7 @@ class DeliveryModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['transactions_id', 'tracking_number', 'status'];
+    protected $allowedFields    = ['transactions_id', 'tracking_number', 'status', 'address'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;  
