@@ -71,5 +71,20 @@ class PagesController extends BaseController
     public function user(): string {
         return view('pages/user/main');
     }
+    public function userProfile(): string {
+        return view('pages/user/profile');
+    }
+    public function payment(): string {
+        return view('pages/user/payment');
+    }
+    public function delivery(): string {
+        return view('pages/user/delivery');
+    }
+    public function inventory(): string {
+        return view('pages/user/inventory');
+    }
+    public function checkout(): string {
+        return view('pages/user/checkout');
+    }
     
 }

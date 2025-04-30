@@ -8,7 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 
 
 // admin
-$routes->group('admin', ['filter' => 'auth'], static function($routes) {
+$routes->group('admin', ['filter' => 'admin'], static function($routes) {
 // $routes->group('admin', static function($routes) {
     $routes->get('dashboard', 'PagesController::dashboard', ['as' => 'dashboard']);
     $routes->get('product', 'PagesController::product', ['as' => 'product']);
@@ -30,6 +30,27 @@ $routes->group('admin', ['filter' => 'auth'], static function($routes) {
 // user
 $routes->group('', static function($routes) {
     $routes->get('/', 'PagesController::user', ['as' => 'user']);
+    $routes->get('profile', 'PagesController::userProfile', [
+        'as' => 'userProfile',
+        'filter' => 'auth'
+    ]);
+    $routes->get('payment', 'PagesController::payment', [
+        'as' => 'payment',
+        'filter' => 'auth'
+    ]);
+    $routes->get('delivery', 'PagesController::delivery', [
+        'as' => 'delivery',
+        'filter' => 'auth'
+    ]);
+    $routes->get('inventory', 'PagesController::inventory', [
+        'as' => 'inventory',
+        'filter' => 'auth'
+    ]);
+    $routes->get('checkout', 'PagesController::checkout', [
+        'as' => 'checkout',
+        'filter' => 'auth'
+    ]);
+
 });
 
 

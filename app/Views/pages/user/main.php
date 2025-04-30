@@ -5,10 +5,7 @@
 
     <?= view('pages/user/components/include/nav-header/cart') ?>
     
-    <?= view('pages/user/components/include/nav-header/button-menu') ?>
-
     <?= view('/pages/user/components/include/nav-header/header') ?>
-
 
     <!--hero section  -->
   

@@ -6,13 +6,17 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-class AuthFilter implements FilterInterface
+class AdminFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // tidak login redirect ke /
         if (! session()->get('isLoggedIn')) {
             return redirect()->to('/');
+        }
+
+        // user login redirect ke /user
+        if (session()->get('role') !== 'admin') {
+            return redirect()->to('/'); 
         }
         
     }

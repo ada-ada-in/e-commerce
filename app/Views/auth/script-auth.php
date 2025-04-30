@@ -74,7 +74,7 @@
                         if(role == 'admin'){
                             window.location.href = '/admin/dashboard'
                         } else {
-                            window.location.href = '/user'
+                            window.location.href = '/'
                         }
 
                         alert(response.message)
