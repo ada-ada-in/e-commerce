@@ -13,10 +13,10 @@
     <?= view('/pages/user/components/include/hero/hero-section-1') ?>
 
     <!-- category -->
-    <?= view('/pages/user/components/include/hero/hero-section-2') ?>
+    <?= view('/pages/user/components/include/hero/category-section') ?>
 
     <!-- best selling products -->
-    <?= view('/pages/user/components/include/hero/hero-section-3') ?>
+    <?= view('/pages/user/components/include/hero/product-section') ?>
  
 
     <section class="py-5">

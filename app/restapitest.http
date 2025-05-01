@@ -5,10 +5,11 @@
 # content-type: application/json
 
 # {
-#    "name": "user2",
-#    "email": "user2@example.com",
-#    "password": "user123",
-#    "confirm_password": "user123",
+#    "name": "admin",
+#    "email": "admin@example.com",
+#    "password": "admin123",
+#    "confirm_password": "admin123",
+#    "role": "admin",
 #    "address": "address Example",
 #    "phone": "081234567890"
 # }
@@ -21,8 +22,8 @@
 #   "password": "user123"
 # }
 
-POST http://localhost:8080/api/v1/auth/logout
-content-type: application/json
+# POST http://localhost:8080/api/v1/auth/logout
+# content-type: application/json
 
 # # USERS
 
@@ -86,7 +87,7 @@ content-type: application/json
 # {
 #   "user_id": 1,
 #   "total_price": 50000,
-#   "status": "settlement",
+#   "status": "pending",
 #   "status_delivery": "order",
 #   "address": "thehok"
 # }
@@ -117,7 +118,9 @@ content-type: application/json
 # {
 #   "user_id": 1,
 #   "total_price": 50000,
-#   "status": "settlement"
+#   "status": "settlement",
+#   "address": "thehok",
+#   "status_delivery": "order"
 # }
 
 # # DELETE http://localhost:8080/api/v1/transactions/1
@@ -230,8 +233,8 @@ content-type: application/json
 # # DELETE http://localhost:8080/api/v1/products/11
 # # content-type: application/json
 
-# GET http://localhost:8080/api/v1/products
-# content-type: application/json
+GET http://localhost:8080/api/v1/products
+content-type: application/json
 
 # GET http://localhost:8080/api/v1/products/countproduct
 # content-type: application/json

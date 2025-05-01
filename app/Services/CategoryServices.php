@@ -22,6 +22,10 @@ class CategoryServices {
             'description'       => [
                 'label' => 'description',
                 'rules' => 'required'
+            ],
+            'image_url' => [
+                'label' => 'image_url',
+                'rules' => 'required'
             ]
         ];
 
@@ -38,6 +42,7 @@ class CategoryServices {
         $this->categoryModel->insert([
             'name'    => $data['name'],
             'description'       => $data['description'],
+            'image_url' => $data['image_url'] ?? null,
         ]);
 
 

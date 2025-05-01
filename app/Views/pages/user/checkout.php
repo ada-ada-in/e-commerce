@@ -74,6 +74,11 @@
                             <p class="mb-1"><strong>Total Harga:</strong> Rp 100.000</p>
                             <p class="mb-1"><strong>Ongkos Kirim:</strong> Rp 10.000</p>
                             <p><strong>Total Pembayaran:</strong> <span class="text-success">Rp 110.000</span></p>
+                            <select class="form-select">
+                            <option selected>Pilih Pengantaran</option>
+                            <option value="1">Diantar</option>
+                            <option value="2">Ambil Sendiri</option>
+                            </select>
                         </div>
                         <div class="text-center">
                             <button class="btn btn-primary w-100">Lanjutkan Pembayaran</button>

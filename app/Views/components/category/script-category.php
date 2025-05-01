@@ -19,6 +19,9 @@
                         <td>${category.name}</td>
                         <td>${category.description}</td>
                         <td>
+                            <img src="/${category.image_url}" alt="${category.name}" class="img-thumbnail" style="width: 80px; height: 8    0px;">
+                        </td>
+                        <td>
                             <button type="button" class="btn btn-primary px-3 btn-update" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="${category.id}">Edit</button>
                             |
                             <button class="btn btn-danger btn-delete" data-id="${category.id}">Hapus</button>
@@ -26,6 +29,7 @@
                     </tr>
                 `;
             });
+
 
             $('#category-data').html(row);
             $('#pageInfo').text(`Page ${currentPage} of ${Math.ceil(data.length / rowsPerPage)}`);
@@ -38,6 +42,7 @@
                 dataType: 'json',
                 success: function (response) {
                     category = response.data;
+                    console.log(category);
                     filteredData = category;
                     currentPage = 1;
                     displayTable(filteredData);

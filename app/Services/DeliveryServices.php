@@ -81,7 +81,10 @@ class DeliveryServices {
      {
          
          $deliveryData = new DeliveryModel();
-         $data = $deliveryData->findAll();
+         $data = $deliveryData
+        ->select('delivery.*, transactions.status as transactions_status')
+        ->orderBy('delivery.created_at', 'DESC')
+        ->findAll();
  
          if(empty($data)){
              return [
@@ -113,8 +116,13 @@ class DeliveryServices {
      {
          
          $deliveryData = new DeliveryModel();
-         $data = $deliveryData->where('status', 'order')->findAll();
- 
+         $data = $deliveryData
+         ->select('delivery.*, transactions.status as transactions_status')
+         ->join('transactions', 'transactions.id = delivery.transactions_id')
+         ->where('transactions.status', 'settlement')
+         ->orderBy('delivery.created_at', 'DESC')
+         ->findAll();
+   
          if(empty($data)){
              return [
                  'status'  => true,

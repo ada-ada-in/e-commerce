@@ -15,14 +15,28 @@ class CategoryController extends ResourceController {
 
     public function addCategory(){
         try {
-            $data = $this->request->getJSON(true);
+            $image = $this->request->getFile('image');
+            $data = $this->request->getPost();
 
-    
-            if (empty($data)) {
+            if (!$image->isValid()) {
                 return $this->fail([
-                    'error' => 'No data received.', 'debug' => $this->request->getBody()
-                ]);
+                    'error' => 'Invalid file.',
+                    'debug' => $image->getError()
+                ], 400);
             }
+
+            if (!file_exists($image->getTempName())) {
+                return $this->fail([
+                    'error' => 'Temporary file missing.',
+                    'debug' => $image->getTempName()
+                ], 400);
+            }
+            
+
+            $imageName = $image->getRandomName();
+            $image->move(FCPATH . 'category/', $imageName);
+
+            $data['image_url'] = 'category/' . $imageName;            
     
             $result = $this->categoryservices->addCategoryServices($data);
     
@@ -34,6 +48,7 @@ class CategoryController extends ResourceController {
     
             return $this->respondCreated([
                 'data' => $data,
+                'file_name' => $imageName,
                 'message' => $result['message']
             ]);
     

@@ -73,8 +73,8 @@ class TransactionServices {
         ],
         'expiry' => [ 
             'start_time' => date("Y-m-d H:i:s O"),
-            'unit' => 'minutes',
-            'duration' => 15
+            'unit' => 'hour',
+            'duration' => 24
         ],
         'customer_details' => [
             'first_name' => $user['name'] ?? 'Customer',
@@ -215,6 +215,7 @@ class TransactionServices {
          }
          return $data;
      }
+     
      
 
 

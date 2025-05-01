@@ -31,6 +31,7 @@
                                                 <th>Nomor</th>
                                                 <th>Nama Kategori</th>
                                                 <th>Deskripsi</th>
+                                                <th>Gambar</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>

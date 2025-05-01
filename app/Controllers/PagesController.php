@@ -86,5 +86,8 @@ class PagesController extends BaseController
     public function checkout(): string {
         return view('pages/user/checkout');
     }
+    public function about(): string {
+        return view('pages/user/about');
+    }
     
 }

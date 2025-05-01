@@ -30,6 +30,7 @@ $routes->group('admin', ['filter' => 'admin'], static function($routes) {
 // user
 $routes->group('', static function($routes) {
     $routes->get('/', 'PagesController::user', ['as' => 'user']);
+    $routes->get('/about', 'PagesController::about', ['as' => 'about']);
     $routes->get('profile', 'PagesController::userProfile', [
         'as' => 'userProfile',
         'filter' => 'auth'
