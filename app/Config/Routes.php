@@ -107,6 +107,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->delete('(:num)', 'Api\V1\CartItems\CartItemsController::deleteCartItem/$1', ['as' => 'api.cartItem.deleteCartItem']);
         $routes->get('', 'Api\V1\CartItems\CartItemsController::getDataCartItem', ['as' => 'api.cartItem.getDataCartItem']);
         $routes->get('(:num)', 'Api\V1\CartItems\CartItemsController::getDataCartItemById/$1', ['as' => 'api.cartItem.getDataCartItemById']);
+        $routes->get('user', 'Api\V1\CartItems\CartItemsController::getDataCartItemByUser', ['as' => 'api.cartItem.getDataCartItemByUser']);
         $routes->put('(:num)', 'Api\V1\CartItems\CartItemsController::updateDataCategoryById/$1', ['as' => 'api.cartItem.updateDataCategoryById']);
     }); 
 

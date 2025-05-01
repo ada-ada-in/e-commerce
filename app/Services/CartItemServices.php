@@ -129,6 +129,29 @@ class CartItemServices {
         return $data;
     }
 
+    public function getDataCartItemByUserServices($id){
+
+        if (!$id) {
+            return [
+                'status'  => false,
+                'message' => 'ID is required'
+            ];
+        }
+
+        $cartItemData = new CartItemsModel();
+    
+        $data = $cartItemData->where('user_id', $id)->findAll();
+    
+        if (!$data) {
+            return [
+                'status'  => false,
+                'message' => 'User not found'
+            ];
+        }
+    
+        return $data;
+    }
+
     public function updateDataByCartItemIdServices($id, array $data)
     {
         if (!$id) {

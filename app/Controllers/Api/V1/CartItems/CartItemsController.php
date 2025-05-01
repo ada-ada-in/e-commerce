@@ -100,6 +100,29 @@ class CartItemsController extends ResourceController {
         }
     }
 
+    public function getDataCartItemByUser(){
+        try {
+
+            $session = session();
+            $userId = $session->get('id');
+    
+            $data = $this->cartItemServices->getDataCartItemByUserServices($userId);
+    
+            return $this->respond([
+                'status'  => true,
+                'data'    => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
     public function updateDataCategoryById($id)
     {
         try {
