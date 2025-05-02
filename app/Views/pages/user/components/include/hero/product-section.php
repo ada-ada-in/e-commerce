@@ -68,7 +68,6 @@
             dataType: 'json',
             success: function (response) {
                     product = response.data;
-                    console.log(product);
                     displayTableProduct(product);
 
             },

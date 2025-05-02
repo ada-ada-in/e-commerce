@@ -139,8 +139,9 @@ class CartItemServices {
         }
 
         $cartItemData = new CartItemsModel();
+
     
-        $data = $cartItemData->where('user_id', $id)->findAll();
+        $data = $cartItemData->orderBy('created_at', 'DESC')->select('cart_items.*, product.name as cart_product_name, product.image_url as cart_product_image_url')->join('product', 'product.id = cart_items.product_id')->where('user_id', $id)->findAll();
     
         if (!$data) {
             return [

@@ -51,7 +51,6 @@
             dataType: 'json',
             success: function (response) {
                 category = response.data;
-                console.log(category);
                 displayTable(category);
             },
             error: function (xhr, status, error) {
