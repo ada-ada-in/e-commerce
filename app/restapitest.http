@@ -85,11 +85,11 @@
 # content-type: application/json; charset=UTF-8
 
 # {
-#   "user_id": 1,
 #   "total_price": 50000,
 #   "status": "pending",
 #   "status_delivery": "order",
-#   "address": "thehok"
+#   "address": "thehok",
+#   "cart_items_ids": [9, 11]
 # }
 
 # # DELETE http://localhost:8080/api/v1/transactions/1
@@ -165,14 +165,14 @@
 
 # # Cart Items
 
-# POST http://localhost:8080/api/v1/cartitems
-# content-type: application/json
+POST http://localhost:8080/api/v1/cartitems
+content-type: application/json
 
-# {
-#   "product_id": 1,
-#   "user_id": 1,
-#   "quantity": 2
-# }
+{
+  "product_id": 1,
+  "user_id": 1,
+  "quantity": 2
+}
 
 # # DELETE http://localhost:8080/api/v1/cartitems/1
 # # content-type: application/json

@@ -33,19 +33,26 @@
                     <div class="card-body">
                         <hr>
                         <h4 class="card-title text-center mb-4">Detail Pembayaran</h4>
-                        <div class="mb-3">
-                            <p class="mb-1"><strong>Total Harga:</strong> <span id="total-price">Rp 0</span></p>
-                            <p class="mb-1"><strong>Ongkos Kirim:</strong> Rp 10.000</p>
-                            <p><strong>Total Pembayaran:</strong> <span class="text-success" id="final-price">Rp 10.000</span></p>
-                            <select class="form-select">
-                                <option selected>Pilih Pengantaran</option>
-                                <option value="1">Diantar</option>
-                                <option value="2">Ambil Sendiri</option>
-                            </select>
+                        <div class="mb-3" id="payment-details">
+                            <!-- Rincian item akan muncul di sini -->
                         </div>
-                        <div class="text-center">
-                            <button class="btn btn-primary w-100" id="payment-button" disabled>Lanjutkan Pembayaran</button>
-                        </div>
+                        <form>
+                            <div class="mb-3">
+                                <p class="mb-1"><strong>Total Harga:</strong> <span id="total-price">Rp 0</span></p>
+                                <p class="mb-1"><strong>Ongkos Kirim:</strong> Rp 10.000</p>
+                                <p><strong>Total Pembayaran:</strong> <span class="text-success" id="final-price">Rp 10.000</span></p>
+                                <select class="form-select" required id="delivery-option" aria-label="Default select example">
+                                    <option selected disabled>Pilih Metode Pengantaran</option>
+                                    <option value="order">Diantar</option>
+                                    <option value="pickup">Ambil Sendiri</option>
+                                </select>
+                                <label for="delivery-note" class="form-label"><strong>Alamat Pengiriman :</strong></label>
+                                <textarea required class="form-control mb-3 shadow-sm" rows="3" id="delivery-note" placeholder="Contoh: Jl. Raya No. 123, Jambi"></textarea>
+                                </div>
+                            <div class="text-center">
+                                <button class="btn btn-primary w-100" id="payment-button" disabled>Lanjutkan Pembayaran</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -56,7 +63,6 @@
     let checkoutItems = [];
     let selectedItemIds = [];
 
-    // Mengambil data cart
     function loadDataCart() {
         $.ajax({
             url: '/api/v1/cartitems/user',
@@ -80,28 +86,46 @@
         });
     }
 
-    
-    function updateTotalPrice() {
-        const selectedItems = checkoutItems.filter(item => selectedItemIds.includes(item.id));
-        let totalPrice = selectedItems.reduce((sum, item) => sum + parseInt(item.total_price), 0);
-        const deliveryOption = $('.form-select').val();
-        const deliveryFee = deliveryOption === '1' ? 10000 : 0;
-        
-        $('#total-price').text(formatRupiah(totalPrice));
-        $('#final-price').text(formatRupiah(totalPrice + deliveryFee));
-    }
-    
-    function updateCartCount(count) {
-        $('#select-all').next('.card-title').text(`Pilih Semua (${count})`);
-        $('#cart-count').text(count);
-    }
-    
     function formatRupiah(number) {
         return new Intl.NumberFormat('id-ID', {
             style: 'currency',
             currency: 'IDR',
             minimumFractionDigits: 0
         }).format(number);
+    }
+
+    function updateCartCount(count) {
+        $('#select-all').next('.card-title').text(`Pilih Semua (${count})`);
+        $('#cart-count').text(count);
+    }
+
+    function getSelectedItems() {
+        return checkoutItems.filter(item => selectedItemIds.includes(parseInt(item.id)));
+    }
+
+    function updateTotalPrice() {
+        const selectedItems = getSelectedItems();
+        let total = 0;
+        let detailHTML = '';
+
+        selectedItems.forEach(item => {
+            total += parseInt(item.total_price);
+            detailHTML += `
+                <div class="d-flex justify-content-between">
+                    <span>${item.cart_product_name}</span>
+                    <span>${item.quantity} x ${formatRupiah(item.total_price / item.quantity)}</span>
+                </div>
+            `;
+        });
+
+        const deliveryOption = $('#delivery-option').val();
+        const deliveryFee = deliveryOption === 'order' ? 10000 : 0;
+
+        $('#total-price').text(formatRupiah(total));
+        $('#final-price').text(formatRupiah(total + deliveryFee));
+        $('#payment-details').html(detailHTML);
+
+        return total + deliveryFee;
     }
 
     function displayTableCart(data) {
@@ -190,33 +214,28 @@
     $(document).ready(function () {
         loadDataCart();
 
-        // Pilih Semua
         $('#select-all').on('change', function () {
             const checked = $(this).is(':checked');
             $('.cart-checkbox').prop('checked', checked);
 
-            selectedItemIds = checked ? checkoutItems.map(i => i.id) : [];
+            selectedItemIds = checked ? checkoutItems.map(i => parseInt(i.id)) : [];
+
             updateCartCount(selectedItemIds.length);
-            console.log(selectedItemIds);
             updateTotalPrice();
             $('#payment-button').prop('disabled', selectedItemIds.length === 0);
 
             $('.cart-checkbox').each(function () {
                 const card = $(this).closest('.card');
-                if (checked) {
-                    card.addClass('cart-selected');
-                } else {
-                    card.removeClass('cart-selected');
-                }
+                checked ? card.addClass('cart-selected') : card.removeClass('cart-selected');
             });
         });
 
-        // Checkbox individual
         $(document).on('change', '.cart-checkbox', function () {
             const id = parseInt($(this).data('id'));
             const card = $(this).closest('.card');
+            const isChecked = $(this).is(':checked');
 
-            if ($(this).is(':checked')) {
+            if (isChecked) {
                 if (!selectedItemIds.includes(id)) {
                     selectedItemIds.push(id);
                 }
@@ -226,15 +245,43 @@
                 card.removeClass('cart-selected');
             }
 
-
-            $('#select-all').prop('checked', selectedItemIds.length === checkoutItems.length);
             updateCartCount(selectedItemIds.length);
             updateTotalPrice();
             $('#payment-button').prop('disabled', selectedItemIds.length === 0);
+            $('#select-all').prop('checked', selectedItemIds.length === checkoutItems.length);
         });
-        
+
         $('.form-select').on('change', function () {
             updateTotalPrice();
+        });
+
+        $('#payment-button').on('click', function (e) {
+            e.preventDefault();
+            const totalInfo = updateTotalPrice();
+            const deliveryNote = $('#delivery-note').val();
+            const deliveryOption = $('.form-select').val();
+
+            const payload = {
+                total_price: totalInfo,
+                address: deliveryNote,
+                cart_items_ids: selectedItemIds,
+                status_delivery: deliveryOption
+            };
+
+            $.ajax({
+                url: '/api/v1/transactions',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(payload),
+                success: function (response) {
+                    const paymentUrl = response.redirect_url;
+                    alert('checkout berhasil, silahkan lakukan pembayaran!');
+                    window.location.href = `${paymentUrl}`;
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error during checkout:', error);
+                }
+            });
         });
     });
     </script>

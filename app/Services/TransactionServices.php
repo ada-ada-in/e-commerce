@@ -3,12 +3,16 @@ namespace App\Services;
 use App\Models\TransactionsModel;
 use App\Models\UserModel;
 use App\Services\DeliveryServices;
+use App\Models\CartItemsModel;
+use App\Models\TransactionsItemsModel;
 use Config\Midtrans;
 
 class TransactionServices {
     protected $transactionsModel;
     protected $usermodel;
     protected $deliveryservice;
+    protected $cartModel;
+    protected $transactionItemModel;
 
 
     public function __construct()
@@ -16,129 +20,163 @@ class TransactionServices {
         $this->transactionsModel = new TransactionsModel();
         $this->usermodel = new UserModel();
         $this->deliveryservice = new DeliveryServices();
+        $this->cartModel = new CartItemsModel();
+        $this->transactionItemModel = new TransactionsItemsModel();
+
         Midtrans::init();
     }
 
     public function addTransactionServices(array $data)
-{
-    $rules = [
-        'user_id' => [
-            'label' => 'User ID',
-            'rules' => 'required'
-        ],
-        'total_price' => [
-            'label' => 'total_price',
-            'rules' => 'required|numeric'
-        ],
-        'status' => [
-            'label' => 'Status',
-            'rules' => 'required|in_list[pending,settlement,deny,cancel,expire,failure,refund,partial_refund,chargeback]'
-        ],
-        'address' => [
-            'label' => 'address',
-            'rules' => 'required'
-        ],
-        'status_delivery' => [
-            'label' => 'Status',
-            'rules' => 'required|in_list[order,pickup,send]'
-        ]
-    ];
-
-    $validation = \Config\Services::validation();
-    $validation->setRules($rules);
-
-    if (!$validation->run($data)) {
-        log_message('error', 'Validation errors: ' . json_encode($validation->getErrors()));
-
-        return [
-            'status' => false,
-            'errors' => $validation->getErrors()
+    {
+        $rules = [
+            'total_price' => [
+                'label' => 'Total Price',
+                'rules' => 'required|numeric'
+            ],
+            'address' => [
+                'label' => 'Address',
+                'rules' => 'required'
+            ],
+            'cart_items_ids' => [
+                'label' => 'Cart Items',
+                'rules' => 'required'
+            ]
         ];
-    }
-
-    $user = $this->usermodel->find($data['user_id']);
-    if (!$user) {
-        return [
-            'status' => false,
-            'errors' => ['transaction' => 'User not found']
-        ];
-    }
-
-    $orderId = 'order_' . uniqid();
-    $data['total_price'];
-    $snapParams = [
-        'transaction_details' => [
-            'order_id' => $orderId,
-            'gross_amount' => $data['total_price'],
-        ],
-        'expiry' => [ 
-            'start_time' => date("Y-m-d H:i:s O"),
-            'unit' => 'hour',
-            'duration' => 24
-        ],
-        'customer_details' => [
-            'first_name' => $user['name'] ?? 'Customer',
-            'email' => filter_var($user['email'], FILTER_VALIDATE_EMAIL) ? $user['email'] : 'no-reply@example.com',
-            'phone' => preg_match('/^\+?\d{8,15}$/', $user['phone']) ? $user['phone'] : '0000000000'
-        ]
-    ];
-
-    try {
-        $snapToken = \Midtrans\Snap::getSnapToken($snapParams);
-
-        if (empty($snapToken) || !$snapToken) {
+    
+        $validation = \Config\Services::validation();
+        $validation->setRules($rules);
+    
+        if (!$validation->run($data)) {
+            log_message('error', 'Validation errors: ' . json_encode($validation->getErrors()));
+    
             return [
                 'status' => false,
-                'errors' => ['transaction' => 'Failed to generate Midtrans snap token']
+                'errors' => $validation->getErrors()
             ];
         }
 
-        $this->transactionsModel->insert([
-            'user_id' => $data['user_id'],
-            'order_id' => $orderId,
-            'total_price' => $data['total_price'],
-            'expire_time' => $snapParams['expiry']['start_time'],
-            'status' => $data['status'],
-            'snap_token' => $snapToken
-        ]);
-
-        $transactions_id = $this->transactionsModel->getInsertID();
-
-        $deliveryData = [
-            'transactions_id' => $transactions_id,
-            'status' => $data['status_delivery'],
-            'address' => $data['address']
-        ];
-
-        $deliveryResult = $this->deliveryservice->addDeliveryServices($deliveryData);
-
-        if (!$deliveryResult['status']) {
-            return [
-                'status' => false,
-                'message' => 'Transaction created, but failed to create delivery',
-                'errors' => $deliveryResult['errors']
-            ];
-        }
-
-        return [
-            'status' => true,
-            'message' => 'Payment created successfully',
-            'snap_token' => $snapToken,
-            'redirect_url' => "https://app.sandbox.midtrans.com/snap/v2/vtweb/$snapToken",
-            'order_id' => $orderId
-        ];
         
-    } catch (\Exception $e) {
-        log_message('error', 'Midtrans error: ' . $e->getMessage());
-
-        return [
-            'status' => false,
-            'message' => 'Midtrans error occurred',
-            'errors' => ['exception' => $e->getMessage()]
+        $sessionUserId = session()->get('id');
+    
+        $user = $this->usermodel->find($sessionUserId);
+        if (!$user) {
+            return [
+                'status' => false,
+                'errors' => ['transaction' => 'User not found']
+            ];
+        }
+    
+        $orderId = 'order_' . uniqid();
+    
+        $snapParams = [
+            'transaction_details' => [
+                'order_id' => $orderId,
+                'gross_amount' => $data['total_price'],
+            ],
+            'expiry' => [ 
+                'start_time' => date("Y-m-d H:i:s O"),
+                'unit' => 'hour',
+                'duration' => 24
+            ],
+            'customer_details' => [
+                'first_name' => $user['name'] ?? 'Customer',
+                'email' => filter_var($user['email'], FILTER_VALIDATE_EMAIL) ? $user['email'] : 'no-reply@example.com',
+                'phone' => preg_match('/^\+?\d{8,15}$/', $user['phone']) ? $user['phone'] : '0000000000'
+            ]
         ];
-    }
-}
+    
+        try {
+            $snapToken = \Midtrans\Snap::getSnapToken($snapParams);
+    
+            if (empty($snapToken)) {
+                return [
+                    'status' => false,
+                    'errors' => ['transaction' => 'Failed to generate Midtrans snap token']
+                ];
+            }
 
+            if(empty($data['status'])) {
+                $data['status'] = 'pending';
+            }
+
+
+            // Insert ke tabel transaksi utama
+            $this->transactionsModel->insert([
+                'user_id' => $sessionUserId,
+                'order_id' => $orderId,
+                'total_price' => $data['total_price'],
+                'expire_time' => $snapParams['expiry']['start_time'],
+                'status' => $data['status'],
+                'snap_token' => $snapToken
+            ]);
+    
+            $transactions_id = $this->transactionsModel->getInsertID();
+    
+            $cartItemIds = $data['cart_items_ids'];
+            $cartItems = $this->cartModel->whereIn('id', $cartItemIds)->findAll();
+    
+            if (count($cartItems) !== count($cartItemIds)) {
+                return [
+                    'status' => false,
+                    'message' => 'Some cart items not found',
+                    'errors' => ['cart' => 'Invalid cart item IDs']
+                ];
+            }
+    
+            // Pindahkan ke transaction_items
+            foreach ($cartItems as $item) {
+                $this->transactionItemModel->insert([
+                    'transactions_id' => $transactions_id,
+                    'product_id' => $item['product_id'],
+                    'quantity' => $item['quantity'],
+                    'price' => $item['total_price'],
+                ]);
+            }
+    
+            // Hapus dari cart
+            $this->cartModel->whereIn('id', $cartItemIds)->delete();
+    
+
+            if(empty($data['status_delivery'])) {
+                $data['status_delivery'] = 'order';
+            }
+
+            // Tambah data delivery
+            $deliveryData = [
+                'transactions_id' => $transactions_id,
+                'status' => $data['status_delivery'],
+                'address' => $data['address']
+            ];
+    
+            $deliveryResult = $this->deliveryservice->addDeliveryServices($deliveryData);
+    
+            if (!$deliveryResult['status']) {
+                return [
+                    'status' => false,
+                    'message' => 'Transaction created, but failed to create delivery',
+                    'errors' => $deliveryResult['errors']
+                ];
+            }
+    
+            return [
+                'status' => true,
+                'message' => 'Payment created successfully',
+                'snap_token' => $snapToken,
+                'redirect_url' => "https://app.sandbox.midtrans.com/snap/v2/vtweb/$snapToken",
+                'order_id' => $orderId
+            ];
+    
+        } catch (\Exception $e) {
+            log_message('error', 'Midtrans error: ' . $e->getMessage());
+    
+            return [
+                'status' => false,
+                'message' => 'Midtrans error occurred',
+                'errors' => ['exception' => $e->getMessage()]
+            ];
+        }
+    }
+    
 
     public function getLatestTransactionServices(){
         $transactionData = new TransactionsModel();
