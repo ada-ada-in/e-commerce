@@ -19,16 +19,14 @@
                                 <input type="number" name="price" class="form-control" placeholder="Harga">
                             </div>
                             <div class="col-sm-6 mt-3">
-                                <select id="category-add" class="form-select" aria-label="Default select example">
-                                    <option disabled selected>Pilih Kategori</option>
-                                    <!-- data category -->
-                                </select>
+                            <select id="category-add" name="category_id" class="form-select" aria-label="Default select example">
+                                <option disabled selected value="">Pilih Kategori</option>
+                            </select>
                             </div>
                             <div class="col-12 mt-3">
                                 <input type="text" name="description" class="form-control" placeholder="Deskripsi">
                             </div>
                             <div class="input-group mt-3">
-                                <label class="input-group-text" for="productFile">Upload</label>
                                 <input type="file" name="image" class="form-control" id="productFile">
                             </div>
                         </div>

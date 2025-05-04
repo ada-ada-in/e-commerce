@@ -101,6 +101,25 @@ class TransactionsItemsController extends ResourceController {
         }
     }
 
+    public function getDataTransactionItemsTransactionsById($id){
+        try {
+    
+            $data = $this->transactionsItemsServices->getDataTransactionsItemsByTransactionsServices($id);
+    
+            return $this->respond([
+                'status'  => true,
+                'data'    => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function updateDataTransactionsItemsyById($id)
     {
         try {

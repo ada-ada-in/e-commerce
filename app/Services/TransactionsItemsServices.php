@@ -128,6 +128,29 @@ class TransactionsItemsServices {
         return $data;
     }
 
+    public function getDataTransactionsItemsByTransactionsServices($id){
+
+        if (!$id) {
+            return [
+                'status'  => false,
+                'message' => 'ID is required'
+            ];
+        }
+
+        $transactionsItemData = new TransactionsItemsModel();
+    
+        $data = $transactionsItemData->select('transactions_items.*, product.name as productitems_name,  product.price as items_price, product.image_url as item_image_url')->join('product', 'product.id = transactions_items.product_id')->where('transactions_id', $id)->orderBy('created_at', 'DESC')->findAll();
+    
+        if (!$data) {
+            return [
+                'status'  => false,
+                'message' => 'transactions not found'
+            ];
+        }
+    
+        return $data;
+    }
+
     public function updateDataTransactionsItmesByIdServices($id, array $data)
     {
         if (!$id) {

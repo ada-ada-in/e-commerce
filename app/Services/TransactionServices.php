@@ -238,6 +238,31 @@ class TransactionServices {
      }
 
 
+     public function getDataTransactionUserServices()
+     {
+
+        $id = session()->get('id');
+         if (!$id) {
+             return [
+                 'status'  => false,
+                 'message' => 'ID is required'
+             ];
+         }
+         $transactionData = new TransactionsModel();
+         $data = $transactionData->orderBy('created_at', 'DESC')->select('transactions.*, users.name as transactions_name, users.email as transactions_email, users.phone as transactions_phone' )->join('users', 'users.id = transactions.user_id')->where('user_id', $id)->findAll();
+ 
+         if(empty($data)){
+             return [
+                 'status'  => true,
+                 'message' => 'transaction is empty'
+             ];
+         }
+ 
+         return $data;
+     }
+
+
+
      public function getDataTransactionPaidServices()
      {
          

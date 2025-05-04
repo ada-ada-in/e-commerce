@@ -97,6 +97,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('', 'Api\V1\Transactions\TransactionsController::getDataTransaction', ['as' => 'api.transactions.getDataTransaction']);
         $routes->get('paid', 'Api\V1\Transactions\TransactionsController::getDataPaidTransaction', ['as' => 'api.transactions.getDataPaidTransaction']);
         $routes->get('pending', 'Api\V1\Transactions\TransactionsController::getDataPendingTransaction', ['as' => 'api.transactions.getDataPendingTransaction']);
+        $routes->get('user', 'Api\V1\Transactions\TransactionsController::getDataUserTransaction', ['as' => 'api.transactions.getDataUserTransaction']);
         $routes->get('cancel', 'Api\V1\Transactions\TransactionsController::getDataCancelTransaction', ['as' => 'api.transactions.getDataCancelTransaction']);
         $routes->get('(:num)', 'Api\V1\Transactions\TransactionsController::getDataTransactionById/$1', ['as' => 'api.transactions.getDataTransactionById']);
         $routes->put('(:num)', 'Api\V1\Transactions\TransactionsController::updateDataTransactionyById/$1', ['as' => 'api.transactions.updateDataTransactionyById']);
@@ -141,6 +142,8 @@ $routes->group('api/v1', static function($routes) {
         $routes->delete('(:num)', 'Api\V1\TransactionsItems\TransactionsItemsController::deleteTransactionItems/$1', ['as' => 'api.transactionsitems.deleteTransactionItems']);
         $routes->get('', 'Api\V1\TransactionsItems\TransactionsItemsController::getDataTransactionItems', ['as' => 'api.transactionsitems.getDataTransactionItems']);
         $routes->get('(:num)', 'Api\V1\TransactionsItems\TransactionsItemsController::getDataTransactionItemsById/$1', ['as' => 'api.transactionsitems.getDataTransactionItemsById']);
+        $routes->get('inventory/(:num)', 'Api\V1\TransactionsItems\TransactionsItemsController::getDataTransactionItemsTransactionsById/$1', ['as' => 'api.transactionsitems.getDataTransactionItemsTransactionsById']);
+        $routes->get('transactions', 'Api\V1\TransactionsItems\TransactionsItemsController::getDataTransactionItemsTransactionsById', ['as' => 'api.transactionsitems.getDataTransactionItemsTransactionsById']);
         $routes->put('(:num)', 'Api\V1\TransactionsItems\TransactionsItemsController::updateDataTransactionsItemsyById/$1', ['as' => 'api.transactionsitems.updateDataTransactionsItemsyById']);
     }); 
 
@@ -160,6 +163,10 @@ $routes->group('api/v1', static function($routes) {
 
     $routes->group('payments', static function($routes) {
         $routes->post('', 'Api\V1\Payment\PaymentController::addPayment', ['as' => 'api.payment.addPayment']);
+    }); 
+
+    $routes->group('webhook', static function($routes) {
+        $routes->post('', 'Api\V1\WebHook\WebHookController::index', ['as' => 'api.webhook.index']);
     }); 
     
 });

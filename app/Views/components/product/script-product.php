@@ -54,54 +54,42 @@
 
         loadData();
 
+        let categoryLoaded = false;
+
         $('#category-add').on('click', function () {
-        $.ajax({
-            url: '/api/v1/category',
-            type: 'GET',
-            success: function (response) {
-                const categoryData = response.data;
-                const selectElement = $('#category-add');
+            if (categoryLoaded) return; // Cegah pengambilan ulang
 
-                selectElement.find('option:not(:first)').remove();
+            $.ajax({
+                url: '/api/v1/category',
+                type: 'GET',
+                success: function (response) {
+                    const categoryData = response.data;
+                    const selectElement = $('#category-add');
 
-                categoryData.forEach(function (category) {
-                    const option = $('<option>', {
-                        value: category.id,
-                        text: category.name
+                    selectElement.empty();
+                    selectElement.append($('<option>', {
+                        value: '',
+                        text: '-- Pilih Kategori --',
+                        disabled: true,
+                        selected: true
+                    }));
+
+                    categoryData.forEach(function (category) {
+                        selectElement.append($('<option>', {
+                            value: category.id,
+                            text: category.name
+                        }));
                     });
-                    selectElement.append(option);
-                });
-                console.log(categoryData)
-            },
-            error: function () {
-                console.error('Gagal memuat data kategori.');
-            }
+
+                    categoryLoaded = true; // Tandai bahwa sudah dimuat
+                },
+                error: function () {
+                    console.error('Gagal memuat data kategori.');
+                }
+            });
         });
-    });
 
-    $('#category-edit').on('click', function () {
-        $.ajax({
-            url: '/api/v1/category',
-            type: 'GET',
-            success: function (response) {
-                const categoryData = response.data;
-                const selectElement = $('#category-edit');
 
-                selectElement.find('option:not(:first)').remove();
-
-                categoryData.forEach(function (category) {
-                    const option = $('<option>', {
-                        value: category.id,
-                        text: category.name
-                    });
-                    selectElement.append(option);
-                });
-            },
-            error: function () {
-                console.error('Gagal memuat data kategori.');
-            }
-        });
-    });
 
 
 
@@ -266,7 +254,7 @@
 
 
         $('#form-add-product').on('submit', function (e) {
-    e.preventDefault();
+        e.preventDefault();
 
     const form = $('#form-add-product')[0];
     const formData = new FormData();
@@ -277,9 +265,6 @@
     formData.append('category_id', $('#category-add').val());
     formData.append('description', form.description.value);
 
-    for (let [key, value] of formData.entries()) {
-    console.log(`${key}:`, value);
-}
     const imageFile = form.image.files[0];
     if (imageFile) {
         formData.append('image', imageFile);
@@ -295,8 +280,8 @@
             const message = response.message;
             console.log(message)
             alert(message);
-            $('#form-add-product')[0].reset();
             loadData();
+            $('#form-add-product')[0].reset();
             $('#staticBackdrop').modal('hide');
         },
         error: function (xhr, status, error) {

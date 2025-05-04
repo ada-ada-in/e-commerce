@@ -85,6 +85,24 @@ class TransactionsController extends ResourceController {
         }
     }
 
+    public function getDataUserTransaction(){
+
+        try {
+            $data = $this->transactionServices->getDataTransactionUserServices();
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved sccessfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function getDataPaidTransaction(){
 
         try {

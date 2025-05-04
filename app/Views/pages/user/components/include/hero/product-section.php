@@ -29,9 +29,9 @@
         data.forEach((product) => {
             div += `
                 <div class="col">
-                    <div class="product-item ">
+                    <div class="product-item">
                         <figure>
-                            <a href="product-details.html?id=${product.id}" title="${product.name}">
+                            <a href="#" title="${product.name}">
                                 <img src="/${product.image_url}" alt="${product.name}" class="tab-image img-fluid" height="200" width="200">
                             </a>
                         </figure>
@@ -46,9 +46,9 @@
                                         <input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1" min="1">
                                     </div>
                                     <div class="col-7">
-                                        <a href="#" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart" data-id="{product.id}">
+                                        <button type="button" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart" data-id="${product.id}">
                                             <svg width="18" height="18"><use xlink:href="#cart"></use></svg> Add to Cart
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -67,9 +67,8 @@
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                    product = response.data;
-                    displayTableProduct(product);
-
+                product = response.data;
+                displayTableProduct(product);
             },
             error: function (xhr, status, error) {
                 console.error('Failed to fetch product data:', error);
@@ -77,7 +76,42 @@
         });
     }
 
+    function addToCart(id, quantity) {
+
+        const payload = {
+        product_id: id, // Ensure this is the correct id
+        quantity: quantity // Ensure this is a valid number
+         };
+
+    console.log("Payload to send:", payload);
+
+        $.ajax({
+            url: '/api/v1/cartitems',
+            type: 'POST',
+            dataType: 'json',
+            data: JSON.stringify(payload),
+            success: function (response) {
+                    alert('Product added to cart successfully!');
+                    if (typeof loadDataCart === 'function') loadDataCart();
+
+            },  
+            error: function (xhr, status, error) {
+                console.error('Failed to add product to cart:', error);
+                console.error('Response:', xhr.responseText); 
+            }
+        });
+    }
+
     $(document).ready(function () {
         loadDataProduct();
+
+        $(document).on('click', '.btn-cart', function (e) {
+            e.preventDefault();
+            const id = $(this).data('id');
+            const quantityInput = $(this).closest('.row').find('input.quantity');
+            const quantity = parseInt(quantityInput.val()) || 1;
+            addToCart(id, quantity);
+            console.log('Product ID:', id, 'Quantity:', quantity);
+        });
     });
 </script>

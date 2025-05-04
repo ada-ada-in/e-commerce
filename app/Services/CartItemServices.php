@@ -22,10 +22,6 @@ class CartItemServices {
                 'label' => 'product_id',
                 'rules' => 'required'
             ], 
-            'user_id'       => [
-                'label' => 'user_id',
-                'rules' => 'required'
-            ],
             'quantity'       => [
                 'label' => 'quantity',
                 'rules' => 'required'
@@ -52,9 +48,18 @@ class CartItemServices {
             ];
         }
 
+        $id = session()->get('id');
+         if (!$id) {
+             return [
+                 'status'  => false,
+                 'message' => 'ID is required'
+             ];
+         }
+        
+
         $this->cartItemModel->insert([
             'product_id'    => $data['product_id'],
-            'user_id'       => $data['user_id'],
+            'user_id'       => $id,
             'quantity'       => $data['quantity'],
             'total_price'       => $data['quantity'] * $product['price'],
         ]);

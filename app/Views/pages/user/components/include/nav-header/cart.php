@@ -31,7 +31,6 @@
             success: function (response) {
                 if (response && response.data) {
                     cartItems = response.data;
-                    console.log(cartItems);
                     displayTableCart(cartItems);
                     updateCartCount(cartItems.length);
                 } else {
