@@ -212,6 +212,26 @@ class DeliveryController extends ResourceController {
         }
     }
 
+    public function getDataDeliveryByTransactionsId($id){
+        try {
+    
+            $data = $this->deliveryServices->getDataDeliveryByIdServices($id);
+    
+            return $this->respond([
+                'status'  => true,
+                'data'    => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
     
     public function updateDataCategoryById($id)
     {

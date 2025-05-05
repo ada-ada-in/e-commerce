@@ -158,6 +158,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('pickup', 'Api\V1\Delivery\DeliveryController::getDataPickUpDelivery', ['as' => 'api.Delivery.getDataPickUpDelivery']);
         $routes->get('trackingnumber', 'Api\V1\Delivery\DeliveryController::getDataTrackingDelivery', ['as' => 'api.Delivery.getDataTrackingDelivery']);
         $routes->get('(:num)', 'Api\V1\Delivery\DeliveryController::getDataDeliveryById/$1', ['as' => 'api.Delivery.getDataDeliveryById']);
+        $routes->get('transactions/(:num)', 'Api\V1\Delivery\DeliveryController::getDataDeliveryByTransactionsId/$1', ['as' => 'api.Delivery.getDataDeliveryByTransactionsId']);
         $routes->put('(:num)', 'Api\V1\Delivery\DeliveryController::updateDataCategoryById/$1', ['as' => 'api.Delivery.updateDataCategoryById']);
     }); 
 

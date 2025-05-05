@@ -190,6 +190,30 @@ class DeliveryServices {
         return $data;
     }
 
+
+    public function getDataDeliveryByTransactionsIdServices($id){
+
+        if (!$id) {
+            return [
+                'status'  => false,
+                'message' => 'ID is required'
+            ];
+        }
+
+        $deliveryData = new DeliveryModel();
+    
+        $data = $deliveryData->where('transactions_id', $id)->first();
+    
+        if (!$data) {
+            return [
+                'status'  => false,
+                'message' => 'Delivery not found'
+            ];
+        }
+    
+        return $data;
+    }
+
     public function getDataTrackingDeliveryByIdServices()
     {
         $request = service('request'); 
