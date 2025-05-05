@@ -32,6 +32,7 @@
                         <ul aria-expanded="false">
                             <li><a href="<?= base_url('admin/order') ?>">Order</a></li>
                             <li><a href="<?= base_url('admin/send') ?>">Send</a></li>
+                            <li><a href="<?= base_url('admin/pickup') ?>">Pick Up</a></li>
                             <li><a href="<?= base_url('admin/complete') ?>">Complete Delivery</a></li>
 
                         </ul>

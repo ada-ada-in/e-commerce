@@ -10,10 +10,13 @@
                     <form id="form-add-category">
                         <div class="row">
                             <div class="col-12 mt-3">
-                                <input type="text" class="form-control" name="category" placeholder="Kategori" required>
+                                <input type="text" class="form-control" name="name" placeholder="Kategori" required>
                             </div>
                             <div class="col-12 mt-3">
                                 <input type="text" class="form-control" name="description" placeholder="Deskripsi" required>
+                            </div>
+                            <div class="input-group mt-3">
+                                <input type="file" name="image" class="form-control" id="productFile">
                             </div>
                         </div>
                         <!-- Submit button inside the form now -->

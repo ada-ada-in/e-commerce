@@ -39,8 +39,9 @@
             $.ajax({
                 url: '/api/v1/category',
                 type: 'GET',
-                dataType: 'json',
-                success: function (response) {
+                processData: false,     
+                contentType: false,                 
+                 success: function (response) {
                     category = response.data;
                     console.log(category);
                     filteredData = category;
@@ -151,49 +152,44 @@
         });
 
         $('#form-add-category').on('submit', function (e) {
-        e.preventDefault();
-        const form = $('#form-add-category');
-        const formData = {
-            name: form.find('input[name="category"]').val(),
-            description: form.find('input[name="description"]').val(),
-        };
-        $.ajax({
-            url: `/api/v1/category`,
-            type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify(formData),
-            success: function (response) {
-                const message = response.message;
-                alert(message);
-                $('#form-add-category')[0].reset(); 
-                loadData();  
-                $('#staticBackdrop').modal('hide'); 
-            },
-            error: function (xhr, status, error) {
-                try {
-                    const response = JSON.parse(xhr.responseText);
-                    let errorMessage = '';
-                    if (response.messages) {
-                        for (const key in response.messages) {
-                            if (response.messages.hasOwnProperty(key)) {
+            e.preventDefault();
+
+            const form = this;
+            const formData = new FormData(form);
+
+            $.ajax({
+                url: `/api/v1/category`,
+                type: 'POST',
+                data: formData,
+                processData: false, 
+                contentType: false,
+                success: function (response) {
+                    alert(response.message);
+                    $('#form-add-category')[0].reset(); 
+                    loadData();  
+                    $('#staticBackdrop').modal('hide'); 
+                },
+                error: function (xhr, status, error) {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        let errorMessage = '';
+                        if (response.messages) {
+                            for (const key in response.messages) {
                                 errorMessage += `${response.messages[key]}\n`;
                             }
+                        } else if (response.message) {
+                            errorMessage = response.message;
+                        } else {
+                            errorMessage = 'Terjadi kesalahan yang tidak diketahui.';
                         }
-                    } else if (response.message) {
-                        errorMessage = response.message;
-                    } else {
-                        errorMessage = 'Terjadi kesalahan yang tidak diketahui.';
+                        alert(errorMessage);
+                    } catch (e) {
+                        console.error('Gagal parse response error:', e);
+                        alert('Terjadi kesalahan saat memproses respons error.');
                     }
-                    alert(errorMessage);
-                } catch (e) {
-                    console.error('Gagal parse response error:', e);
-                    alert('Terjadi kesalahan saat memproses respons error.');
                 }
-            }
+            });
         });
-    });
-
 
             $('#form-update-category').on('submit', function (e) {
                 e.preventDefault();

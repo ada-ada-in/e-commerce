@@ -74,7 +74,7 @@ function printSelected(id) {
                     <a href="javascript:void(0)" class="btn btn-outline-secondary btn-sm" onclick="viewItems(${item.id})">
                         <i class="bi bi-box-seam"></i> Lihat Barang
                     </a>
-                    <a href="<?= base_url('/delivery') ?>" target="_blank" class="btn btn-outline-info btn-sm">
+                    <a href="/delivery?id=${item.id}" target="_blank" class="btn btn-outline-info btn-sm">
                         <i class="bi bi-truck"></i> Lihat Pengiriman
                     </a>
                 </div>
