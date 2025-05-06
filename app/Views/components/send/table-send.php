@@ -33,6 +33,7 @@
                                                 <th>Address</th>
                                                 <th>Status</th>
                                                 <th>Tanggal Delivery</th>
+                                                <th>Detail</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -54,4 +55,5 @@
 
                 
 <?= view('components/send/script-send') ?>
+<?= view('components/send/transaction-items-data') ?>
 <?= view('components/send/edit-modal-send') ?>

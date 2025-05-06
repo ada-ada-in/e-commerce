@@ -54,4 +54,5 @@
 
                 
 <?= view('components/complete/script-complete') ?>
+<?= view('components/complete/transaction-items-data') ?>
 <?= view('components/complete/edit-modal-complete') ?>

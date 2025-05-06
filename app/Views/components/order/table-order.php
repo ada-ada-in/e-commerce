@@ -30,6 +30,7 @@
                                                 <th>Address</th>
                                                 <th>Status</th>
                                                 <th>Tanggal Delivery</th>
+                                                <th>Detail</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -49,4 +50,5 @@
                 </div>
 
 <?= view('components/order/script-order') ?>
+<?= view('components/order/transaction-items-data') ?>
 <?= view('components/order/edit-modal-order') ?>
