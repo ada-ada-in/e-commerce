@@ -31,6 +31,7 @@
                                                 <th>Handphone</th>
                                                 <th>Total Harga</th>
                                                 <th>Tanggal Transaksi</th>
+                                                <th>Detail</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -50,5 +51,6 @@
                 </div>
 
 <?= view('components/paid/add-modal-paid') ?>
+<?= view('components/paid/transaction-items-data') ?>
 <?= view('components/paid/edit-modal-paid') ?>
 <?= view('components/paid/script-paid') ?>

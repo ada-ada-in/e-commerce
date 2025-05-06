@@ -151,6 +151,7 @@ class TransactionsItemsServices {
         return $data;
     }
 
+
     public function updateDataTransactionsItmesByIdServices($id, array $data)
     {
         if (!$id) {

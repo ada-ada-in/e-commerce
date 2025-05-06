@@ -24,12 +24,14 @@
                                     <table class="display table table-striped table-responsive-sm" style="min-width: 845px">
                                         <thead>
                                             <tr>
+                                                <th>No</th>
+                                                <th>No. Order</th>
                                                 <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>Handphone</th>
+                                                <th>Total Harga</th>
+                                                <th>Tanggal Transaksi</th>
+                                                <th>Detail</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody id="transactions-pending-data">
@@ -49,4 +51,5 @@
 
 <?= view('components/pending/add-modal-pending') ?>
 <?= view('components/pending/edit-modal-pending') ?>
+<?= view('components/pending/transaction-items-data') ?>
 <?= view('components/pending/script-pending') ?>

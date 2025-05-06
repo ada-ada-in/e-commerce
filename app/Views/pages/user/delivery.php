@@ -11,8 +11,8 @@
                 <h5 class="mb-0">Status Pengiriman</h5>
                 <p id="order-date">--</p>
                 <br>
-                <h6></h6>
-                <p id="order-date">--</p>
+                <h6>Tracking Number</h6>
+                <p id="tracking-number">--  </p>
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -93,12 +93,16 @@
             const transaction = transactionRes[0].data;
             const delivery = deliveryRes[0].data;
 
+            console.log(delivery)
+
             transactionStatus = transaction.status;
             deliveryStatus = delivery.status;
             orderDate = transaction.created_at;
+            trackingNumber = parseInt(delivery.tracking_number);
 
             // Update date in UI
             document.getElementById('order-date').textContent = orderDate;
+            document.getElementById('tracking-number').textContent = trackingNumber;
 
             // Update progress icons
             updateIcons(transactionStatus, deliveryStatus);

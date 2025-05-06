@@ -24,12 +24,15 @@
                                     <table class="display table table-striped table-responsive-sm" style="min-width: 845px">
                                         <thead>
                                             <tr>
+                                                <th>No.</th>
+                                                <th>No. Order</th>
                                                 <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>Email</th>
+                                                <th>Handphone</th>
+                                                <th>Total Harga</th>
+                                                <th>Tanggal Transaksi</th>
+                                                <th>Detail</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody id="transactions-cancel-data">
@@ -49,4 +52,5 @@
 
 <?= view('components/cancel/add-modal-cancel') ?> 
 <?= view('components/cancel/edit-modal-cancel') ?> 
+<?= view('components/cancel/transaction-items-data') ?> 
 <?= view('components/cancel/script-cancel') ?> 

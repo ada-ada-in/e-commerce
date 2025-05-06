@@ -79,37 +79,6 @@
 # #   "description": "edit description categories example"
 # # }
 
-# Transactions
-
-# POST http://localhost:8080/api/v1/transactions
-# content-type: application/json; charset=UTF-8
-
-# {
-#   "total_price": 50000,
-#   "status": "pending",
-#   "status_delivery": "order",
-#   "address": "thehok",
-#   "cart_items_ids": [9, 11]
-# }
-
-# # DELETE http://localhost:8080/api/v1/transactions/1
-# # content-type: application/json
-
-# GET http://localhost:8080/api/v1/transactions
-# content-type: application/json
-
-# # GET http://localhost:8080/api/v1/transactions/3
-# # content-type: application/json
-
-# # PUT http://localhost:8080/api/v1/transactions/3
-# # content-type: application/json
-
-# # {
-# #   "user_id": 4,
-# #   "total_price": 20000,
-# #   "status": "paid"
-# # }
-
 # # Transactions
 
 # POST http://localhost:8080/api/v1/transactions
@@ -238,8 +207,8 @@
 # GET http://localhost:8080/api/v1/products
 # content-type: application/json
 
-GET http://localhost:8080/api/v1/products/userproduct/2
-content-type: application/json
+# GET http://localhost:8080/api/v1/products/userproduct/2
+# content-type: application/json
 
 # GET http://localhost:8080/api/v1/products/countproduct
 # content-type: application/json
@@ -283,14 +252,17 @@ content-type: application/json
 # # DELETE http://localhost:8080/api/v1/transactionsitems/1
 # # content-type: application/json
 
-# # GET http://localhost:8080/api/v1/transactionsitems
-# # content-type: application/json
-
-# GET http://localhost:8080/api/v1/transactionsitems/inventory/5
+# GET http://localhost:8080/api/v1/transactionsitems
 # content-type: application/json
 
-# # GET http://localhost:8080/api/v1/transactionsitems/3
-# # content-type: application/json
+GET http://localhost:8080/api/v1/transactionsitems/inventory/7
+content-type: application/json
+
+# GET http://localhost:8080/api/v1/transactionsitems/4
+# content-type: application/json
+
+GET http://localhost:8080/api/v1/transactionsitems/4
+# content-type: application/json
 
 # # PUT http://localhost:8080/api/v1/transactionsitems/3
 # # content-type: application/json
@@ -334,8 +306,8 @@ content-type: application/json
 # content-type: application/json
 
 
-GET http://localhost:8080/api/v1/delivery/complete
-content-type: application/json
+# GET http://localhost:8080/api/v1/delivery/complete
+# content-type: application/json
 
 
 # # GET http://localhost:8080/api/v1/delivery/trackingnumber

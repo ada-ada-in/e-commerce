@@ -13,6 +13,7 @@
             let row = '';
             paginatedItems.forEach((transactions, i) => {
                 row += `
+                <a>
                     <tr>
                         <td hidden>${transactions.id}</td>
                         <td>${start + i + 1}</td>
@@ -28,11 +29,15 @@
                         </td>
                         <td>${transactions.updated_at}</td>
                         <td>
+                        <button type="button" class="btn btn-primary px-3 transaction-items" data-bs-toggle="modal" data-bs-target="#transactionitems" data-id="${transactions.id}">Detail Barang</button>
+                        </td>
+                        <td>
                             <button type="button" class="btn btn-primary px-3 btn-update" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="${transactions.id}">Edit</button>
                             |
                             <button class="btn btn-danger btn-delete" data-id="${transactions.id}">Hapus</button>
                         </td>
-                    </tr>
+                        </tr>
+                    </a>
                 `;
             });
 
@@ -167,6 +172,60 @@
             });
         });
 
+        $(document).on('click', '.transaction-items', function () {
+            const id = $(this).data('id');
+            $.ajax({
+                url: `/api/v1/transactionsitems/inventory/${id}`,
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    const items = response.data;
+
+                    console.log(items); // Debugging line
+
+                    let rows = '';
+                    items.forEach((item, index) => {
+                        const total = item.harga * item.jumlah;
+                        rows += `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${item.productitems_name}</td>
+                                <td>${formatRupiah(item.items_price)}</td>
+                                <td>${item.quantity}</td>
+                                <td>${formatRupiah(item.price)}</td>
+                            </tr>
+                        `;
+                    });
+
+                    $('#transactionitems tbody').html(rows);
+                    $('#transactionitems').modal('show');
+                },
+                error: function (xhr, status, error) {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        let errorMessage = '';
+                        if (response.messages) {
+                            for (const key in response.messages) {
+                                if (response.messages.hasOwnProperty(key)) {
+                                    errorMessage += `${response.messages[key]}\n`;
+                                }
+                            }
+                        } else if (response.message) {
+                            errorMessage = response.message;
+                        } else {
+                            errorMessage = 'Terjadi kesalahan yang tidak diketahui.';
+                        }
+                        alert(errorMessage); 
+                    } catch (e) {
+                        console.error('Gagal parse response error:', e);
+                        alert('Terjadi kesalahan saat memproses respons error.');
+                    }
+                }
+            });
+        });
+
+
+
         $('#form-add-category').on('submit', function (e) {
         e.preventDefault();
         const form = $('#form-add-category');
@@ -296,4 +355,9 @@
             doc.save('users-data.pdf');
         });
     });
+
+    function formatRupiah(number) {
+    return 'Rp ' + number.toLocaleString('id-ID');
+}
+
 </script>

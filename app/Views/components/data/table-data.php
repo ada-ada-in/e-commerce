@@ -35,6 +35,7 @@
                                                 <th>Total Harga</th>
                                                 <th>Status</th>
                                                 <th>Tanggal Transaksi</th>
+                                                <th>Detail</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -57,4 +58,5 @@
 
 <?= view('components/data/add-modal-data') ?>
 <?= view('components/data/edit-modal-data') ?>
+<?= view('components/data/transaction-items-data') ?>
 <?= view('components/data/script-data') ?>
