@@ -10,27 +10,29 @@
                         <form id="form-update-data">
                         <div class="row">
                             <div class="col-sm-6">
-                            <input type="text" class="form-control" name="order_id" placeholder="Nomor Order" readonly>
+                            <input type="number" class="form-control" name="tracking_number" placeholder="Tracking Number" readonly>
                             </div>
                             <div class="col-sm-6 mt-2 mt-sm-0">
-                            <input type="number" class="form-control" name="total_price" placeholder="Harga Total" readonly>
+                            <input type="text" class="form-control" name="address" placeholder="alamat" readonly>
                             </div>
-                            <div class="col-sm-6 mt-3">
-                            <input type="text" class="form-control" name="updated_at" placeholder="Tanggal Transaksi" readonly>
-                            </div> 
                             <div class="col-sm-6 mt-3">
                             <select id="status" name="status" class="form-select" aria-label="Default select example">
                                     <option disabled selected>Pilih Status</option>
-                                    <option value="pending">Pending</option>
-                                    <option value="settlement">Settlement</option>
-                                    <option value="cancel">Cancel</option>
+                                    <option value="order">Order</option>
+                                    <option value="send">Send</option>
+                                    <option value="pickup">Pick Up</option>
+                                    <option value="complete">Complete</option>
                                 </select>
                             </div>
+                            <div class="col-sm-6 mt-3">
+                            <input type="text" class="form-control" name="created_at" placeholder="Tanggal Pengiriman" readonly>
+                            </div> 
                                 <input type="text" hidden class="form-control" name="id" placeholder="First name">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Submit</button>
+                            
                         </div>
                         </form>
                     </div>

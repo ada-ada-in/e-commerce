@@ -51,6 +51,10 @@ $routes->group('', static function($routes) {
         'as' => 'checkout',
         'filter' => 'auth'
     ]);
+    $routes->get('productcategory', 'PagesController::productCategory', [
+        'as' => 'productCategory',
+        'filter' => 'auth'
+    ]);
 
 });
 
@@ -127,6 +131,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('', 'Api\V1\Product\ProductController::getDataProduct', ['as' => 'api.product.getDataProduct']);
         $routes->get('countproduct', 'Api\V1\Product\ProductController::countProduct', ['as' => 'api.product.countProduct']);
         $routes->get('(:num)', 'Api\V1\Product\ProductController::getDataProductById/$1', ['as' => 'api.product.getDataProductById']);
+        $routes->get('userproduct/(:num)', 'Api\V1\Product\ProductController::getDataProductByCategoryId/$1', ['as' => 'api.product.getDataProductByCategoryId']);
         $routes->put('(:num)', 'Api\V1\Product\ProductController::updateDataProductById/$1', ['as' => 'api.product.updateDataProductyById']);
     }); 
 

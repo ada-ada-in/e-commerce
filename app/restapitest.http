@@ -238,6 +238,9 @@
 # GET http://localhost:8080/api/v1/products
 # content-type: application/json
 
+GET http://localhost:8080/api/v1/products/userproduct/2
+content-type: application/json
+
 # GET http://localhost:8080/api/v1/products/countproduct
 # content-type: application/json
 
@@ -323,16 +326,16 @@
 # GET http://localhost:8080/api/v1/delivery/order
 # content-type: application/json
 
-GET http://localhost:8080/api/v1/delivery/transactions/2
-content-type: application/json
+# GET http://localhost:8080/api/v1/delivery/transactions/2
+# content-type: application/json
 
 
 # GET http://localhost:8080/api/v1/delivery/pickup
 # content-type: application/json
 
 
-# GET http://localhost:8080/api/v1/delivery/complete
-# content-type: application/json
+GET http://localhost:8080/api/v1/delivery/complete
+content-type: application/json
 
 
 # # GET http://localhost:8080/api/v1/delivery/trackingnumber

@@ -1,6 +1,6 @@
 <script>
     $(function () {
-        let transactions = [];
+        let order = [];
         let currentPage = 1;
         const rowsPerPage = 10;
         let filteredData = []; 
@@ -11,98 +11,71 @@
             const paginatedItems = data.slice(start, end);
 
             let row = '';
-            paginatedItems.forEach((transactions, i) => {
+            paginatedItems.forEach((item, i) => {
                 row += `
                     <tr>
-                        <td hidden>${transactions.id}</td>
+                        <td hidden>${item.id}</td>
                         <td>${start + i + 1}</td>
-                        <td>${transactions.order_id}</td>
-                        <td>${transactions.transactions_name}</td>
-                        <td>${transactions.transactions_email}</td>
-                        <td>${transactions.transactions_phone}</td>
-                        <td>${transactions.total_price}</td>
-                        <td>${transactions.updated_at}</td>
+                        <td>${parseInt(item.tracking_number)}</td>
+                        <td>${item.address}</td>
                         <td>
-                            <button type="button" class="btn btn-primary px-3 btn-update" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="${transactions.id}">Edit</button>
+                        <span class="badge badge-${getStatusClass(item.status)}">
+                        ${item.status}
+                        </snap>
+                        </td>
+                        <td>${item.updated_at}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary px-3 btn-update" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="${item.id}">Edit</button>
                             |
-                            <button class="btn btn-danger btn-delete" data-id="${transactions.id}">Hapus</button>
+                            <button class="btn btn-danger btn-delete" data-id="${item.id}">Hapus</button>
                         </td>
                     </tr>
                 `;
             });
 
-            $('#delivery-data').html(row);
+            $('#complete-data').html(row);
             $('#pageInfo').text(`Page ${currentPage} of ${Math.ceil(data.length / rowsPerPage)}`);
         }
 
-        
         function getStatusClass(status) {
                         switch (status.toLowerCase()) {
-                        case 'settlement': return 'primary';
-                        case 'pending': return 'warning';
-                        case 'cancel': return 'danger';
+                        case 'pickup': return 'primary';
+                        case 'order': return 'warning';
+                        case 'send': return 'warning';
                         default: return 'secondary';
                         }
                     }
 
         function loadData() {
             $.ajax({
-                url: '/api/v1/transactions/complete',
+                url: '/api/v1/delivery/complete',
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
-                    transactions = response.data;
-                    filteredData = transactions;
+                    order = response.data;
+                    console.log(order)
+                    filteredData = order;
                     currentPage = 1;
                     displayTable(filteredData);
                 },
                 error: function (xhr, status, error) {
-                    console.error('Gagal mengambil data complete:', error);
+                    console.error('Gagal mengambil data products:', error);
                 }
             });
         }
 
         loadData();
 
-    $('#transactions-edit').on('click', function () {
-        $.ajax({
-            url: '/api/v1/transactions',
-            type: 'GET',
-            success: function (response) {
-                const categoryData = response.data;
-                const selectElement = $('#transactions-edit');
-
-                selectElement.find('option:not(:first)').remove();
-
-                categoryData.forEach(function (transactions) {
-                    const option = $('<option>', {
-                        value: transactions.id,
-                        text: transactions.name
-                    });
-                    selectElement.append(option);
-                });
-            },
-            error: function () {
-                console.error('Gagal memuat data kategori.');
-            }
-        });
-    });
-
-
-
         $('#searchInput').on('input', function () {
-            const keyword = $(this).val().toLowerCase();
-            filteredData = transactions.filter(transactions =>
-                transactions.transactions_name.toLowerCase().includes(keyword) ||
-                transactions.transactions_email.toLowerCase().includes(keyword) ||
-                transactions.transactions_phone.toLowerCase().includes(keyword) ||
-                transactions.status.toLowerCase().includes(keyword) ||
-                transactions.order_id.toLowerCase().includes(keyword)
-            );
-            currentPage = 1;
-            displayTable(filteredData);
-        });
-
+        const keyword = $(this).val().toLowerCase();
+        filteredData = order.filter(order =>
+            order.tracking_number.includes(keyword) ||
+            order.address.toLowerCase().includes(keyword) ||
+            order.created_at.toLowerCase().includes(keyword)
+        );
+        currentPage = 1;
+        displayTable(filteredData);
+    });
 
         $('#prevPage').on('click', function () {
             if (currentPage > 1) {
@@ -122,11 +95,11 @@
             const id = $(this).data('id');
             if (confirm('Apakah kamu yakin ingin menghapus transaksi ini?')) {
                 $.ajax({
-                    url: `/api/v1/transactions/${id}`,
+                    url: `/api/v1/delivery/${id}`,
                     type: 'DELETE',
                     success: function () {
-                        loadData(); 
                         alert('Kategori berhasil dihapus!');
+                        loadData(); 
                     },
                     error: function (xhr, status, error) {
                         try {
@@ -156,16 +129,16 @@
         $(document).on('click', '.btn-update', function () {
             const id = $(this).data('id');
             $.ajax({
-                url: `/api/v1/transactions/${id}`,
+                url: `/api/v1/delivery/${id}`,
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
-                    const updateData = response.data 
+                        const updateData = response.data 
                     $('#editmodal input[name="id"]').val(updateData.id);
-                    $('#editmodal input[name="order_id"]').val(updateData.order_id);
-                    $('#editmodal input[name="total_price"]').val(updateData.total_price);  
-                    $('#editmodal input[name="updated_at"]').val(updateData.updated_at); 
-                    loadData();
+                    $('#editmodal input[name="tracking_number"]').val(updateData.tracking_number);
+                    $('#editmodal input[name="address"]').val(updateData.address);  
+                    $('#editmodal select[name="status"]').val(updateData.status);  
+                    $('#editmodal input[name="created_at"]').val(updateData.created_at);  
                 },
                 error: function (xhr, status, error) {
                     try {
@@ -191,25 +164,23 @@
             });
         });
 
-        $('#form-update-data').on('submit', function (e) {
+                $('#form-update-data').on('submit', function (e) {
                 e.preventDefault();
                 const id = $('input[name="id"]').val();
                 const form = $('#form-update-data');
                 const formData = {
-                    order_id: form.find('input[name="order_id"]').val(),
-                    total_price: form.find('input[name="total_price"]').val(),
                     status: form.find('select[name="status"]').val(),
                 };
                 console.log(formData);
                 $.ajax({
-                    url: `/api/v1/transactions/${id}`,
+                    url: `/api/v1/delivery/${id}`,
                     type: 'PUT',
                     dataType: 'json',
                     contentType: 'application/json',
                     data: JSON.stringify(formData),
                     success: function (response) {
-                        loadData();
                         alert(response.message);
+                        loadData();
                     },
                     error: function (xhr, status, error) {
                         try {
@@ -234,8 +205,6 @@
                     }
                 });
             });
-
-
 
 
         // Excel export functionality
@@ -277,11 +246,5 @@
 
             doc.save('users-data.pdf');
         });
-    })
-
-            $('#productFile').on('change', function () {
-            const fileName = $(this).val().split('\\').pop();
-            $('#fileLabel').text(fileName);
-        });
-
+    });
 </script>

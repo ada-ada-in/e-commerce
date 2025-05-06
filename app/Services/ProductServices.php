@@ -117,7 +117,6 @@ class ProductServices {
      {
          
          $productData = new ProductModel();
-         $categoryModel = new CategoryModel();
 
 
          $data = $productData->orderBy('created_at', 'DESC')->getProductsWithCategory();
@@ -136,6 +135,26 @@ class ProductServices {
             }
         }
          
+ 
+         return $data;
+     }
+
+
+     public function getProductDataServicesByCategoryId($id)
+     {
+         
+         $productData = new ProductModel();
+
+
+         $data = $productData->where('category_id', $id)->orderBy('created_at', 'DESC')->getProductsWithCategory();
+         
+ 
+         if(empty($data)){
+             return [       
+                 'status'  => true,
+                 'message' => 'product is empty'
+             ];
+         }
  
          return $data;
      }

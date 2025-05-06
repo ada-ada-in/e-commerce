@@ -4,8 +4,11 @@
                         <div class="card border border-0">
                             <div class="card-header bg-white">
                                 <h4 class="card-title">Complete Datatable</h4>
-                                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari kategori...">
+                                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari pengiriman...">
                                 <div>
+                                    <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    +
+                                    </button>
                                     <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="icon-printer"></i>
@@ -21,24 +24,20 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="display table table-striped table-responsive-sm" style="min-width: 845px">
+                                    <table   class="display table table-striped table-responsive-sm" style="min-width: 845px">
                                         <thead>
                                             <tr>
                                                 <th>No.</th>
-                                                <th>No. Order</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Handphone</th>
-                                                <th>Total Harga</th>
+                                                <th hidden>id</th>
+                                                <th>Tracking Number</th>
+                                                <th>Address</th>
                                                 <th>Status</th>
-                                                <th>Tanggal Transaksi</th>
-                                                <th>Actions</th>
+                                                <th>Tanggal Delivery</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="delivery-complete">
-                                           
-                                                <!-- data complete -->
-                                            
+                                        <tbody id="complete-data">
+                                           <!-- data send -->
                                         </tbody>
                                     </table>
                                     <div>
@@ -51,3 +50,8 @@
                         </div>
                     </div>
                 </div>
+
+
+                
+<?= view('components/complete/script-complete') ?>
+<?= view('components/complete/edit-modal-complete') ?>

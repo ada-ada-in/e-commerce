@@ -10,6 +10,9 @@
             <div class="card-header">
                 <h5 class="mb-0">Status Pengiriman</h5>
                 <p id="order-date">--</p>
+                <br>
+                <h6></h6>
+                <p id="order-date">--</p>
             </div>
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">

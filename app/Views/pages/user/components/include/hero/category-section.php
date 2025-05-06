@@ -34,7 +34,7 @@
         let div = '';
         data.forEach((category) => {
             div += `
-                <a href="category.html" class="nav-link swiper-slide text-center">
+                <a href="productcategory?id=${category.id}" class="nav-link swiper-slide text-center">
                     <img src="/${category.image_url}" class="rounded-circle" height="150" width="150" alt="${category.name}">
                     <h4 class="fs-6 mt-3 fw-normal category-title">${category.name}</h4>
                 </a>

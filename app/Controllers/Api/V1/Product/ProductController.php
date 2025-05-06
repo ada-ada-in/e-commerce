@@ -92,6 +92,23 @@ class ProductController extends ResourceController {
         }
     }
 
+    public function getDataProductByCategoryId($id){
+
+        try {
+            $data = $this->productServices->getProductDataServicesByCategoryId($id);
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                 $e->getMessage()
+            ]);
+        }
+    }
+
     
     public function getDataProductById($id){
         try {

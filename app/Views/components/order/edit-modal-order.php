@@ -20,7 +20,8 @@
                                     <option disabled selected>Pilih Status</option>
                                     <option value="order">Order</option>
                                     <option value="send">Send</option>
-                                    <option value="picku    p">Pick Up</option>
+                                    <option value="pickup">Pick Up</option>
+                                    <option value="complete">Complete</option>
                                 </select>
                             </div>
                             <div class="col-sm-6 mt-3">
