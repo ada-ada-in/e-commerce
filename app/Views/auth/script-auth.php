@@ -24,7 +24,7 @@
                         const message = response.message
                         alert(message)
                         window.location.href = '/auth/login'
-                    },
+                    },  
                     error: function(xhr, status, error){
                         try{
                             const response = JSON.parse(xhr.responseText);

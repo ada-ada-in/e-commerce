@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>MM Barokah 4 Putra</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/mmbarokah-logo.jpg">
     <link href="/assets/focus2/vendor/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <link href="/assets/focus2/vendor/chartist/css/chartist.min.css" rel="stylesheet">
     <link href="/assets/focus2/css/style.css" rel="stylesheet">

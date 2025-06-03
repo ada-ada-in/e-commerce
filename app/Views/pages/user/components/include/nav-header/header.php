@@ -69,7 +69,7 @@
           <div class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
             <div class="d-flex align-items-center my-3 my-sm-0">
               <a href="<?= base_url('/') ?>">
-                <img src="/assets/organic/images/logo.svg" alt="logo" class="img-fluid">
+                <img src="/images/mmbarokah-logo.png" alt="logo" style="width: 100%; height: 60px; object-fit: cover;">
               </a>
             </div>
           </div>
