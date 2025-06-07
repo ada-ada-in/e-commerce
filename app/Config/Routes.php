@@ -77,6 +77,7 @@ $routes->group('api/v1', static function($routes) {
 
     $routes->group('users', static function($routes) {
         $routes->get('', 'Api\V1\User\UserController::getDataUser', ['as' => 'api.users.getDataUser']);
+        $routes->get('profile', 'Api\V1\User\UserController::getDataUserProfile', ['as' => 'api.users.getDataUserProfile']);
         $routes->get('countuser', 'Api\V1\User\UserController::countUser', ['as' => 'api.users.countUser']);
         $routes->get('(:num)', 'Api\V1\User\UserController::getDataUserById/$1', ['as' => 'api.users.getDataUserById']);
         $routes->delete('(:num)', 'Api\V1\User\UserController::deleteDataUserById/$1', ['as' => 'api.userss.deleteDataUserById']);

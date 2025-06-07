@@ -26,6 +26,24 @@ class UserServices {
 
         return $data;
     }
+
+    public function getUserProfileDataServices()
+    {
+        
+        $userData = new UserModel();
+        $data = $userData->orderBy('created_at', 'DESC')
+        ->where('id', session()->get('id'))
+        ->find();
+
+        if(empty($data)){
+            return [
+                'status'  => true,
+                'message' => 'data is empty'
+            ];
+        }
+
+        return $data;
+    }
     
 
     public function getDataUserByIdServices($id){

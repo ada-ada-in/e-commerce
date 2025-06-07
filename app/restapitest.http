@@ -30,12 +30,15 @@
 # GET http://localhost:8080/api/v1/users
 # content-type: application/json
 
+GET http://localhost:8080/api/v1/users/profile
+content-type: application/json
+
 # GET http://localhost:8080/api/v1/users/countuser
 # content-type: application/json
 
 
-# # GET http://localhost:8080/api/v1/users/1
-# # content-type: application/json
+# GET http://localhost:8080/api/v1/users/1
+# content-type: application/json
 
 # # DELETE http://localhost:8080/api/v1/users/2
 # # content-type: application/json
@@ -255,13 +258,13 @@
 # GET http://localhost:8080/api/v1/transactionsitems
 # content-type: application/json
 
-GET http://localhost:8080/api/v1/transactionsitems/inventory/7
-content-type: application/json
+# GET http://localhost:8080/api/v1/transactionsitems/inventory/7
+# content-type: application/json
 
 # GET http://localhost:8080/api/v1/transactionsitems/4
 # content-type: application/json
 
-GET http://localhost:8080/api/v1/transactionsitems/4
+# GET http://localhost:8080/api/v1/transactionsitems/4
 # content-type: application/json
 
 # # PUT http://localhost:8080/api/v1/transactionsitems/3

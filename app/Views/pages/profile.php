@@ -6,53 +6,45 @@
                         <div class="welcome-text">
                             <h4>Profile Page</h4>
                         </div>
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h4 class="card-title">Horizontal Form</h4>
-                                            </div>
+                                        <div class="card my-5">
                                             <div class="card-body">
                                                 <div class="basic-form">
                                                     <form>
 
                                                         <div class="form-row">
                                                             <div class="form-group col-md-6">
-                                                                <label>First Name</label>
-                                                                <input type="text" class="form-control" placeholder="1234 Main St">
+                                                                <label>Username</label>
+                                                                <input type="text" class="form-control" placeholder="Username">
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label>Email</label>
                                                                 <input type="email" class="form-control" placeholder="Email">
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label>Password</label>
-                                                                <input type="password" class="form-control" placeholder="Password">
+                                                                <label>Handphone</label>
+                                                                <input type="number" class="form-control" placeholder="handphone">
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label>City</label>
-                                                                <input type="text" class="form-control">
+                                                                <label>Alamat</label>
+                                                                <input type="text" class="form-control" placeholder="Alamat">
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Passowrd</label>
+                                                                <input type="password" class="form-control">
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Confirn Password</label>
+                                                                <input type="confirm_password" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="form-row">
                                                             <div class="form-group col-md-4">
-                                                                <label>State</label>
+                                                                <label>Role</label>
                                                                 <select id="inputState" class="form-control">
-                                                                    <option selected>Choose...</option>
-                                                                    <option>Option 1</option>
-                                                                    <option>Option 2</option>
-                                                                    <option>Option 3</option>
+                                                                    <option selected disabled>Pilih Role...</option>
+                                                                    <option value="admin">Admin</option>
+                                                                    <option value="users">Users</option>
                                                                 </select>
-                                                            </div>
-                                                            <div class="form-group col-md-2">
-                                                                <label>Zip</label>
-                                                                <input type="text" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox">
-                                                                <label class="form-check-label">
-                                                                    Check me out
-                                                                </label>
                                                             </div>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Sign in</button>
@@ -64,3 +56,23 @@
                 </div>
 
 <?= $this->endSection() ?> 
+
+<script>
+    $.ajax({
+        url: '/api/v1/users/profile',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            console.log(data)
+            // // Populate the form with the fetched data
+            $('input[name="username"]').val(data.username);
+            $('input[name="email"]').val(data.email);
+            $('input[name="handphone"]').val(data.handphone);
+            $('input[name="alamat"]').val(data.alamat);
+            // Handle other fields similarly
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching profile data:', error);
+        }
+    });
+</script>

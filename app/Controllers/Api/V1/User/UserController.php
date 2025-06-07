@@ -26,6 +26,23 @@ class UserController extends ResourceController {
             ]);
         }
     } 
+
+    public function getDataUserProfile(){
+
+        try {
+            $data = $this->userServices->getUserProfileDataServices();
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                 $e->getMessage()
+            ]);
+        }
+    } 
     
 
     public function getDataUserById($id){

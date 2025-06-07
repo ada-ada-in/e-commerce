@@ -2,6 +2,7 @@
 namespace App\Services;
 use App\Models\CartItemsModel;
 use App\Models\ProductModel;
+use App\Models\StokModel;
 
 
 
@@ -13,6 +14,7 @@ class CartItemServices {
     {
         $this->cartItemModel = new CartItemsModel();
         $this->productModel = new ProductModel();
+
     }
 
     public function addCartItemServices(array $data){
@@ -55,6 +57,15 @@ class CartItemServices {
                  'message' => 'ID is required'
              ];
          }
+
+
+        if($data['quantity'] > $product['stock']){
+            return [
+                'status' => false,
+                'errors' => ['quantity' => 'Stok tidak mencukupi']
+            ];
+        }
+
         
 
         $this->cartItemModel->insert([

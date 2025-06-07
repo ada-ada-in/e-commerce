@@ -37,6 +37,7 @@
                         </figure>
                         <div class="d-flex flex-column text-center">
                             <h3 class="fs-6 fw-normal">${product.name}</h3>
+                            <p>Stok : ${product.stock}</p>
                             <div class="d-flex justify-content-center align-items-center gap-2">
                                 <span class="text-dark fw-semibold">${product.price}</span>
                             </div>
@@ -83,14 +84,13 @@
         quantity: quantity // Ensure this is a valid number
          };
 
-    console.log("Payload to send:", payload);
-
         $.ajax({
             url: '/api/v1/cartitems',
             type: 'POST',
             dataType: 'json',
             data: JSON.stringify(payload),
             success: function (response) {
+
                     alert('Product added to cart successfully!');
                     if (typeof loadDataCart === 'function') loadDataCart();
 
@@ -98,6 +98,17 @@
             error: function (xhr, status, error) {
                 console.error('Failed to add product to cart:', error);
                 console.error('Response:', xhr.responseText); 
+
+                try {
+                    const res = JSON.parse(xhr.responseText);
+                   
+                    message = res.messages.quantity; 
+
+                    alert(message)
+
+                } catch (e) {
+                    console.error('JSON parse error:', e);
+                }
             }
         });
     }
