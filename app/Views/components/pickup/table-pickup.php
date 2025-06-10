@@ -6,9 +6,9 @@
                                 <h4 class="card-title">Pick Up Datatable</h4>
                                 <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari pengiriman...">
                                 <div>
-                                    <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <!-- <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     +
-                                    </button>
+                                    </button> -->
                                     <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="icon-printer"></i>

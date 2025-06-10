@@ -1,117 +1,119 @@
 <?= view('pages/user/components/include/nav-header/head') ?>
-  <body>
+<body>
+  <!-- navbar -->
+  <?= view('pages/user/components/include/nav-header/cart') ?>
+  <?= view('/pages/user/components/include/nav-header/header') ?>
 
-    <!-- navbar -->
-    <?= view('pages/user/components/include/nav-header/cart') ?>
-    <?= view('/pages/user/components/include/nav-header/header') ?>
+  <div class="container my-5">
+    <div class="card shadow-sm">
+      <div class="card-header">
+        <h5 class="mb-0 fw-semibold">Status Pengiriman</h5>
+        <small id="order-date" class="text-muted">--</small>
+        <hr class="my-3" />
+        <h6 class="fw-semibold mb-1">Tracking Number</h6>
+        <p id="tracking-number" class="mb-0">--</p>
+      </div>
 
-    <div class="container my-5">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">Status Pengiriman</h5>
-                <p id="order-date">--</p>
-                <br>
-                <h6>Tracking Number</h6>
-                <p id="tracking-number">--  </p>
-            </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="text-center flex-fill">
-                        <div class="mb-2">  
-                            <i id="icon-order" class="bi bi-cart-check fs-4 text-secondary"></i>
-                        </div>
-                        <p class="mb-0">Pesanan Dibuat</p>
-                    </div>
-                    <div class="flex-fill border-top border-5 mx-2" style="margin-top: 15px; border-color:rgb(60, 57, 57);"></div>
-                    <div class="text-center flex-fill">
-                        <div class="mb-2">
-                            <i id="icon-paid" class="bi bi-credit-card fs-4 text-secondary"></i>
-                        </div>
-                        <p class="mb-0">Pesanan Dibayarkan</p>
-                    </div>
-                    <div class="flex-fill border-top border-5 mx-2" style="margin-top: 15px; border-color:rgb(60, 57, 57);"></div>
-                    <div class="text-center flex-fill">
-                        <div class="mb-2">
-                            <i id="icon-send" class="bi bi-truck fs-4 text-secondary"></i>
-                        </div>
-                        <p class="mb-0">Pesanan Dikirimkan</p>
-                    </div>
-                    <div class="flex-fill border-top border-5 mx-2" style="margin-top: 15px; border-color:rgb(60, 57, 57);"></div>
-                    <div class="text-center flex-fill">
-                        <div class="mb-2">
-                            <i id="icon-complete" class="bi bi-check-circle-fill fs-4 text-secondary"></i>
-                        </div>
-                        <p class="mb-0">Pesanan Selesai</p>
-                    </div>
-                </div>
-            </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between text-center">
+          <!-- 1. dibuat -->
+          <div class="flex-fill">
+            <i id="icon-order" class="bi bi-cart-check fs-4 text-secondary" aria-label="Pesanan Dibuat"></i>
+            <p class="small mb-0">Dibuat</p>
+          </div>
+
+          <div class="flex-fill border-top border-5 mx-2" style="margin-top:15px"></div>
+
+          <!-- 2. dibayar -->
+          <div class="flex-fill">
+            <i id="icon-paid" class="bi bi-credit-card fs-4 text-secondary" aria-label="Pesanan Dibayarkan"></i>
+            <p class="small mb-0">Dibayarkan</p>
+          </div>
+
+          <div class="flex-fill border-top border-5 mx-2" style="margin-top:15px"></div>
+
+          <!-- 3. diproses / siap pickup -->
+          <div class="flex-fill">
+            <i id="icon-box" class="bi bi-box-seam fs-4 text-secondary" aria-label="Siap Pickup"></i>
+            <p class="small mb-0">Ambil Di Tempat</p>
+          </div>
+
+          <div class="flex-fill border-top border-5 mx-2" style="margin-top:15px"></div>
+
+          <!-- 4. dikirim -->
+          <div class="flex-fill">
+            <i id="icon-send" class="bi bi-truck fs-4 text-secondary" aria-label="Dikirim"></i>
+            <p class="small mb-0">Dikirim</p>
+          </div>
+
+          <div class="flex-fill border-top border-5 mx-2" style="margin-top:15px"></div>
+
+          <!-- 5. selesai -->
+          <div class="flex-fill">
+            <i id="icon-complete" class="bi bi-check-circle-fill fs-4 text-secondary" aria-label="Selesai"></i>
+            <p class="small mb-0">Selesai</p>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- libs -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get('id');
+  <script>
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
 
-        let transactionStatus = '';
-        let deliveryStatus = '';
-        let orderDate = '';
+      // urutkan sesuai alur proses
+      const STEP_ICONS = ['icon-order', 'icon-paid', 'icon-box', 'icon-send', 'icon-complete'];
 
-        function updateIcons(transactionStatus, deliveryStatus) {
-            // Reset all icons
-            ['icon-order', 'icon-paid', 'icon-send', 'icon-complete'].forEach(id => {
-                document.getElementById(id).classList.remove('text-success');
-                document.getElementById(id).classList.add('text-secondary');
-            });
-
-            // Always created
-            document.getElementById('icon-order').classList.replace('text-secondary', 'text-success');
-
-            if (transactionStatus === 'settlement') {
-                document.getElementById('icon-paid').classList.replace('text-secondary', 'text-success');
-
-                if (deliveryStatus === 'send') {
-                    document.getElementById('icon-send').classList.replace('text-secondary', 'text-success');
-                }
-
-                if (deliveryStatus === 'complete') {
-                    document.getElementById('icon-send').classList.replace('text-secondary', 'text-success');
-                    document.getElementById('icon-complete').classList.replace('text-secondary', 'text-success');
-                }
-            } else if (transactionStatus === 'pending') {
-                // Do nothing more (only icon-order stays green)
-            }
-        }
-
-        // Fetch both transaction and delivery data
-        $.when(
-            $.getJSON('/api/v1/transactions/' + id),
-            $.getJSON('/api/v1/delivery/transactions/' + id)
-        ).done(function(transactionRes, deliveryRes) {
-            const transaction = transactionRes[0].data;
-            const delivery = deliveryRes[0].data;
-
-            console.log(delivery)
-
-            transactionStatus = transaction.status;
-            deliveryStatus = delivery.status;
-            orderDate = transaction.created_at;
-            trackingNumber = parseInt(delivery.tracking_number);
-
-            // Update date in UI
-            document.getElementById('order-date').textContent = orderDate;
-            document.getElementById('tracking-number').textContent = trackingNumber;
-
-            // Update progress icons
-            updateIcons(transactionStatus, deliveryStatus);
-
-        }).fail(function(xhr) {
-            console.error('Error fetching data:', xhr.responseText);
+      function highlightSteps(upto) {
+        // reset
+        STEP_ICONS.forEach(i => {
+          document.getElementById(i).classList.replace('text-success', 'text-secondary');
         });
-    </script>
+        // aktifkan sampai indeks 'upto' (inklusif)
+        for (let i = 0; i <= upto; i++) {
+          document.getElementById(STEP_ICONS[i]).classList.replace('text-secondary', 'text-success');
+        }
+      }
 
-    <?= view('/pages/user/components/include/link') ?>
-  </body>
+      $.when(
+        $.getJSON(`/api/v1/transactions/${id}`),
+        $.getJSON(`/api/v1/delivery/transactions/${id}`)
+      )
+      .done(function(txRes, dlRes) {
+        const tx = txRes[0].data || {};
+        const dl = dlRes[0].data || {};
+
+        // Tanggal order dalam locale ID
+        const createdAt = tx.created_at ? new Date(tx.created_at).toLocaleString('id-ID') : '--';
+        $('#order-date').text(createdAt);
+
+        // tracking number
+        $('#tracking-number').text(dl.tracking_number || '--');
+
+        let stepIndex = 0;
+        if (tx.status === 'settlement') stepIndex = 1;
+        if (dl.status === 'pickup') {
+            stepIndex = 2;
+             $('#icon-send').parent().hide()
+        } 
+        if (dl.status === 'send') {
+            stepIndex = 3;
+            $('#icon-box').parent().hide();
+        }  
+        if (dl.status === 'complete') stepIndex = 4;
+
+        highlightSteps(stepIndex);
+      })
+      .fail(xhr => console.error('Gagal mengambil data:', xhr?.responseText));
+    })();
+  </script>
+
+  <?= view('/pages/user/components/include/link') ?>
+</body>
 </html>
