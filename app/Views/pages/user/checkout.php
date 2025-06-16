@@ -39,7 +39,7 @@
                         <form>
                             <div class="mb-3">
                                 <p class="mb-1"><strong>Total Harga:</strong> <span id="total-price">Rp 0</span></p>
-                                <p class="mb-1"><strong>Ongkos Kirim:</strong> Rp 10.000</p>
+                                <p class="mb-1" id="ongkos"><strong>Ongkos Kirim:</strong> Rp 10.000</p>
                                 <p><strong>Total Pembayaran:</strong> <span class="text-success" id="final-price">Rp 10.000</span></p>
                                 <select class="form-select" required id="delivery-option" aria-label="Default select example">
                                     <option selected disabled>Pilih Metode Pengantaran</option>
@@ -47,7 +47,7 @@
                                     <option value="pickup">Ambil Sendiri</option>
                                 </select>
                                 <label for="delivery-note" class="form-label"><strong>Alamat Pengiriman :</strong></label>
-                                <textarea required class="form-control mb-3 shadow-sm" rows="3" id="delivery-note" placeholder="Contoh: Jl. Raya No. 123, Jambi"></textarea>
+                                <textarea class="form-control mb-3 shadow-sm" rows="3" id="delivery-note" placeholder="Contoh: Jl. Raya No. 123, Jambi"></textarea>
                                 </div>
                             <div class="text-center">
                                 <button class="btn btn-primary w-100" id="payment-button" disabled>Lanjutkan Pembayaran</button>
@@ -62,6 +62,28 @@
     <script>
     let checkoutItems = [];
     let selectedItemIds = [];
+
+    $('#ongkos').hide();
+
+    $('#delivery-option').on('change', function () {
+        const deliveryOption = $(this).val();
+        if (deliveryOption === 'order') {
+            $('#ongkos').show();
+            $('#delivery-note').val('').prop('disabled', false);
+        } else {
+            $('#ongkos').hide();
+            $('#delivery-note').val('Ambil Ditempat').prop('disabled', true);
+        }
+
+         if (deliveryOption === 'order' && $('#delivery-note').val().trim() === '') {
+            alert('Mohon isi alamat pengiriman sebelum melanjutkan pembayaran.');
+            $('#delivery-note').focus();
+        }
+
+        updateTotalPrice();
+    });
+
+
 
     function loadDataCart() {
         $.ajax({

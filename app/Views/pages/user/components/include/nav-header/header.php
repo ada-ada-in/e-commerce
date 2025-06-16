@@ -64,73 +64,53 @@
 
 
       <div class="container-fluid">
-        <div class="row py-3 border-bottom">
-          
-          <div class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
-            <div class="d-flex align-items-center my-3 my-sm-0">
-              <a href="<?= base_url('/') ?>">
-                <img src="/images/mmbarokah-logo.png" alt="logo" style="width: 100%; height: 60px; object-fit: cover;">
-              </a>
-            </div>
+    <div class="row py-3 align-items-center justify-content-between">
+
+      <!-- Logo -->
+      <div class="col-6 col-md-4 col-lg-2 text-start">
+        <a href="<?= base_url('/') ?>">
+          <img src="/images/mmbarokah-logo.png" alt="logo" class="img-fluid" style="height: 60px; object-fit: cover;">
+        </a>
+      </div>
+
+      <!-- Navigation Menu -->
+      <div class="d-none d-lg-block col-lg-6">
+        <ul class="navbar-nav d-flex flex-row gap-3 justify-content-center align-items-center mb-0 fw-bold text-uppercase text-dark">
+          <li class="nav-item"><a href="<?= base_url('/') ?>" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="<?= base_url('/about') ?>" class="nav-link">About</a></li>
+          <?php if (session()->get('isLoggedIn')): ?>
+            <li class="nav-item"><a href="<?= base_url('/payment') ?>" class="nav-link">Payment</a></li>
+          <?php endif; ?>
+        </ul>
+      </div>
+
+      <!-- Account & Cart -->
+      <div class="col-6 col-md-8 col-lg-4 d-flex justify-content-end align-items-center gap-3">
+        <?php if (session()->get('isLoggedIn')): ?>
+          <!-- Logged-in User -->
+          <div class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle text-black" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <svg width="24" height="24"><use xlink:href="#user"></use></svg>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="<?= base_url('/profile') ?>">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" id="logout" onclick="logout()">Logout</a></li>
+            </ul>
           </div>
-          
-          <?php $session = session(); ?>
-      <?php if ($session->get('isLoggedIn')): ?>
-        <!-- Jika login -->
-        <div class="col-lg-6">
-          <ul class="navbar-nav list-unstyled d-flex flex-row gap-3 gap-lg-5 justify-content-center flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
-            <li class="nav-item active">
-              <a href="<?= base_url('/') ?>" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url('/about') ?>" class="nav-link">About</a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url('/payment') ?>" class="nav-link">Payment</a>
-            </li>
-          </ul>
-        </div>
 
-        <div class="col-sm-8 col-lg-3 d-flex gap-5 align-items-center justify-content-center justify-content-sm-end">
-          <ul class="d-flex justify-content-end list-unstyled m-0">
-            <li class="nav-item dropdown">
-              <a  href="#" class="nav-link dropdown-toggle text-black" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <svg width="24" height="24"><use xlink:href="#user"></use></svg>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item text-black" href="<?= base_url('/profile') ?>">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item text-danger" id="logout" onclick="logout()">Logout</a></li>
-              </ul>
-            </li>
-            <li>
-              <a href="#" class="p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                <svg width="24" height="24"><use xlink:href="#shopping-bag"></use></svg>
-              </a>
-            </li>
-          </ul>
-        </div>
-      <?php else: ?>
-        <!-- Jika belum login -->
-        <div class="col-lg-6">
-          <ul class="navbar-nav list-unstyled d-flex flex-row gap-3 gap-lg-5 justify-content-center flex-wrap align-items-center mb-0 fw-bold text-uppercase text-dark">
-            <li class="nav-item active">
-              <a href="<?= base_url('/') ?>" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="<?= base_url('/about') ?>" class="nav-link">About</a>
-            </li>
-          </ul>
-        </div>
+          <a href="#" class="p-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+            <svg width="24" height="24"><use xlink:href="#shopping-bag"></use></svg>
+          </a>
 
-        <div class="col-sm-8 col-lg-3 d-flex gap-3 align-items-center justify-content-center justify-content-sm-end">
+        <?php else: ?>
+          <!-- Guest User -->
           <a href="<?= base_url('/auth/login') ?>" class="btn btn-sm btn-outline-primary">Login</a>
           <a href="<?= base_url('/auth/register') ?>" class="btn btn-sm btn-primary">Register</a>
-        </div>
-      <?php endif; ?>
-
-        </div>
+        <?php endif; ?>
       </div>
-    </header>
-    
-    <?= view('auth/script-auth') ?>
+    </div>
+  </div>
+</header>
+
+<?= view('auth/script-auth') ?>

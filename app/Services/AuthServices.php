@@ -111,7 +111,8 @@ class AuthServices {
             return [
                 'status'  => true,
                 'message' => 'Login successful',
-                'role' => $user['role']
+                'role' => $user['role'],
+                'id' => $user['id']
             ];
             
         } else {

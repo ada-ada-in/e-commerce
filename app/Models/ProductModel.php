@@ -51,4 +51,12 @@ class ProductModel extends Model
                 ->findAll();
 }
 
+    public function getProductsWithCategoryLimit()
+{
+    return $this->select('product.*, categories.name as category_name')
+                ->join('categories', 'categories.id = product.category_id')
+                ->limit(30)
+                ->findAll();
+}
+
 }

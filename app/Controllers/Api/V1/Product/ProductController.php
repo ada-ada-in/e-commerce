@@ -92,6 +92,24 @@ class ProductController extends ResourceController {
         }
     }
 
+        public function getDataProductLimit(){
+
+        try {
+            $data = $this->productServices->getProductDataLimitServices();
+    
+            return $this->respond([
+                'data' => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                 $e->getMessage()
+            ]);
+        }
+    }
+
+
     public function getDataProductByCategoryId($id){
 
         try {

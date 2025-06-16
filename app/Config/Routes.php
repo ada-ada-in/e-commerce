@@ -31,6 +31,8 @@ $routes->group('admin', ['filter' => 'admin'], static function($routes) {
 $routes->group('', static function($routes) {
     $routes->get('/', 'PagesController::user', ['as' => 'user']);
     $routes->get('/about', 'PagesController::about', ['as' => 'about']);
+    $routes->get('allcategory', 'PagesController::allcategory', ['as' => 'allcategory']);
+    $routes->get('allproduct', 'PagesController::allproduct', ['as' => 'allproduct']);
     $routes->get('profile', 'PagesController::userProfile', [
         'as' => 'userProfile',
         'filter' => 'auth'
@@ -78,6 +80,7 @@ $routes->group('api/v1', static function($routes) {
     $routes->group('users', static function($routes) {
         $routes->get('', 'Api\V1\User\UserController::getDataUser', ['as' => 'api.users.getDataUser']);
         $routes->get('profile', 'Api\V1\User\UserController::getDataUserProfile', ['as' => 'api.users.getDataUserProfile']);
+        $routes->put('profile/update', 'Api\V1\User\UserController::getDataUserProfileById', ['as' => 'api.users.getDataUserProfileById']);
         $routes->get('countuser', 'Api\V1\User\UserController::countUser', ['as' => 'api.users.countUser']);
         $routes->get('(:num)', 'Api\V1\User\UserController::getDataUserById/$1', ['as' => 'api.users.getDataUserById']);
         $routes->delete('(:num)', 'Api\V1\User\UserController::deleteDataUserById/$1', ['as' => 'api.userss.deleteDataUserById']);
@@ -130,6 +133,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->post('', 'Api\V1\Product\ProductController::addProduct', ['as' => 'api.product.addProduct']);
         $routes->delete('(:num)', 'Api\V1\Product\ProductController::deleteProduct/$1', ['as' => 'api.product.deleteProduct']);
         $routes->get('', 'Api\V1\Product\ProductController::getDataProduct', ['as' => 'api.product.getDataProduct']);
+        $routes->get('limit', 'Api\V1\Product\ProductController::getDataProductLimit', ['as' => 'api.product.getDataProductLimit']);
         $routes->get('countproduct', 'Api\V1\Product\ProductController::countProduct', ['as' => 'api.product.countProduct']);
         $routes->get('(:num)', 'Api\V1\Product\ProductController::getDataProductById/$1', ['as' => 'api.product.getDataProductById']);
         $routes->get('userproduct/(:num)', 'Api\V1\Product\ProductController::getDataProductByCategoryId/$1', ['as' => 'api.product.getDataProductByCategoryId']);

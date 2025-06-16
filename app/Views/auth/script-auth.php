@@ -70,6 +70,8 @@
                     success: function(response){
                         const message = response.message
                         const role = response.role;
+                        const id = response.id;
+                        localStorage.setItem('userId', id);
                         
                         if(role == 'admin'){
                             window.location.href = '/admin/dashboard'

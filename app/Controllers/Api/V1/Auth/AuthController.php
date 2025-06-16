@@ -79,7 +79,8 @@ class AuthController extends ResourceController {
             return $this->respondCreated([
                 'data' => $data,
                 'message' => $result['message'],
-                'role' => $result['role']
+                'role' => $result['role'],
+                'id' => $result['id']
             ]);
 
         } catch (\Exception $e) {

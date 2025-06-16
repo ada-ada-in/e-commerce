@@ -64,6 +64,25 @@ class UserController extends ResourceController {
         }
     }
 
+    public function getDataUserProfileById($id){
+        try {
+    
+            $data = $this->userServices->getDataUserProfileByIdServices($id);
+    
+            return $this->respond([
+                'status'  => true,
+                'data'    => $data,
+                'message' => 'Data retrieved successfully'
+            ], 200);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function deleteDataUserById($id){
 
         try {
@@ -98,6 +117,8 @@ class UserController extends ResourceController {
                     'message' => 'No data provided for update'
                 ], 400);
             }
+
+        
     
             $updatedData = $this->userServices->updateDataByUserIdServices($id, $data);
 

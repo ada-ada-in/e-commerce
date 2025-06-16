@@ -46,17 +46,83 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Update Profile</button></div>
             </div>
         </div>
     </div>
 </div>
 </div>
 </div>
-    
-
     <?= view('/pages/user/components/include/link') ?>
 
+
+    <script>
+
+        function loadData() {
+            $.ajax({
+                url: '/api/v1/users/profile',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    const user = response.data[0];
+                    console.log(user);
+                    $('input[name="name"]').val(user.name);
+                    $('input[name="email"]').val(user.email);
+                    $('input[name="phone"]').val(user.phone);
+                    $('input[name="address"]').val(user.address);
+                },
+                error: function(error) {
+                    console.error('Error fetching profile data. ', error);
+                }
+            });
+        }
+
+        loadData();
+
+        $(document).ready(function() {
+            $('.profile-button').on('click', function() {
+                const id = localStorage.getItem('user_id');
+                const name = $('input[name="name"]').val();
+                const email = $('input[name="email"]').val();
+                const phone = $('input[name="phone"]').val();
+                const address = $('input[name="address"]').val();
+                const password = $('input[name="password"]').val();
+                const confirm_password = $('input[name="confirm_password"]').val();
+
+                if (password !== confirm_password) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+                
+                const formData = {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    address: address,
+                    password: password,
+                    confirm_password: confirm_password
+                };
+
+                console.log('Form Data:', formData);    
+
+                $.ajax({
+                    url: '/api/v1/users/' + localStorage.getItem('userId'),
+                    type: 'PUT',    
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        alert(response.message || 'Profile updated successfully!');
+                        loadData(); 
+                        window.location.href = '/auth/login'; 
+                    },
+                    error: function(error) {
+                        console.error('Error updating profile. ', error);
+                        alert('Failed to update profile.');
+                    }
+                });
+            });
+        });
+
+    </script>
 
   </body>
 </html>

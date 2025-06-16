@@ -28,7 +28,7 @@
                 <svg width="32" height="32"><use xlink:href="#package"></use></svg>
               </div>
               <div class="card-body p-0">
-                <h5>Free delivery</h5>
+                <h5>Delivery</h5>
                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
               </div>
             </div>

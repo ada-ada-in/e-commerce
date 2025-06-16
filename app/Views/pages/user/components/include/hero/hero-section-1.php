@@ -84,8 +84,8 @@
             </div>
             <div class="col-md-9">
               <div class="card-body p-0">
-                <h5 class="text-light">Gratis Ongkir</h5>
-                <p class="card-text">Pengiriman cepat langsung ke depan rumah Anda.</p>
+                <h5 class="text-light">Bisa Kirim</h5>
+                <p class="card-text">Pengiriman cepat langsung ke rumah Anda.</p>
               </div>
             </div>
           </div>

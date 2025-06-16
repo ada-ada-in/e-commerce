@@ -140,6 +140,34 @@ class ProductServices {
      }
 
 
+         public function getProductDataLimitServices()
+     {
+         
+         $productData = new ProductModel();
+
+
+         $data = $productData->orderBy('created_at', 'DESC')->getProductsWithCategoryLimit();
+         
+ 
+         if(empty($data)){
+             return [       
+                 'status'  => true,
+                 'message' => 'product is empty'
+             ];
+         }
+
+         foreach ($data as &$item) {
+            if (isset($item['price'])) {
+                $item['price'] = 'Rp ' . number_format($item['price'], 0, ',', '.');
+            }
+        }
+         
+ 
+         return $data;
+     }
+
+
+
      public function getProductDataServicesByCategoryId($id)
      {
          

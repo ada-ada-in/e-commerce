@@ -69,6 +69,29 @@ class UserServices {
         return $data;
     }
 
+    public function getDataUserProfileByIdServices($id){
+
+        if (!$id) {
+            return [
+                'status'  => false,
+                'message' => 'ID is required'
+            ];
+        }
+
+        $userData = new UserModel();
+    
+        $data = $userData->find(session()->get('id'));
+    
+        if (!$data) {
+            return [
+                'status'  => false,
+                'message' => 'User not found'
+            ];
+        }
+    
+        return $data;
+    }
+
     public function deleteDataUserByIdServices($id){
    
         if (!$id) {

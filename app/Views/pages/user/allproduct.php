@@ -1,12 +1,19 @@
-<section class="pb-5">
+<?= view('pages/user/components/include/nav-header/head') ?>
+  <body>
+
+    <!-- navbar -->
+
+    <?= view('pages/user/components/include/nav-header/cart') ?>
+    
+    <?= view('/pages/user/components/include/nav-header/header') ?>
+
+
+    <section class="pb-5">
     <div class="container-lg">
         <div class="row">
             <div class="col-md-12">
                 <div class="section-header d-flex flex-wrap justify-content-between my-4">
                     <h2 class="section-title">Products</h2>
-                    <div class="d-flex align-items-center">
-                        <a href="<?= base_url('/allproduct') ?>" class="btn btn-primary rounded-1">View All</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -64,7 +71,7 @@
 
     function loadDataProduct() {
         $.ajax({
-            url: '/api/v1/products/limit',
+            url: '/api/v1/products',
             type: 'GET',
             dataType: 'json',
             success: function (response) {
@@ -126,3 +133,11 @@
         });
     });
 </script>
+
+ 
+
+    <?= view('/pages/user/components/include/footer') ?>
+
+
+  </body>
+</html>

@@ -17,7 +17,7 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-md-6">
-                <img src="https://via.placeholder.com/500x300" alt="About Us" class="img-fluid rounded shadow">
+                <img src="images/mmbarokah-logo.png" alt="About Us" class="img-fluid rounded shadow">
             </div>
             <div class="col-md-6">
                 <h2 class="fw-bold">Siapa Kami?</h2>
@@ -50,45 +50,35 @@
         </div>
     </div>
 
-    <!-- Team Section -->
-    <div class="container my-5">
-        <h2 class="text-center fw-bold mb-4">Tim Kami</h2>
-        <div class="row text-center">
-            <div class="col-md-4">
-                <img src="https://via.placeholder.com/150" alt="Team Member" class="img-fluid rounded-circle mb-3">
-                <h5>John Doe</h5>
-                <p>CEO & Founder</p>
-            </div>
-            <div class="col-md-4">
-                <img src="https://via.placeholder.com/150" alt="Team Member" class="img-fluid rounded-circle mb-3">
-                <h5>Jane Smith</h5>
-                <p>Head of Marketing</p>
-            </div>
-            <div class="col-md-4">
-                <img src="https://via.placeholder.com/150" alt="Team Member" class="img-fluid rounded-circle mb-3">
-                <h5>Michael Brown</h5>
-                <p>Chief Technology Officer</p>
-            </div>
-        </div>
-    </div>
-
     <!-- Testimonials Section -->
     <div class="container my-5">
         <h2 class="text-center fw-bold mb-4">Apa Kata Pelanggan Kami?</h2>
         <div class="row text-center">
             <div class="col-md-4">
+                <div>
+                    <img src="/images/woman-1.jpg" width="300" height="300" alt="Customer" class="img-fluid rounded-circle mb-3">
+                    <h5>John Doe</h5>
+                 </div>
                 <blockquote class="blockquote">
                     <p>"Belanja di sini sangat mudah dan produknya berkualitas tinggi!"</p>
                     <footer class="blockquote-footer">Sarah, Jakarta</footer>
                 </blockquote>
             </div>
             <div class="col-md-4">
+                <div>
+                    <img src="/images/man-1.jpg"  width="300" height="300"alt="Customer" class="img-fluid rounded-circle mb-3">
+                    <h5>John Doe</h5>
+                 </div>
                 <blockquote class="blockquote">
                     <p>"Pengiriman cepat dan layanan pelanggan sangat membantu."</p>
                     <footer class="blockquote-footer">Andi, Surabaya</footer>
                 </blockquote>
             </div>
             <div class="col-md-4">
+                <div>
+                    <img src="/images/woman-2.jpg" width="300" height="300" alt="Customer" class="img-fluid rounded-circle mb-3">
+                    <h5>John Doe</h5>
+                 </div>
                 <blockquote class="blockquote">
                     <p>"Saya sangat puas dengan pengalaman belanja saya di sini."</p>
                     <footer class="blockquote-footer">Rina, Bandung</footer>
