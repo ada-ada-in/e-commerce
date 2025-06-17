@@ -21,7 +21,7 @@
                         <td>${transactions.transactions_name}</td>
                         <td>${transactions.transactions_email}</td>
                         <td>${transactions.transactions_phone}</td>
-                        <td>${transactions.total_price}</td>
+                        <td>Rp. ${transactions.total_price}</td>
                         <td>
                         <span class="badge badge-${getStatusClass(transactions.status)}">
                         ${transactions.status}

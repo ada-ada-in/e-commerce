@@ -27,6 +27,7 @@
                                                 <th>No</th>
                                                 <th>No. Order</th>
                                                 <th>Name</th>
+                                                <th>Email</th>
                                                 <th>Handphone</th>
                                                 <th>Total Harga</th>
                                                 <th>Tanggal Transaksi</th>

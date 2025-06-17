@@ -20,7 +20,7 @@
                         <td>${transactions.transactions_name}</td>
                         <td>${transactions.transactions_email}</td>
                         <td>${transactions.transactions_phone}</td>
-                        <td>${transactions.total_price}</td>
+                        <td>Rp. ${transactions.total_price}</td>
                         <td>${transactions.updated_at}</td>
                                               <td>
                         <button type="button" class="btn btn-primary px-3 transaction-items" data-bs-toggle="modal" data-bs-target="#transactionitems" data-id="${transactions.id}">Detail Barang</button>
