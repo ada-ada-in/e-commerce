@@ -24,6 +24,7 @@ $routes->group('admin', ['filter' => 'admin'], static function($routes) {
     $routes->get('users', 'PagesController::users', ['as' => 'users']);
     $routes->get('profile', 'PagesController::profile', ['as' => 'profile']);
     $routes->get('complete', 'PagesController::complete', ['as' => 'complete']);
+    $routes->get('inventory', 'PagesController::stokin', ['as' => 'stokin']);
 });
 
 
@@ -79,6 +80,7 @@ $routes->group('api/v1', static function($routes) {
 
     $routes->group('users', static function($routes) {
         $routes->get('', 'Api\V1\User\UserController::getDataUser', ['as' => 'api.users.getDataUser']);
+        $routes->get('print', 'Api\V1\User\UserController::printDataUser', ['as' => 'api.users.printDataUser']);
         $routes->get('profile', 'Api\V1\User\UserController::getDataUserProfile', ['as' => 'api.users.getDataUserProfile']);
         $routes->put('profile/update', 'Api\V1\User\UserController::getDataUserProfileById', ['as' => 'api.users.getDataUserProfileById']);
         $routes->get('countuser', 'Api\V1\User\UserController::countUser', ['as' => 'api.users.countUser']);
@@ -91,6 +93,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->post('', 'Api\V1\Category\CategoryController::addCategory', ['as' => 'api.category.addCategory']);
         $routes->delete('(:num)', 'Api\V1\Category\CategoryController::deleteCategory/$1', ['as' => 'api.category.deleteCategory']);
         $routes->get('', 'Api\V1\Category\CategoryController::getDataCategory', ['as' => 'api.category.getDataCategory']);
+        $routes->get('print', 'Api\V1\Category\CategoryController::printDataProduct', ['as' => 'api.category.printDataProduct']);
         $routes->get('(:num)', 'Api\V1\Category\CategoryController::getDataCategoryById/$1', ['as' => 'api.category.getDataCategoryById']);
         $routes->put('(:num)', 'Api\V1\Category\CategoryController::updateDataCategoryById/$1', ['as' => 'api.category.updateDataCategoryById']);
     });
@@ -103,6 +106,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('countprofit', 'Api\V1\Transactions\TransactionsController::countProfit', ['as' => 'api.transactions.countProfit']);
         $routes->get('chartmonthgraph', 'Api\V1\Transactions\TransactionsController::chartMonthGraph', ['as' => 'api.transactions.chartMonthGraph']);
         $routes->get('', 'Api\V1\Transactions\TransactionsController::getDataTransaction', ['as' => 'api.transactions.getDataTransaction']);
+        $routes->post('data/print', 'Api\V1\Transactions\TransactionsController::printDataTransactions', ['as' => 'api.transactions.printDataTransactions']);
         $routes->get('paid', 'Api\V1\Transactions\TransactionsController::getDataPaidTransaction', ['as' => 'api.transactions.getDataPaidTransaction']);
         $routes->get('pending', 'Api\V1\Transactions\TransactionsController::getDataPendingTransaction', ['as' => 'api.transactions.getDataPendingTransaction']);
         $routes->get('user', 'Api\V1\Transactions\TransactionsController::getDataUserTransaction', ['as' => 'api.transactions.getDataUserTransaction']);
@@ -133,6 +137,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->post('', 'Api\V1\Product\ProductController::addProduct', ['as' => 'api.product.addProduct']);
         $routes->delete('(:num)', 'Api\V1\Product\ProductController::deleteProduct/$1', ['as' => 'api.product.deleteProduct']);
         $routes->get('', 'Api\V1\Product\ProductController::getDataProduct', ['as' => 'api.product.getDataProduct']);
+        $routes->get('print', 'Api\V1\Product\ProductController::printDataProduct', ['as' => 'api.product.printDataProduct']);
         $routes->get('limit', 'Api\V1\Product\ProductController::getDataProductLimit', ['as' => 'api.product.getDataProductLimit']);
         $routes->get('countproduct', 'Api\V1\Product\ProductController::countProduct', ['as' => 'api.product.countProduct']);
         $routes->get('(:num)', 'Api\V1\Product\ProductController::getDataProductById/$1', ['as' => 'api.product.getDataProductById']);
@@ -145,6 +150,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->delete('(:num)', 'Api\V1\StokIn\StokInController::deleteStokIn/$1', ['as' => 'api.stokin.deleteStokIn']);
         $routes->get('', 'Api\V1\StokIn\StokInController::getDataStokIn', ['as' => 'api.stokin.getDataStokIn']);
         $routes->get('(:num)', 'Api\V1\StokIn\StokInController::getDataStokInById/$1', ['as' => 'api.stokin.getDataStokInById']);
+        $routes->put('(:num)', 'Api\V1\StokIn\StokInController::updateDataStokInById/$1', ['as' => 'api.stokin.updateDataStokInById']);
     }); 
 
     $routes->group('transactionsitems', static function($routes) {

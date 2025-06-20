@@ -275,4 +275,8 @@
             doc.save('users-data.pdf');
         });
     });
+
+    $('#downloadPdf').on('click', function () {
+            window.open('/api/v1/category/print', '_blank');
+        });
 </script>

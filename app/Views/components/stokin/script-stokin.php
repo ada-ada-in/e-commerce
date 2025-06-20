@@ -11,20 +11,18 @@
             const paginatedItems = data.slice(start, end);
 
             let row = '';
-            paginatedItems.forEach((user, i) => {
+            paginatedItems.forEach((stok, i) => {
                 row += `
                     <tr>
-                        <td hidden>${user.id}</td>
+                        <td hidden>${stok.id}</td>
                         <td>${start + i + 1}</td>
-                        <td>${user.name}</td>
-                        <td>${user.email}</td>
-                        <td>${user.phone}</td>
-                        <td>${user.address}</td>
-                        <td>${user.role}</td>
+                        <td>${stok.product_name}</td>
+                        <td>${stok.quantity}</td>
+                        <td>${stok.created_at}</td>
                         <td>
-                            <button type="button" class="btn btn-primary px-3 btn-update" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="${user.id}">Edit</button>
+                            <button type="button" class="btn btn-primary px-3 btn-update" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="${stok.id}">Edit</button>
                             |
-                            <button class="btn btn-danger btn-delete" data-id="${user.id}">Hapus</button>
+                            <button class="btn btn-danger btn-delete" data-id="${stok.id}">Hapus</button>
                         </td>
                     </tr>
                 `;
@@ -34,9 +32,9 @@
             $('#pageInfo').text(`Page ${currentPage} of ${Math.ceil(data.length / rowsPerPage)}`);
         }
 
-        function loadUsers() {
+        function loadStok() {
             $.ajax({
-                url: '/api/v1/users',
+                url: '/api/v1/stokin',
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
@@ -51,13 +49,12 @@
             });
         }
 
-        loadUsers();
+        loadStok();
 
         $('#searchInput').on('input', function () {
             const keyword = $(this).val().toLowerCase();
-            filteredUsers = users.filter(user =>
-                user.name.toLowerCase().includes(keyword) ||
-                user.email.toLowerCase().includes(keyword)
+            filteredUsers = users.filter(stok =>
+                stok.product_name.toLowerCase().includes(keyword) 
             );
             currentPage = 1;
             displayTable(filteredUsers);
@@ -79,13 +76,13 @@
 
         $(document).on('click', '.btn-delete', function () {
             const id = $(this).data('id');
-            if (confirm('Apakah kamu yakin ingin menghapus user ini?')) {
+            if (confirm('Apakah kamu yakin ingin menghapus stok ini?')) {
                 $.ajax({
-                    url: `/api/v1/users/${id}`,
+                    url: `/api/v1/stokin/${id}`,
                     type: 'DELETE',
                     success: function () {
-                        alert('User berhasil dihapus!');
-                        loadUsers(); 
+                        alert('stok berhasil dihapus!');
+                        loadStok(); 
                     },
                     error: function (xhr, status, error) {
                         try {
@@ -115,17 +112,15 @@
         $(document).on('click', '.btn-update', function () {
             const id = $(this).data('id');
             $.ajax({
-                url: `/api/v1/users/${id}`,
+                url: `/api/v1/stokin/${id}`,
                 type: 'GET',
                 dataType: 'json',
                 success: function (response) {
                     const updateData = response.data 
+                    console.log(updateData);
                     $('#editmodal input[name="id"]').val(updateData.id);
-                    $('#editmodal input[name="name"]').val(updateData.name);
-                    $('#editmodal input[name="email"]').val(updateData.email);
-                    $('#editmodal input[name="phone"]').val(updateData.phone);
-                    $('#editmodal input[name="address"]').val(updateData.address);
-                    $('#editmodal select[name="role"]').val(updateData.role);                                       
+                    $('#editmodal select[name="product"]').val(updateData.product_id);
+                    $('#editmodal input[name="quantity"]').val(updateData.quantity);
                 },
                 error: function (xhr, status, error) {
                     try {
@@ -151,69 +146,18 @@
             });
         });
 
-        $('#form-add-user').on('submit', function (e) {
-            e.preventDefault();
-            const form = $('#form-add-user');
-            const formData = {
-                name: form.find('input[name="name"]').val(),
-                email: form.find('input[name="email"]').val(),
-                phone: form.find('input[name="phone"]').val(),
-                address: form.find('input[name="address"]').val(),
-                role: form.find('select[name="role"]').val(),
-                password: form.find('input[name="password"]').val(),
-                confirm_password: form.find('input[name="confirm_password"]').val(),
-            };
-            $.ajax({
-                url: `/api/v1/auth/register`,
-                type: 'POST',
-                dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(formData),
-                success: function (response) {
-                    const message = response.message 
-                    alert(message)
-                    $('#form-add-user')[0].reset();
-                    loadUsers();   
-                },
-                error: function (xhr, status, error) {
-                    try {
-                        const response = JSON.parse(xhr.responseText);
-                        let errorMessage = '';
-                        if (response.messages) {
-                            for (const key in response.messages) {
-                                if (response.messages.hasOwnProperty(key)) {
-                                    errorMessage += `${response.messages[key]}\n`;
-                                }
-                            }
-                        } else if (response.message) {
-                            errorMessage = response.message;
-                        } else {
-                            errorMessage = 'Terjadi kesalahan yang tidak diketahui.';
-                        }
-                        alert(errorMessage); 
-                    } catch (e) {
-                        console.error('Gagal parse response error:', e);
-                        alert('Terjadi kesalahan saat memproses respons error.');
-                    }
-                }
-            });
-        });
 
-        $('#form-update-user').on('submit', function (e) {
+
+        $('#form-update-stok').on('submit', function (e) {
             e.preventDefault();
             const id = $('input[name="id"]').val()
-            const form = $('#form-update-user');
+            const form = $('#form-update-stok');
             const formData = {
-                name: form.find('input[name="name"]').val(),
-                email: form.find('input[name="email"]').val(),
-                phone: form.find('input[name="phone"]').val(),
-                address: form.find('input[name="address"]').val(),
-                role: form.find('select[name="role"]').val(),
-                password: form.find('input[name="password"]').val(),
-                confirm_password: form.find('input[name="confirm_password"]').val(),
+                product_id: form.find('select[name="product"]').val(),
+                quantity: form.find('input[name="quantity"]').val()
             };
             $.ajax({
-                url: `/api/v1/users/${id}`,
+                url: `/api/v1/stokin/${id}`,
                 type: 'PUT',
                 dataType: 'json',
                 contentType: 'application/json',
@@ -221,8 +165,8 @@
                 success: function (response) {
                     const message = response.message 
                     alert(message)
-                    $('#form-update-user')[0].reset();
-                    loadUsers(); 
+                    $('#form-update-stok')[0].reset();
+                    loadStok(); 
                 },
                 error: function (xhr, status, error) {
                     try {
@@ -255,14 +199,14 @@
                 ["No", "Nama", "Email", "Telepon", "Alamat", "Role"]
             ];
 
-            filteredUsers.forEach((user, index) => {
+            filteredUsers.forEach((stok, index) => {
                 ws_data.push([
                     index + 1,
-                    user.name,
-                    user.email,
-                    user.phone,
-                    user.address,
-                    user.role
+                    stok.name,
+                    stok.email,
+                    stok.phone,
+                    stok.address,
+                    stok.role
                 ]);
             });
 

@@ -11,7 +11,7 @@
                                     +
                                     </button>
                                     <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button type="button" id="downloadPdf" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="icon-printer"></i>
                                     </button>
                                     <ul class="dropdown-menu">

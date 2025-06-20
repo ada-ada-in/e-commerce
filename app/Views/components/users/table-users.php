@@ -16,7 +16,7 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                     <li><button class="dropdown-item" id="downloadExcel">Excel</button></li>
-                                    <li><button class="dropdown-item" id="downloadPDF">PDF</button></li>
+                                    <li><button type="submit" class="dropdown-item" id="downloadPdf">PDF</button></li>
                                     </ul>
                                     
                                 </div>

@@ -55,6 +55,9 @@ class PagesController extends BaseController
     public function complete(): string {
         return view('pages/complete-delivery');
     }
+    public function stokin(): string {
+        return view('pages/stokin');
+    }
 
     // auth
 

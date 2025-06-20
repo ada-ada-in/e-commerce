@@ -29,11 +29,11 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Password</label>
-                                <input type="password" placeholder="Password" name="password" class="form-control">
+                                <input type="password" required placeholder="Password" name="password" class="form-control">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Confirm Password</label>
-                                <input type="password" placeholder="Confirm Password" name="confirm_password" class="form-control">
+                                <input type="password" required placeholder="Confirm Password" name="confirm_password" class="form-control">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary profile-button">Update Profile</button>

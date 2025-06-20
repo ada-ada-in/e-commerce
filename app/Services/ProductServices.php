@@ -276,7 +276,12 @@ class ProductServices {
 
     }
 
-    
+
+    public function exportPdfProduct()
+    {
+        $productData = new ProductModel();
+        return $productData->orderBy('created_at', 'DESC')->findAll();
+    } 
      
 }
 

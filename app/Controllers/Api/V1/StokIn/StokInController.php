@@ -100,6 +100,37 @@ class StokInController extends ResourceController {
         }
     }
 
+    public function updateDataStokInById($id){
+        try {
+    
+            $data = $this->request->getJSON(true);
+    
+            if (empty($data)) {
+                return $this->fail([
+                    'error' => 'No data received.', 'debug' => $this->request->getBody()
+                ]);
+            }
+    
+            $result = $this->stokInServices->updateDataStokInByIdServices($id, $data);
+    
+            if ($result['status'] == false) {
+                return $this->fail(
+                    $result['errors']
+                );
+            }
+    
+            return $this->respondUpdated([
+                'data' => $data,
+                'message' => $result['message']
+            ]);
+    
+        } catch (\Exception $e) {
+            return $this->fail([
+                 $e->getMessage()
+            ]);
+        }
+    }
+
  
 }
 

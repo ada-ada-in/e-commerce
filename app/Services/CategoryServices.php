@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 use App\Models\CategoryModel;
+use Dompdf\Dompdf;
 
 
 
@@ -146,6 +147,13 @@ class CategoryServices {
     
         return $updateCategory;
     }
+
+
+        public function exportPdfCategory()
+    {
+        $categoryData = new CategoryModel();
+        return $categoryData->orderBy('created_at', 'DESC')->findAll();
+    } 
      
 }
 

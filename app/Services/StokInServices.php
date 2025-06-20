@@ -111,7 +111,10 @@ class StokInServices {
      {
          
          $stokInData = new StokInModel();
-         $data = $stokInData->findAll();
+         $data = $stokInData
+         ->select('stok_in.*, product.name as product_name' )
+        ->join('product', 'stok_in.product_id = product.id')
+         ->findAll();
  
          if(empty($data)){
              return [
@@ -144,6 +147,49 @@ class StokInServices {
         }
     
         return $data;
+    }
+
+    public function updateDataStokInByIdServices($id, array $data)
+    {
+        if (!$id) {
+            return [
+                'status'  => false,
+                'message' => 'ID is required'
+            ];
+        }
+
+        $stokInModel = new StokInModel();
+    
+        $stokInData = $stokInModel->find($id);
+    
+        if (!$stokInData) {
+            return [
+                'status'  => false,
+                'message' => 'stok not found'
+            ];
+        }
+
+        $product = $this->productModel->where('id', $data['product_id'])->first();
+
+        if (!$product) {
+            return [
+                'status' => false,
+                'message' => 'Product not found'
+            ];
+        }
+
+        $newStock = $product['stock'] - $stokInData['quantity'] + $data['quantity'];
+        $this->productModel->update($data['product_id'], ['stock' => $newStock]);
+
+        $stokInModel->update($id, [
+            'product_id' => $data['product_id'],
+            'quantity' => $data['quantity'],
+        ]);
+    
+        return [
+            'status'  => true,
+            'message' => 'stok updated successfully'
+        ];
     }
 
     

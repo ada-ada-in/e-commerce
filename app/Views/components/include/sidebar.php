@@ -39,6 +39,13 @@
                     </li>
 
                     <li class="mt-2">
+                        <a href="<?= base_url('admin/inventory') ?>" aria-expanded="false">
+                            <i class="icon-bag"></i>
+                            <span class="nav-text">Add inventory</span>
+                        </a>
+                    </li>
+
+                    <li class="mt-2">
                         <a href="<?= base_url('admin/users') ?>" aria-expanded="false">
                             <i class="icon icon-single-04"></i>
                             <span class="nav-text">Users</span>

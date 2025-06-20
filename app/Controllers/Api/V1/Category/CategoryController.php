@@ -2,6 +2,7 @@
 namespace App\Controllers\Api\V1\Category;
 use CodeIgniter\RESTful\ResourceController;
 use App\Services\CategoryServices;
+use Dompdf\Dompdf;
 
 class CategoryController extends ResourceController {
 
@@ -135,6 +136,33 @@ class CategoryController extends ResourceController {
                 'message' => 'Data updated successfully'
             ]);
     
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
+      public function printDataProduct()
+    {
+        try {
+            $data = $this->categoryservices->exportPdfCategory();
+
+            if (empty($data)) {
+                return $this->failNotFound('No user data found');
+            }
+
+            $html = view('print/CategoryPages', ['categories' => $data]);
+
+            $dompdf = new Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            $dompdf->stream('data_categories.pdf', ['Attachment' => false]);
+            exit;
+
         } catch (\Exception $e) {
             return $this->fail([
                 'status'  => false,

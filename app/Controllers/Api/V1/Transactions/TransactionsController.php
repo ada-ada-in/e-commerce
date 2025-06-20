@@ -3,6 +3,7 @@ namespace App\Controllers\Api\V1\Transactions;
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Services\TransactionServices;
+use Dompdf\Dompdf;
 
 class TransactionsController extends ResourceController {
 
@@ -298,7 +299,47 @@ class TransactionsController extends ResourceController {
             ],500);
         }
     }
- 
+
+
+    public function printDataTransactions()
+    {
+        try {
+            $input = $this->request->getJSON(true); // true = array
+            $startDate = $input['start_date'] ?? null;
+            $endDate   = $input['end_date'] ?? null;
+
+            if (!$startDate || !$endDate) {
+                return $this->failValidationErrors('Start and End dates are required.');
+            }
+
+            $data = $this->transactionServices->exportPdfTransactions($startDate, $endDate);
+
+            if (empty($data)) {
+                return $this->failNotFound('No transactions found.');
+            }
+
+            $html = view('print/TransactionsPages', ['transactions' => $data]);
+
+            $dompdf = new \Dompdf\Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+
+            // Tambahkan header agar jelas bahwa ini PDF
+            header('Content-Type: application/pdf');
+            $dompdf->stream('transactions.pdf', ['Attachment' => false]);
+            exit;
+
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
+
 }
 
 ?>

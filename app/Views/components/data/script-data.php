@@ -360,4 +360,80 @@
     return 'Rp ' + number.toLocaleString('id-ID');
 }
 
+
+document.getElementById('filterBtn').addEventListener('click', () => {
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+
+        if (!startDate || !endDate) {
+            alert("Mohon isi Start Date dan End Date");
+            return;
+        }
+
+        fetchTransactions(startDate, endDate);
+    });
+
+    function fetchTransactions(startDate, endDate) {
+        fetch('/api/v1/transactions?start_date=' + startDate + '&end_date=' + endDate)
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('transactions-data');
+                tbody.innerHTML = ''; // Bersihkan isi sebelumnya
+
+                data.forEach((item, index) => {
+                    const row = `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${item.order_number}</td>
+                            <td>${item.name}</td>
+                            <td>${item.email}</td>
+                            <td>${item.handphone}</td>
+                            <td>Rp ${item.total_harga.toLocaleString()}</td>
+                            <td>${item.status}</td>
+                            <td>${item.tanggal_transaksi}</td>
+                            <td><a href="/transactions/${item.id}" class="btn btn-sm btn-info">Detail</a></td>
+                            <td>...</td>
+                        </tr>
+                    `;
+                    tbody.insertAdjacentHTML('beforeend', row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching transactions:', error);
+            });
+    }
+
+
+    function printPDF() {
+    const start = document.getElementById('startDate').value;
+    const end = document.getElementById('endDate').value;
+
+    if (!start || !end) {
+        alert('Pilih Start dan End Date terlebih dahulu');
+        return;
+    }
+
+    fetch('/api/v1/transactions/data/print', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ start_date: start, end_date: end })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.blob();
+        }
+        throw new Error('Gagal generate PDF');
+    })
+    .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, '_blank');
+    })
+    .catch(err => {
+        console.error(err);
+        alert('Terjadi kesalahan saat mencetak PDF');
+    });
+}
+
 </script>

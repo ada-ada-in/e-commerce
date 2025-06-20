@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 use App\Models\UserModel;
+use Dompdf\Dompdf;
 
 class UserServices {
     protected $userModel;
@@ -167,6 +168,18 @@ class UserServices {
         return $count;
     
     }
+
+    public function exportPdfUsers()
+    {
+        $userData = new UserModel();
+        return $userData->orderBy('created_at', 'DESC')->findAll();
+    } 
+
+    public function exportExcelUsers()
+    {
+        $userData = new UserModel();
+        return $userData->orderBy('created_at', 'DESC')->findAll();
+    }  
     
 }
 

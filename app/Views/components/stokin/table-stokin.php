@@ -1,12 +1,13 @@
 
-                <div class="row">
+<div class="row">
                     <div class="col-12">
                         <div class="card border border-0">
                             <div class="card-header bg-white">
-                                <h4 class="card-title">Category Datatable</h4>
-                                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari kategori...">
+                                <h4 class="card-title">Inventory Datatable</h4>
+                                
+                                <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari produk...">
                                 <div>
-                                    <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <button type="button" class="btn btn-primary px-3" data-bs-toggle="modal" data-bs-target="#addmodal">
                                     +
                                     </button>
                                     <div class="btn-group" role="group">
@@ -19,6 +20,7 @@
                                     </ul>
                                 </div>
                                 </div>
+                                </div>
                             </div>
                             <div>
                             </div>
@@ -29,14 +31,14 @@
                                             <tr>
                                                 <th hidden>id</th>
                                                 <th>Nomor</th>
-                                                <th>Nama Kategori</th>
-                                                <th>Deskripsi</th>
-                                                <th>Gambar</th>
+                                                <th>Nama Produk</th>
+                                                <th>Quantity</th>
+                                                <th>Tanggal</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="category-data">
-                                            <!-- data category -->
+                                        <tbody id="users_data">
+                                            <!-- tabel users  -->
                                         </tbody>
                                     </table>
                                     <div>
@@ -50,6 +52,6 @@
                     </div>
                 </div>
 
-<?= view('components/category/add-modal-category') ?>
-<?= view('components/category/edit-modal-category') ?>
-<?= view('components/category/script-category') ?>
+<?= view('components/stokin/add-modal-stokin') ?>
+<?= view('components/stokin/edit-modal-stokin') ?>
+<?= view('components/stokin/script-stokin') ?>

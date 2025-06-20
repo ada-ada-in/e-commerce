@@ -357,5 +357,9 @@
         $('#fileLabel').text(fileName); 
     });
 
+    $('#downloadPdf').on('click', function () {
+            window.open('/api/v1/products/print', '_blank');
+    });
+
 
 </script>

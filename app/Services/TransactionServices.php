@@ -442,8 +442,25 @@ class TransactionServices {
     
         return $chartData;
     }
-    
-    
+
+    public function exportPdfTransactions($startDate, $endDate)
+    {
+
+        if (empty($startDate) || empty($endDate)) {
+            throw new \Exception('Start date and end date are required');
+        }
+
+        $transactionData = new TransactionsModel();
+
+        $data = $transactionData
+            ->where('created_at >=', $startDate . ' 00:00:00')
+            ->where('created_at <=', $endDate . ' 23:59:59')
+            ->orderBy('created_at', 'DESC')
+            ->findAll();
+
+        return $data;
+    }
+
      
 }
 

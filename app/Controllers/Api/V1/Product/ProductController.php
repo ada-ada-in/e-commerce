@@ -3,6 +3,7 @@ namespace App\Controllers\Api\V1\Product;
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Services\ProductServices;
+use Dompdf\Dompdf;
 
 class ProductController extends ResourceController {
 
@@ -202,6 +203,32 @@ class ProductController extends ResourceController {
             return $this->fail([
                 'status' => false,
                 'messge' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+       public function printDataProduct()
+    {
+        try {
+            $data = $this->productServices->exportPdfProduct();
+
+            if (empty($data)) {
+                return $this->failNotFound('No user data found');
+            }
+
+            $html = view('print/ProductPages', ['products' => $data]);
+
+            $dompdf = new Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            $dompdf->stream('data_product.pdf', ['Attachment' => false]);
+            exit;
+
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
             ], 500);
         }
     }
