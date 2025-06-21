@@ -275,6 +275,151 @@ class TransactionsController extends ResourceController {
         }
     }
 
+    public function sortDataTransactionByDate(){
+        try{
+            $startDate = $this->request->getGet('start_date');
+            $endDate = $this->request->getGet('end_date');
+
+            if (!$startDate || !$endDate) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Parameter start_date dan end_date wajib diisi.'
+                ])->setStatusCode(400);
+            }
+
+            $data = $this->transactionServices->sortDataTransactionByDateServices($startDate, $endDate);
+
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ]);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => $data,
+                'message' => 'Data retrieved succesfully'
+            ], 200);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
+
+
+    public function sortPaidTransactionByDate(){
+        try{
+            $startDate = $this->request->getGet('start_date');
+            $endDate = $this->request->getGet('end_date');
+
+            if (!$startDate || !$endDate) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Parameter start_date dan end_date wajib diisi.'
+                ])->setStatusCode(400);
+            }
+
+            $data = $this->transactionServices->sortDataPaidByDateServices($startDate, $endDate);
+
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ]);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => $data,
+                'message' => 'Data retrieved succesfully'
+            ], 200);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
+
+
+    public function sortPendingTransactionByDate(){
+        try{
+            $startDate = $this->request->getGet('start_date');
+            $endDate = $this->request->getGet('end_date');
+
+            if (!$startDate || !$endDate) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Parameter start_date dan end_date wajib diisi.'
+                ])->setStatusCode(400);
+            }
+
+            $data = $this->transactionServices->sortDataPendingByDateServices($startDate, $endDate);
+
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ]);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => $data,
+                'message' => 'Data retrieved succesfully'
+            ], 200);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
+
+
+    public function sortCancelTransactionByDate(){
+        try{
+            $startDate = $this->request->getGet('start_date');
+            $endDate = $this->request->getGet('end_date');
+
+            if (!$startDate || !$endDate) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Parameter start_date dan end_date wajib diisi.'
+                ])->setStatusCode(400);
+            }
+
+            $data = $this->transactionServices->sortDataCancelByDateServices($startDate, $endDate);
+
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ]);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => $data,
+                'message' => 'Data retrieved succesfully'
+            ], 200);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
+
+
+
     public function chartMonthGraph(){
         try{
             $data = $this->transactionServices->chartMonthGraphServices();
@@ -304,9 +449,8 @@ class TransactionsController extends ResourceController {
     public function printDataTransactions()
     {
         try {
-            $input = $this->request->getJSON(true); // true = array
-            $startDate = $input['start_date'] ?? null;
-            $endDate   = $input['end_date'] ?? null;
+            $startDate = $this->request->getGet('startDate');
+            $endDate = $this->request->getGet('endDate');
 
             if (!$startDate || !$endDate) {
                 return $this->failValidationErrors('Start and End dates are required.');
@@ -337,6 +481,117 @@ class TransactionsController extends ResourceController {
             ], 500);
         }
     }
+
+    public function printPaidTransactions()
+    {
+        try {
+            $startDate = $this->request->getGet('startDate');
+            $endDate = $this->request->getGet('endDate');
+
+            if (!$startDate || !$endDate) {
+                return $this->failValidationErrors('Start and End dates are required.');
+            }
+
+            $data = $this->transactionServices->exportPdfPaidTransactions($startDate, $endDate);
+
+            if (empty($data)) {
+                return $this->failNotFound('No transactions paid found.');
+            }
+
+            $html = view('print/PaidPages', ['paids' => $data]);
+
+            $dompdf = new \Dompdf\Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+
+            // Tambahkan header agar jelas bahwa ini PDF
+            header('Content-Type: application/pdf');
+            $dompdf->stream('paid.pdf', ['Attachment' => false]);
+            exit;
+
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
+    public function printPendingTransactions()
+    {
+        try {
+            $startDate = $this->request->getGet('startDate');
+            $endDate = $this->request->getGet('endDate');
+
+            if (!$startDate || !$endDate) {
+                return $this->failValidationErrors('Start and End dates are required.');
+            }
+
+            $data = $this->transactionServices->exportPdfPendingTransactions($startDate, $endDate);
+
+            if (empty($data)) {
+                return $this->failNotFound('No transactions pending found.');
+            }
+
+            $html = view('print/PendingPages', ['pendings' => $data]);
+
+            $dompdf = new \Dompdf\Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+
+            // Tambahkan header agar jelas bahwa ini PDF
+            header('Content-Type: application/pdf');
+            $dompdf->stream('pending.pdf', ['Attachment' => false]);
+            exit;
+
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+     public function printCancelTransactions()
+    {
+        try {
+            $startDate = $this->request->getGet('startDate');
+            $endDate = $this->request->getGet('endDate');
+
+            if (!$startDate || !$endDate) {
+                return $this->failValidationErrors('Start and End dates are required.');
+            }
+
+            $data = $this->transactionServices->exportPdfCancelTransactions($startDate, $endDate);
+
+            if (empty($data)) {
+                return $this->failNotFound('No transactions cancel found.');
+            }
+
+            $html = view('print/CancelPages', ['pendings' => $data]);
+
+            $dompdf = new \Dompdf\Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+
+            // Tambahkan header agar jelas bahwa ini PDF
+            header('Content-Type: application/pdf');
+            $dompdf->stream('cancel.pdf', ['Attachment' => false]);
+            exit;
+
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
 
 
 

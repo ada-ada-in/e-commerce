@@ -106,7 +106,14 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('countprofit', 'Api\V1\Transactions\TransactionsController::countProfit', ['as' => 'api.transactions.countProfit']);
         $routes->get('chartmonthgraph', 'Api\V1\Transactions\TransactionsController::chartMonthGraph', ['as' => 'api.transactions.chartMonthGraph']);
         $routes->get('', 'Api\V1\Transactions\TransactionsController::getDataTransaction', ['as' => 'api.transactions.getDataTransaction']);
-        $routes->post('data/print', 'Api\V1\Transactions\TransactionsController::printDataTransactions', ['as' => 'api.transactions.printDataTransactions']);
+        $routes->get('paid/print', 'Api\V1\Transactions\TransactionsController::printPaidTransactions', ['as' => 'api.transactions.printPaidTransactions']);
+        $routes->get('data/print', 'Api\V1\Transactions\TransactionsController::printDataTransactions', ['as' => 'api.transactions.printDataTransactions']);
+        $routes->get('pending/print', 'Api\V1\Transactions\TransactionsController::printPendingTransactions', ['as' => 'api.transactions.printPendingTransactions']);
+        $routes->get('cancel/print', 'Api\V1\Transactions\TransactionsController::printCancelTransactions', ['as' => 'api.transactions.printCancelTransactions']);
+        $routes->get('paid/date', 'Api\V1\Transactions\TransactionsController::sortPaidTransactionByDate', ['as' => 'api.transactions.sortPaidTransactionByDate']);
+        $routes->get('pending/date', 'Api\V1\Transactions\TransactionsController::sortPendingTransactionByDate', ['as' => 'api.transactions.sortPendingTransactionByDate']);
+        $routes->get('cancel/date', 'Api\V1\Transactions\TransactionsController::sortCancelTransactionByDate', ['as' => 'api.transactions.sortCancelTransactionByDate']);
+        $routes->get('data/date', 'Api\V1\Transactions\TransactionsController::sortDataTransactionByDate', ['as' => 'api.transactions.sortDataTransactionByDate']);
         $routes->get('paid', 'Api\V1\Transactions\TransactionsController::getDataPaidTransaction', ['as' => 'api.transactions.getDataPaidTransaction']);
         $routes->get('pending', 'Api\V1\Transactions\TransactionsController::getDataPendingTransaction', ['as' => 'api.transactions.getDataPendingTransaction']);
         $routes->get('user', 'Api\V1\Transactions\TransactionsController::getDataUserTransaction', ['as' => 'api.transactions.getDataUserTransaction']);

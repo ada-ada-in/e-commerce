@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Data Transaksi</title>
+    <title>Data Transaksi Dibayarkan</title>
     
 </head>
 
@@ -17,7 +17,7 @@
 
     
 
-    <h2 class="text-center">Data Transaksi</h2>
+    <h2 class="text-center">Data Transaksi Dibayarkan</h2>
 
     <table>
         <thead>
@@ -32,15 +32,15 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($transactions as $i => $transaction): ?>
+            <?php foreach($paids as $i => $paid): ?>
             <tr> 
                 <td><?= $i + 1 ?></td>
-                <td><?= $transaction['transactions_name'] ?></td>
-                <td><?= $transaction['order_id'] ?></td>
-                <td><?= $transaction['transactions_email'] ?></td>
-                <td><?= $transaction['transactions_phone'] ?></td>
-                <td><?= $transaction['status'] ?></td>
-                <td><?= $transaction['created_at'] ?></td>
+                <td><?= $paid['transactions_name'] ?></td>
+                <td><?= $paid['order_id'] ?></td>
+                <td><?= $paid['transactions_email'] ?></td>
+                <td><?= $paid['transactions_phone'] ?></td>
+                <td><?= $paid['status'] ?></td>
+                <td><?= $paid['created_at'] ?></td>
             </tr>
             <?php endforeach ?>
         </tbody>

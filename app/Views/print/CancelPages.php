@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Data Transaksi</title>
+    <title>Data Transaksi Dibatalkan</title>
     
 </head>
 
@@ -17,7 +17,7 @@
 
     
 
-    <h2 class="text-center">Data Transaksi</h2>
+    <h2 class="text-center">Data Transaksi Dibatalkan</h2>
 
     <table>
         <thead>
@@ -27,20 +27,18 @@
                 <th>No. Order</th>
                 <th>Email</th>
                 <th>Handphone</th>
-                <th>Status Pembayaran</th>
                 <th>Tanggal</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach($transactions as $i => $transaction): ?>
+            <?php foreach($cancels as $i => $cancel): ?>
             <tr> 
                 <td><?= $i + 1 ?></td>
-                <td><?= $transaction['transactions_name'] ?></td>
-                <td><?= $transaction['order_id'] ?></td>
-                <td><?= $transaction['transactions_email'] ?></td>
-                <td><?= $transaction['transactions_phone'] ?></td>
-                <td><?= $transaction['status'] ?></td>
-                <td><?= $transaction['created_at'] ?></td>
+                <td><?= $cancel['transactions_name'] ?></td>
+                <td><?= $cancel['order_id'] ?></td>
+                <td><?= $cancel['transactions_email'] ?></td>
+                <td><?= $cancel['transactions_phone'] ?></td>
+                <td><?= $cancel['created_at'] ?></td>
             </tr>
             <?php endforeach ?>
         </tbody>

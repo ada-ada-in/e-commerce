@@ -4,6 +4,19 @@
                         <div class="card border border-0">
                             <div class="card-header bg-white">
                                 <h4 class="card-title">Pending Datatable</h4>
+                                <div class="row mb-3">
+                                    <div class="col-md-3">
+                                        <label for="startDate" class="form-label">Start Date</label>
+                                        <input type="date" id="startDate" class="form-control">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="endDate" class="form-label">End Date</label>
+                                        <input type="date" id="endDate" class="form-control">
+                                    </div>
+                                    <div class="col-md-3 d-flex align-items-end">
+                                        <button id="filterBtn" onclick="filter()" class="btn btn-primary w-100">Filter</button>
+                                    </div>
+                                </div>
                                 <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari transaksi pending...">
                                 <div>
                                     <div class="btn-group" role="group">
@@ -11,8 +24,8 @@
                                     <i class="icon-printer"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Excel</a></li>
-                                    <li><a class="dropdown-item" href="#">PDF</a></li>
+                                    <!-- <li><a class="dropdown-item" href="#">Excel</a></li> -->
+                                    <li><a class="dropdown-item" href="#" id="downloadPdf">PDF</a></li>
                                     </ul>
                                 </div>
                                 </div>

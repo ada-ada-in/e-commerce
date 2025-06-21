@@ -269,6 +269,7 @@
                     success: function (response) {
                         loadData();
                         alert(response.message);
+                        window.location.reload()
                     },
                     error: function (xhr, status, error) {
                         try {
@@ -293,54 +294,79 @@
                     }
                 });
             });
-
-
-
-
-        // Excel export functionality
-        $('#downloadExcel').on('click', function (e) {
-            e.preventDefault();
-            const ws_data = [
-                ["No", "Nama", "Email", "Telepon", "Alamat", "Role"]
-            ];
-
-            filteredUsers.forEach((user, index) => {
-                ws_data.push([
-                    index + 1,
-                    user.name,
-                    user.email,
-                    user.phone,
-                    user.address,
-                    user.role
-                ]);
-            });
-
-            const wb = XLSX.utils.book_new();
-            const ws = XLSX.utils.aoa_to_sheet(ws_data);
-            XLSX.utils.book_append_sheet(wb, ws, "Users");
-
-            XLSX.writeFile(wb, "users-data.xlsx");
-        });
-
-        // PDF export functionality
-        $('#downloadPdf').on('click', function () {
-            const doc = new jsPDF();
-            doc.setFontSize(12);
-            doc.text('Users Data', 20, 20);
-
-            let yOffset = 30;
-            filteredUsers.forEach((user, index) => {
-                doc.text(`${index + 1}. ${user.name} | ${user.email} | ${user.phone} | ${user.address} | ${user.role}`, 20, yOffset);
-                yOffset += 10;
-            });
-
-            doc.save('users-data.pdf');
-        });
     })
 
             $('#productFile').on('change', function () {
             const fileName = $(this).val().split('\\').pop();
             $('#fileLabel').text(fileName);
+        });
+
+
+    function filter() {
+        const startDate = $('#startDate').val();
+        const endDate = $('#endDate').val();
+
+        $.ajax({
+            url: '/api/v1/transactions/pending/date',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                start_date: startDate,
+                end_date: endDate
+            },
+            success: function (response) {
+                const tbody = $('#transactions-pending-data');
+                tbody.empty();
+
+                const data = Array.isArray(response.data.data) ? response.data.data : [response.data.data];
+
+                data.forEach((item, index) => {
+                    const row = `
+                        <tr>
+                            <td hidden>${item.id}</td>
+                            <td>${index + 1}</td>
+                            <td>${item.order_id}</td>
+                            <td>${item.transactions_name}</td>
+                            <td>${item.transactions_email}</td>
+                            <td>${item.transactions_phone}</td>
+                            <td>${item.total_price}</td>
+                            <td>
+                                <span class="badge">
+                                    ${item.status}
+                                </span>
+                            </td>
+                            <td>${item.updated_at}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary px-3 transaction-items" data-bs-toggle="modal" data-bs-target="#transactionitems" data-id="${item.id}">Detail Barang</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary px-3 btn-update" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="${item.id}">Edit</button>
+                                |
+                                <button class="btn btn-danger btn-delete" data-id="${item.id}">Hapus</button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.append(row);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error('Gagal memuat data transaksi:', error);
+                alert('Gagal memuat data transaksi. Silakan coba lagi.');
+            }
+        });
+    }
+    
+        $('#downloadPdf').on('click', function () {
+            const startDate = $('#startDate').val();
+            const endDate = $('#endDate').val();
+
+            if (!startDate || !endDate) {
+                alert('Please select both start and end dates.');
+                return;
+            }
+
+            const url = `/api/v1/transactions/pending/print?startDate=${encodeURIComponent(startDate)}&endDate=${encodeURIComponent(endDate)}`;
+            window.open(url, '_blank');
         });
 
 </script>

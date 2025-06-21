@@ -127,6 +127,14 @@
 #     "end_date": "2025-12-31"
 # }
     
+GET http://localhost:8080/api/v1/transactions/data/date
+content-type: application/json
+
+{
+    "start_date": "2023-01-01",
+    "end_date": "2025-01-31"
+}
+    
 
 # GET http://localhost:8080/api/v1/transactions/counttransactions
 # content-type: application/json

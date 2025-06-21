@@ -372,6 +372,117 @@ class TransactionServices {
         return $updateTransaction;
     }
 
+        public function sortDataTransactionByDateServices($startDate, $endDate)
+        {
+            if (empty($startDate) || empty($endDate)) {
+                return [
+                    'status' => false,
+                    'message' => 'Start date and end date are required',
+                    'data' => []
+                ];
+            }
+
+            $transactionData = new TransactionsModel();
+            $data = $transactionData
+                ->select('transactions.*, users.name AS transactions_name, users.email AS transactions_email, users.phone AS transactions_phone')
+                ->join('users', 'users.id = transactions.user_id')
+                ->where('transactions.created_at >=', $startDate . ' 00:00:00')
+                ->where('transactions.created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('transactions.created_at', 'DESC')
+                ->findAll();
+
+            return [
+                'status' => true,
+                'message' => 'Data retrieved successfully',
+                'data' => $data ?? []
+            ];
+        }
+
+
+        public function sortDataPaidByDateServices($startDate, $endDate)
+        {
+            if (empty($startDate) || empty($endDate)) {
+                return [
+                    'status' => false,
+                    'message' => 'Start date and end date are required',
+                    'data' => []
+                ];
+            }
+
+            $transactionData = new TransactionsModel();
+            $data = $transactionData
+                ->select('transactions.*, users.name AS transactions_name, users.email AS transactions_email, users.phone AS transactions_phone')
+                ->join('users', 'users.id = transactions.user_id')
+                ->where('status', 'settlement')
+                ->where('transactions.created_at >=', $startDate . ' 00:00:00')
+                ->where('transactions.created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('transactions.created_at', 'DESC')
+                ->findAll();
+
+            return [
+                'status' => true,
+                'message' => 'Data retrieved successfully',
+                'data' => $data ?? []
+            ];
+        }
+
+
+         public function sortDataPendingByDateServices($startDate, $endDate)
+        {
+            if (empty($startDate) || empty($endDate)) {
+                return [
+                    'status' => false,
+                    'message' => 'Start date and end date are required',
+                    'data' => []
+                ];
+            }
+
+            $transactionData = new TransactionsModel();
+            $data = $transactionData
+                ->select('transactions.*, users.name AS transactions_name, users.email AS transactions_email, users.phone AS transactions_phone')
+                ->join('users', 'users.id = transactions.user_id')
+                ->where('status', 'pending')
+                ->where('transactions.created_at >=', $startDate . ' 00:00:00')
+                ->where('transactions.created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('transactions.created_at', 'DESC')
+                ->findAll();
+
+            return [
+                'status' => true,
+                'message' => 'Data retrieved successfully',
+                'data' => $data ?? []
+            ];
+        }
+
+        public function sortDataCancelByDateServices($startDate, $endDate)
+        {
+            if (empty($startDate) || empty($endDate)) {
+                return [
+                    'status' => false,
+                    'message' => 'Start date and end date are required',
+                    'data' => []
+                ];
+            }
+
+            $transactionData = new TransactionsModel();
+            $data = $transactionData
+                ->select('transactions.*, users.name AS transactions_name, users.email AS transactions_email, users.phone AS transactions_phone')
+                ->join('users', 'users.id = transactions.user_id')
+                ->where('status', 'cancel')
+                ->where('transactions.created_at >=', $startDate . ' 00:00:00')
+                ->where('transactions.created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('transactions.created_at', 'DESC')
+                ->findAll();
+
+            return [
+                'status' => true,
+                'message' => 'Data retrieved successfully',
+                'data' => $data ?? []
+            ];
+        }
+
+
+
     public function countTransactionsServices(){
         $transactionData = new TransactionsModel();
         $data = $transactionData->where('status', 'settlement')->countAllResults(false);
@@ -453,10 +564,97 @@ class TransactionServices {
         $transactionData = new TransactionsModel();
 
         $data = $transactionData
-            ->where('created_at >=', $startDate . ' 00:00:00')
-            ->where('created_at <=', $endDate . ' 23:59:59')
-            ->orderBy('created_at', 'DESC')
-            ->findAll();
+            ->select('transactions.*, users.name AS transactions_name, users.email AS transactions_email, users.phone AS transactions_phone')
+                ->join('users', 'users.id = transactions.user_id')
+                ->where('transactions.created_at >=', $startDate . ' 00:00:00')
+                ->where('transactions.created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('transactions.created_at', 'DESC')
+                ->findAll();
+
+        return $data;
+    }
+
+        public function exportPdfPaidTransactions($startDate, $endDate)
+    {
+
+        if (empty($startDate) || empty($endDate)) {
+            throw new \Exception('Start date and end date are required');
+        }
+
+        $transactionData = new TransactionsModel();
+
+        $data = $transactionData
+            ->select('transactions.*, users.name AS transactions_name, users.email AS transactions_email, users.phone AS transactions_phone')
+                ->join('users', 'users.id = transactions.user_id')
+                ->where('status', 'settlement')
+                ->where('transactions.created_at >=', $startDate . ' 00:00:00')
+                ->where('transactions.created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('transactions.created_at', 'DESC')
+                ->findAll();
+
+        return $data;
+    }
+
+      public function exportPdfPendingTransactions($startDate, $endDate)
+    {
+
+        if (empty($startDate) || empty($endDate)) {
+            throw new \Exception('Start date and end date are required');
+        }
+
+        $transactionData = new TransactionsModel();
+
+        $data = $transactionData
+            ->select('transactions.*, users.name AS transactions_name, users.email AS transactions_email, users.phone AS transactions_phone')
+                ->join('users', 'users.id = transactions.user_id')
+                ->where('status', 'pending')
+                ->where('transactions.created_at >=', $startDate . ' 00:00:00')
+                ->where('transactions.created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('transactions.created_at', 'DESC')
+                ->findAll();
+
+        return $data;
+    }
+
+      public function exportPdfCancelTransactions($startDate, $endDate)
+    {
+
+        if (empty($startDate) || empty($endDate)) {
+            throw new \Exception('Start date and end date are required');
+        }
+
+        $transactionData = new TransactionsModel();
+
+        $data = $transactionData
+            ->select('transactions.*, users.name AS transactions_name, users.email AS transactions_email, users.phone AS transactions_phone')
+                ->join('users', 'users.id = transactions.user_id')
+                ->where('status', 'expire')
+                ->where('transactions.created_at >=', $startDate . ' 00:00:00')
+                ->where('transactions.created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('transactions.created_at', 'DESC')
+                ->findAll();
+
+        return $data;
+    }
+
+
+    public function exportPdPaidfTransactions($startDate, $endDate)
+    {
+
+        if (empty($startDate) || empty($endDate)) {
+            throw new \Exception('Start date and end date are required');
+        }
+
+        $transactionData = new TransactionsModel();
+
+        $data = $transactionData
+            ->select('transactions.*, users.name AS transactions_name, users.email AS transactions_email, users.phone AS transactions_phone')
+                ->join('users', 'users.id = transactions.user_id')
+                ->where('transactions.created_at >=', $startDate . ' 00:00:00')
+                ->where('transactions.created_at <=', $endDate . ' 23:59:59')
+                ->where('status', 'settlement')
+                ->orderBy('transactions.created_at', 'DESC')
+                ->findAll();
 
         return $data;
     }

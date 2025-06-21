@@ -38,11 +38,11 @@
                         </div>
                         <div class=" shadow-sm mb-3">
                             <label class="labels">Password</label>
-                            <input type="password" class="form-control shadow-sm" name="password" placeholder="enter password">
+                            <input type="password" class="form-control shadow-sm" name="password" placeholder="enter password" required>
                         </div>
                         <div class=" shadow-sm mb-3">
                             <label class="labels">Confirm Password</label>
-                            <input type="password" class="form-control shadow-sm" name="confirm_password" placeholder="enter confirm password">
+                            <input type="password" class="form-control shadow-sm" name="confirm_password" placeholder="enter confirm password" required>
                         </div>
                     </div>
                 </div>

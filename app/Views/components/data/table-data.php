@@ -13,7 +13,7 @@
                                         <input type="date" id="endDate" class="form-control">
                                     </div>
                                     <div class="col-md-3 d-flex align-items-end">
-                                        <button id="filterBtn" class="btn btn-primary w-100">Filter</button>
+                                        <button id="filterBtn" onclick="filter()" class="btn btn-primary w-100">Filter</button>
                                     </div>
                                 </div>
                                 <h4 class="card-title">Data Transaksi</h4>
@@ -27,8 +27,8 @@
                                     <i class="icon-printer"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Excel</a></li>
-                                    <li><a class="dropdown-item" href="#">PDF</a></li>
+                                    <!-- <li><a class="dropdown-item" href="#">Excel</a></li> -->
+                                    <li><a class="dropdown-item" href="#" id="downloadPdf">PDF</a></li>
                                     </ul>
                                 </div>
                                 </div>

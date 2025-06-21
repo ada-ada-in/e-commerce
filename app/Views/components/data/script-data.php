@@ -361,79 +361,67 @@
 }
 
 
-document.getElementById('filterBtn').addEventListener('click', () => {
-        const startDate = document.getElementById('startDate').value;
-        const endDate = document.getElementById('endDate').value;
+    function filter() {
+        const startDate = $('#startDate').val();
+        const endDate = $('#endDate').val();
 
-        if (!startDate || !endDate) {
-            alert("Mohon isi Start Date dan End Date");
-            return;
-        }
+        $.ajax({
+            url: '/api/v1/transactions/data/date',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                start_date: startDate,
+                end_date: endDate
+            },
+            success: function (response) {
+                const tbody = $('#transactions-data');
+                tbody.empty();
 
-        fetchTransactions(startDate, endDate);
-    });
-
-    function fetchTransactions(startDate, endDate) {
-        fetch('/api/v1/transactions?start_date=' + startDate + '&end_date=' + endDate)
-            .then(response => response.json())
-            .then(data => {
-                const tbody = document.getElementById('transactions-data');
-                tbody.innerHTML = ''; // Bersihkan isi sebelumnya
+                const data = Array.isArray(response.data.data) ? response.data.data : [response.data.data];
 
                 data.forEach((item, index) => {
                     const row = `
                         <tr>
+                            <td hidden>${item.id}</td>
                             <td>${index + 1}</td>
-                            <td>${item.order_number}</td>
-                            <td>${item.name}</td>
-                            <td>${item.email}</td>
-                            <td>${item.handphone}</td>
-                            <td>Rp ${item.total_harga.toLocaleString()}</td>
-                            <td>${item.status}</td>
-                            <td>${item.tanggal_transaksi}</td>
-                            <td><a href="/transactions/${item.id}" class="btn btn-sm btn-info">Detail</a></td>
-                            <td>...</td>
+                            <td>${item.order_id}</td>
+                            <td>${item.transactions_name}</td>
+                            <td>${item.transactions_email}</td>
+                            <td>${item.transactions_phone}</td>
+                            <td>${item.total_price}</td>d
+                            <td>${item.updated_at}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary px-3 transaction-items" data-bs-toggle="modal" data-bs-target="#transactionitems" data-id="${item.id}">Detail Barang</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary px-3 btn-update" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="${item.id}">Edit</button>
+                                |
+                                <button class="btn btn-danger btn-delete" data-id="${item.id}">Hapus</button>
+                            </td>
                         </tr>
                     `;
-                    tbody.insertAdjacentHTML('beforeend', row);
+                    tbody.append(row);
                 });
-            })
-            .catch(error => {
-                console.error('Error fetching transactions:', error);
-            });
+            },
+            error: function (xhr, status, error) {
+                console.error('Gagal memuat data transaksi:', error);
+                alert('Gagal memuat data transaksi. Silakan coba lagi.');
+            }
+        });
     }
+    
+        $('#downloadPdf').on('click', function () {
+            const startDate = $('#startDate').val();
+            const endDate = $('#endDate').val();
 
+            if (!startDate || !endDate) {
+                alert('Please select both start and end dates.');
+                return;
+            }
 
-    function printPDF() {
-    const start = document.getElementById('startDate').value;
-    const end = document.getElementById('endDate').value;
+            const url = `/api/v1/transactions/data/print?startDate=${encodeURIComponent(startDate)}&endDate=${encodeURIComponent(endDate)}`;
+            window.open(url, '_blank');
+        });
 
-    if (!start || !end) {
-        alert('Pilih Start dan End Date terlebih dahulu');
-        return;
-    }
-
-    fetch('/api/v1/transactions/data/print', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ start_date: start, end_date: end })
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.blob();
-        }
-        throw new Error('Gagal generate PDF');
-    })
-    .then(blob => {
-        const url = window.URL.createObjectURL(blob);
-        window.open(url, '_blank');
-    })
-    .catch(err => {
-        console.error(err);
-        alert('Terjadi kesalahan saat mencetak PDF');
-    });
-}
 
 </script>
