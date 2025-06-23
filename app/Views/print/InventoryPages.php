@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Data Kategori Barang</title>
+    <title>Data Pembelian Stok Barang</title>
     
 </head>
 
@@ -17,22 +17,24 @@
 
     
 
-    <h2 class="text-center">Data Kategori</h2>
+    <h2 class="text-center">Data Tambah Stok Barang</h2>
 
     <table>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama Kategori</th>
-                <th>Deskripsi</th>
+                <th>Nama Barang</th>
+                <th>Quantity</th>
+                <th>Tanggal</th>
                 </tr>
         </thead>
         <tbody>
-            <?php foreach($categories as $i => $category): ?>
+            <?php foreach($inventorys as $i => $inventory): ?>
             <tr> 
                 <td><?= $i + 1 ?></td>
-                <td><?= $category['name'] ?></td>
-                <td><?= $category['description'] ?></td>
+                <td><?= $inventory['product_name'] ?></td>
+                <td><?= $inventory['quantity'] ?></td>
+                <td><?= $inventory['created_at'] ?></td>
             </tr>
             <?php endforeach ?>
         </tbody>

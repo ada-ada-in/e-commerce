@@ -20,7 +20,7 @@
                                 <input type="number" class="form-control" name="price" id="edit-price" placeholder="Harga per pcs" required>
                                 </div>
                                 <div class="col-sm-6 mt-3">
-                                    <select required  id="category-edit" class="form-select" aria-label="Default select example">
+                                    <select required name="category"  id="category-edit" class="form-select" aria-label="Default select example">
                                         <option disabled selected>Pilih Kategori</option>
                                         <!-- data category -->
                                     </select>
@@ -52,3 +52,23 @@
                     </div>
                 </div>
                 </div>
+
+    <script>
+    $.ajax({
+        url: '/api/v1/category',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            const data = response.data;
+            let options = '<option value="" disabled selected>Pilih Kategori</option>';
+            data.forEach(function(category) {
+                options += `<option value="${category.id}">${category.name}</option>`;
+            });
+            $('select[name="category"]').html(options);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching products:', error);
+        }
+    });
+
+    </script>

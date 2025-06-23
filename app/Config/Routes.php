@@ -95,7 +95,7 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('', 'Api\V1\Category\CategoryController::getDataCategory', ['as' => 'api.category.getDataCategory']);
         $routes->get('print', 'Api\V1\Category\CategoryController::printDataProduct', ['as' => 'api.category.printDataProduct']);
         $routes->get('(:num)', 'Api\V1\Category\CategoryController::getDataCategoryById/$1', ['as' => 'api.category.getDataCategoryById']);
-        $routes->put('(:num)', 'Api\V1\Category\CategoryController::updateDataCategoryById/$1', ['as' => 'api.category.updateDataCategoryById']);
+        $routes->post('(:num)', 'Api\V1\Category\CategoryController::updateDataCategoryById/$1', ['as' => 'api.category.updateDataCategoryById']);
     });
 
     $routes->group('transactions', static function($routes) {
@@ -149,13 +149,15 @@ $routes->group('api/v1', static function($routes) {
         $routes->get('countproduct', 'Api\V1\Product\ProductController::countProduct', ['as' => 'api.product.countProduct']);
         $routes->get('(:num)', 'Api\V1\Product\ProductController::getDataProductById/$1', ['as' => 'api.product.getDataProductById']);
         $routes->get('userproduct/(:num)', 'Api\V1\Product\ProductController::getDataProductByCategoryId/$1', ['as' => 'api.product.getDataProductByCategoryId']);
-        $routes->put('(:num)', 'Api\V1\Product\ProductController::updateDataProductById/$1', ['as' => 'api.product.updateDataProductyById']);
+        $routes->post('(:num)', 'Api\V1\Product\ProductController::updateDataProductById/$1', ['as' => 'api.product.updateDataProductyById']);
     }); 
 
     $routes->group('stokin', static function($routes) {
         $routes->post('', 'Api\V1\StokIn\StokInController::addStokIn', ['as' => 'api.stokin.addStokIn']);
         $routes->delete('(:num)', 'Api\V1\StokIn\StokInController::deleteStokIn/$1', ['as' => 'api.stokin.deleteStokIn']);
         $routes->get('', 'Api\V1\StokIn\StokInController::getDataStokIn', ['as' => 'api.stokin.getDataStokIn']);
+        $routes->get('print', 'Api\V1\StokIn\StokInController::printDataStokIn', ['as' => 'api.stokin.printDataStokIn']);
+        $routes->get('date', 'Api\V1\StokIn\StokInController::sortStokInByDate', ['as' => 'api.stokin.sortStokInByDate']);
         $routes->get('(:num)', 'Api\V1\StokIn\StokInController::getDataStokInById/$1', ['as' => 'api.stokin.getDataStokInById']);
         $routes->put('(:num)', 'Api\V1\StokIn\StokInController::updateDataStokInById/$1', ['as' => 'api.stokin.updateDataStokInById']);
     }); 
@@ -176,9 +178,17 @@ $routes->group('api/v1', static function($routes) {
         $routes->delete('(:num)', 'Api\V1\Delivery\DeliveryController::deleteDelivery/$1', ['as' => 'api.Delivery.deleteDelivery']);
         $routes->get('', 'Api\V1\Delivery\DeliveryController::getDataDelivery', ['as' => 'api.Delivery.getDataDelivery']);
         $routes->get('send', 'Api\V1\Delivery\DeliveryController::getDataSendDelivery', ['as' => 'api.Delivery.getDataSendDelivery']);
+        $routes->get('send/date', 'Api\V1\Delivery\DeliveryController::sortSendByDate', ['as' => 'api.Delivery.sortSendByDate']);
+        $routes->get('send/print', 'Api\V1\Delivery\DeliveryController::printDataSend', ['as' => 'api.Delivery.printDataSend']);
         $routes->get('order', 'Api\V1\Delivery\DeliveryController::getDataOrderDelivery', ['as' => 'api.Delivery.getDataOrderDelivery']);
+        $routes->get('order/date', 'Api\V1\Delivery\DeliveryController::sortOrderByDate', ['as' => 'api.Delivery.sortOrderByDate']);
+        $routes->get('order/print', 'Api\V1\Delivery\DeliveryController::printDataOrder', ['as' => 'api.Delivery.printDataOrder']);
         $routes->get('complete', 'Api\V1\Delivery\DeliveryController::getDataCompleteDelivery', ['as' => 'api.Delivery.getDataCompleteDelivery']);
+        $routes->get('complete/date', 'Api\V1\Delivery\DeliveryController::sortCompleteByDate', ['as' => 'api.Delivery.sortCompleteByDate']);
+        $routes->get('complete/print', 'Api\V1\Delivery\DeliveryController::printDataComplete', ['as' => 'api.Delivery.printDataComplete']);
         $routes->get('pickup', 'Api\V1\Delivery\DeliveryController::getDataPickUpDelivery', ['as' => 'api.Delivery.getDataPickUpDelivery']);
+        $routes->get('pickup/date', 'Api\V1\Delivery\DeliveryController::sortPickUpByDate', ['as' => 'api.Delivery.sortPickUpByDate']);
+        $routes->get('pickup/print', 'Api\V1\Delivery\DeliveryController::printDataPickUp', ['as' => 'api.Delivery.printDataPickUp']);
         $routes->get('trackingnumber', 'Api\V1\Delivery\DeliveryController::getDataTrackingDelivery', ['as' => 'api.Delivery.getDataTrackingDelivery']);
         $routes->get('(:num)', 'Api\V1\Delivery\DeliveryController::getDataDeliveryById/$1', ['as' => 'api.Delivery.getDataDeliveryById']);
         $routes->get('transactions/(:num)', 'Api\V1\Delivery\DeliveryController::getDataDeliveryByTransactionsId/$1', ['as' => 'api.Delivery.getDataDeliveryByTransactionsId']);

@@ -192,6 +192,45 @@ class StokInServices {
         ];
     }
 
+
+    public function sortStokInByDateServices($startDate, $endDate)
+        {
+            if (empty($startDate) || empty($endDate)) {
+                return [
+                    'status' => false,
+                    'message' => 'Start date and end date are required',
+                    'data' => []
+                ];
+            }
+
+            $stokInData = new StokInModel();
+            $data = $stokInData
+                ->where('stok_in.created_at >=', $startDate . ' 00:00:00')
+                ->where('stok_in.created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('stok_in.created_at', 'DESC')
+                ->select('stok_in.*, product.name as product_name' )
+                ->join('product', 'stok_in.product_id = product.id')
+                ->findAll();
+
+            return [
+                'status' => true,
+                'message' => 'Data retrieved successfully',
+                'data' => $data ?? []
+            ];
+        }
+
+
+     public function exportPdfStokIn($startDate, $endDate)
+    {
+        $stokInData = new StokInModel();
+        return $stokInData->orderBy('stok_in.created_at', 'DESC')
+        ->where('stok_in.created_at >=', $startDate . ' 00:00:00')
+        ->where('stok_in.created_at <=', $endDate . ' 23:59:59')
+        ->select('stok_in.*, product.name as product_name' )
+        ->join('product', 'stok_in.product_id = product.id')
+        ->findAll();
+    } 
+
     
      
 }

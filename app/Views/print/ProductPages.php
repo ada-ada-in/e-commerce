@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Data Users</title>
+    <title>Data Produk Barang</title>
     
 </head>
 

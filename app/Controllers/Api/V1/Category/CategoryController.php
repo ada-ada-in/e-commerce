@@ -119,8 +119,23 @@ class CategoryController extends ResourceController {
     public function updateDataCategoryById($id)
     {
         try {
-            $data = $this->request->getJSON(true);
-    
+            $data = $this->request->getPost();
+            $image = $this->request->getFile('image');
+
+            if ($image && $image->isValid() && !$image->hasMoved()) {
+                if (!file_exists($image->getTempName())) {
+                    return $this->fail([
+                        'error' => 'Temporary file missing.',
+                        'debug' => $image->getTempName()
+                    ], 400);
+                }
+
+                $imageName = $image->getRandomName();
+                $image->move(FCPATH . 'uploads/', $imageName);
+
+                $data['image_url'] = 'uploads/' . $imageName;
+            }
+
             if (!$data || empty($data)) {
                 return $this->fail([
                     'status'  => false,

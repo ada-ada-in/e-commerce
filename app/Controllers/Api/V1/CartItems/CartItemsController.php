@@ -23,6 +23,10 @@ class CartItemsController extends ResourceController {
                     'error' => 'No data received.', 'debug' => $this->request->getBody()
                 ]);
             }
+
+            if (!session()->get('id')) {
+                return $this->failUnauthorized('Anda harus login terlebih dahulu.');
+            }
     
             $result = $this->cartItemServices->addCartItemServices($data);
     

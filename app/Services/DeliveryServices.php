@@ -275,6 +275,145 @@ class DeliveryServices {
     
         return $updateDelivery;
     }
+
+
+    public function sortDataOrderByDateServices($startDate, $endDate)
+        {
+            if (empty($startDate) || empty($endDate)) {
+                return [
+                    'status' => false,
+                    'message' => 'Start date and end date are required',
+                    'data' => []
+                ];
+            }
+
+            $orderData = new DeliveryModel();
+            $data = $orderData
+                ->where('created_at >=', $startDate . ' 00:00:00')
+                ->where('created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('created_at', 'DESC')
+                ->findAll();
+
+            return [
+                'status' => true,
+                'message' => 'Data retrieved successfully',
+                'data' => $data ?? []
+            ];
+        }
+
+    public function sortDataSendByDateServices($startDate, $endDate)
+        {
+            if (empty($startDate) || empty($endDate)) {
+                return [
+                    'status' => false,
+                    'message' => 'Start date and end date are required',
+                    'data' => []
+                ];
+            }
+
+            $sendData = new DeliveryModel();
+            $data = $sendData
+                ->where('created_at >=', $startDate . ' 00:00:00')
+                ->where('created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('created_at', 'DESC')
+                ->where('status', 'send')
+                ->findAll();
+
+            return [
+                'status' => true,
+                'message' => 'Data retrieved successfully',
+                'data' => $data ?? []
+            ];
+        }
+
+        public function sortDataPickUpByDateServices($startDate, $endDate)
+        {
+            if (empty($startDate) || empty($endDate)) {
+                return [
+                    'status' => false,
+                    'message' => 'Start date and end date are required',
+                    'data' => []
+                ];
+            }
+
+            $pickUp = new DeliveryModel();
+            $data = $pickUp
+                ->where('created_at >=', $startDate . ' 00:00:00')
+                ->where('created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('created_at', 'DESC')
+                ->where('status', 'pickup')
+                ->findAll();
+
+            return [
+                'status' => true,
+                'message' => 'Data retrieved successfully',
+                'data' => $data ?? []
+            ];
+        }
+
+        public function sortDataCompleteByDateServices($startDate, $endDate)
+        {
+            if (empty($startDate) || empty($endDate)) {
+                return [
+                    'status' => false,
+                    'message' => 'Start date and end date are required',
+                    'data' => []
+                ];
+            }
+
+            $completeData = new DeliveryModel();
+            $data = $completeData
+                ->where('created_at >=', $startDate . ' 00:00:00')
+                ->where('created_at <=', $endDate . ' 23:59:59')
+                ->orderBy('created_at', 'DESC')
+                ->where('status', 'complete')
+                ->findAll();
+
+            return [
+                'status' => true,
+                'message' => 'Data retrieved successfully',
+                'data' => $data ?? []
+            ];
+        }
+
+        public function exportPdfOrder($startDate, $endDate)
+    {
+        $orderData = new DeliveryModel();
+        return $orderData->orderBy('created_at', 'DESC')
+        ->where('created_at >=', $startDate . ' 00:00:00')
+        ->where('created_at <=', $endDate . ' 23:59:59')
+        ->findAll();
+    } 
+     
+        public function exportPdfSend($startDate, $endDate)
+    {
+        $sendData = new DeliveryModel();
+        return $sendData->orderBy('created_at', 'DESC')
+        ->where('created_at >=', $startDate . ' 00:00:00')
+        ->where('created_at <=', $endDate . ' 23:59:59')
+        ->where('status', 'send')
+        ->findAll();
+    } 
+     
+        public function exportPdfPickup($startDate, $endDate)
+    {
+        $pickupData = new DeliveryModel();
+        return $pickupData->orderBy('created_at', 'DESC')
+        ->where('created_at >=', $startDate . ' 00:00:00')
+        ->where('created_at <=', $endDate . ' 23:59:59')
+        ->where('status', 'pickup')
+        ->findAll();
+    } 
+     
+        public function exportPdfComplete($startDate, $endDate)
+    {
+        $completeData = new DeliveryModel();
+        return $completeData->orderBy('created_at', 'DESC')
+        ->where('created_at >=', $startDate . ' 00:00:00')
+        ->where('created_at <=', $endDate . ' 23:59:59')
+        ->where('status', 'complete')
+        ->findAll();
+    } 
      
 }
 

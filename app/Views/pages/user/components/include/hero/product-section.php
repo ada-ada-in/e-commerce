@@ -99,6 +99,13 @@
                 console.error('Failed to add product to cart:', error);
                 console.error('Response:', xhr.responseText); 
 
+                 const res = JSON.parse(xhr.responseText);
+
+                  if (res.status === 401) {
+                        alert(res.messages.error);
+                        return;
+                    }
+
                 try {
                     const res = JSON.parse(xhr.responseText);
                    

@@ -140,6 +140,11 @@ class CategoryServices {
             'description'   => $data['description'] ?? $existingCategory['description'],
         ];
 
+        if (!empty($data['image_url'])) {
+            $updateData['image_url'] = $data['image_url'];
+        }
+
+
     
         $categoryModel->update($id, $updateData);
     

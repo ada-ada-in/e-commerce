@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Data Kategori Barang</title>
+    <title>Data Barang Dikirm</title>
     
 </head>
 
@@ -17,22 +17,26 @@
 
     
 
-    <h2 class="text-center">Data Kategori</h2>
+    <h2 class="text-center">Data Pengiriman Barang</h2>
 
     <table>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama Kategori</th>
-                <th>Deskripsi</th>
+                <th>Tracking Number</th>
+                <th>Lokasi Pengiriman</th>
+                <th>Status</th>
+                <th>Tanggal</th>
                 </tr>
         </thead>
         <tbody>
-            <?php foreach($categories as $i => $category): ?>
+            <?php foreach($sends as $i => $send): ?>
             <tr> 
                 <td><?= $i + 1 ?></td>
-                <td><?= $category['name'] ?></td>
-                <td><?= $category['description'] ?></td>
+                <td><?= $send['tracking_number'] ?></td>
+                <td><?= $send['address'] ?></td>
+                <td><?= $send['status'] ?></td>
+                <td><?= $send['created_at'] ?></td>
             </tr>
             <?php endforeach ?>
         </tbody>

@@ -260,6 +260,291 @@ class DeliveryController extends ResourceController {
             ], 500);
         }
     }
+    
+
+     public function sortOrderByDate(){
+        try{
+            $startDate = $this->request->getGet('start_date');
+            $endDate = $this->request->getGet('end_date');
+
+            if (!$startDate || !$endDate) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Parameter start_date dan end_date wajib diisi.'
+                ])->setStatusCode(400);
+            }
+
+            $data = $this->deliveryServices->sortDataOrderByDateServices($startDate, $endDate);
+
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ]);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => $data,
+                'message' => 'Data retrieved succesfully'
+            ], 200);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
+
+     public function sortSendByDate(){
+        try{
+            $startDate = $this->request->getGet('start_date');
+            $endDate = $this->request->getGet('end_date');
+
+            if (!$startDate || !$endDate) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Parameter start_date dan end_date wajib diisi.'
+                ])->setStatusCode(400);
+            }
+
+            $data = $this->deliveryServices->sortDataSendByDateServices($startDate, $endDate);
+
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ]);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => $data,
+                'message' => 'Data retrieved succesfully'
+            ], 200);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
+
+     public function sortPickUpByDate(){
+        try{
+            $startDate = $this->request->getGet('start_date');
+            $endDate = $this->request->getGet('end_date');
+
+            if (!$startDate || !$endDate) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Parameter start_date dan end_date wajib diisi.'
+                ])->setStatusCode(400);
+            }
+
+            $data = $this->deliveryServices->sortDataPickUpByDateServices($startDate, $endDate);
+
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ]);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => $data,
+                'message' => 'Data retrieved succesfully'
+            ], 200);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
+
+     public function sortCompleteByDate(){
+        try{
+            $startDate = $this->request->getGet('start_date');
+            $endDate = $this->request->getGet('end_date');
+
+            if (!$startDate || !$endDate) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Parameter start_date dan end_date wajib diisi.'
+                ])->setStatusCode(400);
+            }
+
+            $data = $this->deliveryServices->sortDataCompleteByDateServices($startDate, $endDate);
+
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ]);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => $data,
+                'message' => 'Data retrieved succesfully'
+            ], 200);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
+
+    public function printDataOrder()
+    {
+        try {
+            $startDate = $this->request->getGet('startDate');
+            $endDate = $this->request->getGet('endDate');
+
+            if (!$startDate || !$endDate) {
+                return $this->failValidationErrors('Start and End dates are required.');
+            }
+
+            $data = $this->deliveryServices->exportPdfOrder($startDate, $endDate);
+
+            if (empty($data)) {
+                return $this->failNotFound('No transactions found.');
+            }
+
+            $html = view('print/OrderPages', ['orders' => $data]);
+
+            $dompdf = new \Dompdf\Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+
+            // Tambahkan header agar jelas bahwa ini PDF
+            header('Content-Type: application/pdf');
+            $dompdf->stream('orders.pdf', ['Attachment' => false]);
+            exit;
+
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+ 
+    public function printDataSend()
+    {
+        try {
+            $startDate = $this->request->getGet('startDate');
+            $endDate = $this->request->getGet('endDate');
+
+            if (!$startDate || !$endDate) {
+                return $this->failValidationErrors('Start and End dates are required.');
+            }
+
+            $data = $this->deliveryServices->exportPdfSend($startDate, $endDate);
+
+            if (empty($data)) {
+                return $this->failNotFound('No transactions found.');
+            }
+
+            $html = view('print/SendPages', ['sends' => $data]);
+
+            $dompdf = new \Dompdf\Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+
+            // Tambahkan header agar jelas bahwa ini PDF
+            header('Content-Type: application/pdf');
+            $dompdf->stream('send.pdf', ['Attachment' => false]);
+            exit;
+
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+ 
+    public function printDataPickUp()
+    {
+        try {
+            $startDate = $this->request->getGet('startDate');
+            $endDate = $this->request->getGet('endDate');
+
+            if (!$startDate || !$endDate) {
+                return $this->failValidationErrors('Start and End dates are required.');
+            }
+
+            $data = $this->deliveryServices->exportPdfPickup($startDate, $endDate);
+
+            if (empty($data)) {
+                return $this->failNotFound('No transactions found.');
+            }
+
+            $html = view('print/PickUpPages', ['pickups' => $data]);
+
+            $dompdf = new \Dompdf\Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+
+            // Tambahkan header agar jelas bahwa ini PDF
+            header('Content-Type: application/pdf');
+            $dompdf->stream('pickup.pdf', ['Attachment' => false]);
+            exit;
+
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+ 
+    public function printDataComplete()
+    {
+        try {
+            $startDate = $this->request->getGet('startDate');
+            $endDate = $this->request->getGet('endDate');
+
+            if (!$startDate || !$endDate) {
+                return $this->failValidationErrors('Start and End dates are required.');
+            }
+
+            $data = $this->deliveryServices->exportPdfComplete($startDate, $endDate);
+
+            if (empty($data)) {
+                return $this->failNotFound('No transactions found.');
+            }
+
+            $html = view('print/CompletePages', ['pickups' => $data]);
+
+            $dompdf = new \Dompdf\Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+
+            // Tambahkan header agar jelas bahwa ini PDF
+            header('Content-Type: application/pdf');
+            $dompdf->stream('complete.pdf', ['Attachment' => false]);
+            exit;
+
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
  
 }
 

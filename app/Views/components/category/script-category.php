@@ -43,7 +43,6 @@
                 contentType: false,                 
                  success: function (response) {
                     category = response.data;
-                    console.log(category);
                     filteredData = category;
                     currentPage = 1;
                     displayTable(filteredData);
@@ -124,8 +123,11 @@
                 success: function (response) {
                     const updateData = response.data 
                     $('#editmodal input[name="id"]').val(updateData.id);
-                    $('#editmodal input[name="category"]').val(updateData.name);
-                    $('#editmodal input[name="description"]').val(updateData.description);  
+                    $('#editmodal input[name="name"]').val(updateData.name);
+                    $('#editmodal input[name="description"]').val(updateData.description)
+                    $('#edit-preview').attr('src', '/' + updateData.image_url);; 
+                    $('#editmodal input[name="image_url"]').val(updateData.image_url);    
+ 
                 },
                 error: function (xhr, status, error) {
                     try {
@@ -191,49 +193,70 @@
             });
         });
 
-            $('#form-update-category').on('submit', function (e) {
-                e.preventDefault();
-                const id = $('input[name="id"]').val()
-                const form = $('#form-update-category');
-                const formData = {
-                    name: form.find('input[name="category"]').val(),
-                    description: form.find('input[name="description"]').val(),
-                };
-                $.ajax({
-                    url: `/api/v1/category/${id}`,
-                    type: 'PUT',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    data: JSON.stringify(formData),
-                    success: function (response) {
-                        const message = response.message 
-                        alert(message)
-                        loadData(); 
-                        $('#form-update-category')[0].reset();
-                    },
-                    error: function (xhr, status, error) {
-                        try {
-                            const response = JSON.parse(xhr.responseText);
-                            let errorMessage = '';
-                            if (response.messages) {
-                                for (const key in response.messages) {
-                                    if (response.messages.hasOwnProperty(key)) {
-                                        errorMessage += `${response.messages[key]}\n`;
-                                    }
-                                }
-                            } else if (response.message) {
-                                errorMessage = response.message;
-                            } else {
-                                errorMessage = 'Terjadi kesalahan yang tidak diketahui.';
-                            }
-                            alert(errorMessage); 
-                        } catch (e) {
-                            console.error('Gagal parse response error:', e);
-                            alert('Terjadi kesalahan saat memproses respons error.');
+
+    $('#form-update-category').on('submit', function (e) {
+        e.preventDefault();
+        const id = $('#edit-id').val();
+        const formData = new FormData();
+
+        formData.append('name', $('#edit-category').val());
+        formData.append('description', $('#edit-description').val());
+        const input = document.getElementById('edit-productFile');
+        const imageFile = input && input.files.length > 0 ? input.files[0] : null;
+
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+
+        $.ajax({
+            url: `/api/v1/category/${id}`,
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function (response) {
+                alert(response.message);
+                loadData();
+                $('#form-update-category')[0].reset();
+            },
+            error: function (xhr) {
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    let errorMessage = '';
+                    if (response.messages) {
+                        for (const key in response.messages) {
+                            errorMessage += `${response.messages[key]}\n`;
                         }
+                    } else if (response.message) {
+                        errorMessage = response.message;
+                    } else {
+                        errorMessage = 'Terjadi kesalahan yang tidak diketahui.';
                     }
-                });
+                    alert(errorMessage);
+                } catch (e) {
+                    console.error('Gagal parse response error:', e);
+                    alert('Terjadi kesalahan saat memproses respons error.');
+                }
+            }
         });
+    });
+
+    $('#productFile').on('change', function () {
+        const fileName = this.files[0] ? this.files[0].name : 'Choose file';
+        $('#fileLabel').text(fileName);
+    });
+
+    $('#productFile').on('change', function () {
+    const file = this.files[0];
+    if (file) {
+        console.log("Nama file:", file.name);
+        console.log("Tipe file:", file.type);
+        console.log("Ukuran file:", file.size);
+    } else {
+        console.log("Tidak ada file dipilih.");
+    }
+});
+
 
         // Excel export functionality
         $('#downloadExcel').on('click', function (e) {

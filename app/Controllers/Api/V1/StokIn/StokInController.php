@@ -2,6 +2,7 @@
 namespace App\Controllers\Api\V1\StokIn;
 use CodeIgniter\RESTful\ResourceController;
 use App\Services\StokInServices;
+use Dompdf\Dompdf;
 
 class StokInController extends ResourceController {
 
@@ -128,6 +129,76 @@ class StokInController extends ResourceController {
             return $this->fail([
                  $e->getMessage()
             ]);
+        }
+    }
+
+
+    public function sortStokInByDate(){
+        try{
+            $startDate = $this->request->getGet('start_date');
+            $endDate = $this->request->getGet('end_date');
+
+            if (!$startDate || !$endDate) {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Parameter start_date dan end_date wajib diisi.'
+                ])->setStatusCode(400);
+            }
+
+            $data = $this->stokInServices->sortStokInByDateServices($startDate, $endDate);
+
+            if(!$data || empty($data)){
+                return $this->fail([
+                    'status' => false,
+                    'message' => 'data empty'
+                ]);
+            }
+
+            return $this->respond([
+                'status' => true,
+                'data' => $data,
+                'message' => 'Data retrieved succesfully'
+            ], 200);
+
+        }catch(\Exception $e){
+            return $this->fail([
+                'status' => false,
+                'message' => $e->getMessage()
+            ],500);
+        }
+    }
+
+
+    public function printDataStokIn()
+    {
+        try {
+            $startDate = $this->request->getGet('startDate');
+            $endDate = $this->request->getGet('endDate');
+
+            if (!$startDate || !$endDate) {
+                return $this->failValidationErrors('Start and End dates are required.');
+            }
+
+            $data = $this->stokInServices->exportPdfStokIn($startDate, $endDate);
+
+            if (empty($data)) {
+                return $this->failNotFound('No Inventory found.');
+            }
+
+            $html = view('print/InventoryPages', ['inventorys' => $data]);
+
+            $dompdf = new Dompdf();
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            $dompdf->stream('data_inventory.pdf', ['Attachment' => false]);
+            exit;
+
+        } catch (\Exception $e) {
+            return $this->fail([
+                'status'  => false,
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 

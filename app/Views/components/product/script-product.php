@@ -166,6 +166,7 @@
                     $('#editmodal input[name="price"]').val(updateData.price);    
                     $('#editmodal input[name="stock"]').val(updateData.stock);    
                     $('#editmodal input[name="image_url"]').val(updateData.image_url);    
+                    $('#editmodal select[name="category"]').val(updateData.category_id);    
                     $('#edit-preview').attr('src', '/' + updateData.image_url);
                     $('#editmodal input[name="description"]').val(updateData.description);  
                 },
@@ -204,8 +205,9 @@
             formData.append('price', $('#edit-price').val());
             formData.append('category_id', $('#category-edit').val());
             formData.append('description', $('#edit-description').val());
-
             const imageFile = $('#productFile')[0].files[0];
+
+
             if (imageFile) {
                 formData.append('image', imageFile);
             }
@@ -217,12 +219,11 @@
 
             $.ajax({
                 url: `/api/v1/products/${id}`,
-                type: 'PUT',
+                type: 'POST',
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    console.log(formdata)
                     alert(response.message);
                     $('#form-update-product')[0].reset();
                     loadData();
@@ -230,7 +231,7 @@
                 error: function (xhr) {
                     try {
                         const response = JSON.parse(xhr.responseText);
-                        let errorMessage = '';
+                        let errorMessage = '';  
 
                         if (response.messages) {
                             for (const key in response.messages) {

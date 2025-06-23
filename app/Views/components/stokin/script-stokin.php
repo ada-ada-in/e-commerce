@@ -217,9 +217,67 @@
             XLSX.writeFile(wb, "users-data.xlsx");
         });
 
-       $('#downloadPdf').on('click', function () {
-            window.open('/api/v1/users/print', '_blank');
+      
+    
+        $('#downloadPdf').on('click', function () {
+            const startDate = $('#startDate').val();
+            const endDate = $('#endDate').val();
+
+            if (!startDate || !endDate) {
+                alert('Please select both start and end dates.');
+                return;
+            }
+
+            const url = `/api/v1/stokin/print?startDate=${encodeURIComponent(startDate)}&endDate=${encodeURIComponent(endDate)}`;
+            window.open(url, '_blank');
         });
 
+        
+
     });
+
+     function filter() {
+        const startDate = $('#startDate').val();
+        const endDate = $('#endDate').val();
+
+        $.ajax({
+            url: '/api/v1/stokin/date',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                start_date: startDate,
+                end_date: endDate
+            },
+            success: function (response) {
+                const tbody = $('#users_data');
+                tbody.empty();
+
+                const data = Array.isArray(response.data.data) ? response.data.data : [response.data.data];
+
+                console.log(data)
+
+                data.forEach((item, index) => {
+                    const row = `
+                        <tr>
+                            <td hidden>${item.id}</td>
+                            <td>${index + 1}</td>
+                            <td>${item.product_name}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.created_at}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary px-3 btn-update" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="${item.id}">Edit</button>
+                                |
+                                <button class="btn btn-danger btn-delete" data-id="${item.id}">Hapus</button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.append(row);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error('Gagal memuat data inventory:', error);
+                alert('Gagal memuat data inventory. Silakan coba lagi.');
+            }
+        });
+    }
 </script>

@@ -151,35 +151,45 @@ class ProductController extends ResourceController {
     public function updateDataProductById($id)
     {
         try {
-            $data = $this->request->getRawInput();
-    
+            $data = $this->request->getPost();
             $image = $this->request->getFile('image');
+
             if ($image && $image->isValid() && !$image->hasMoved()) {
-                $data['image'] = $image; 
+                if (!file_exists($image->getTempName())) {
+                    return $this->fail([
+                        'error' => 'Temporary file missing.',
+                        'debug' => $image->getTempName()
+                    ], 400);
+                }
+
+                $imageName = $image->getRandomName();
+                $image->move(FCPATH . 'uploads/', $imageName);
+
+                $data['image_url'] = 'uploads/' . $imageName;
             }
-    
+
             if (!$data || empty($data)) {
                 return $this->fail([
                     'status'  => false,
                     'message' => 'No data provided for update'
                 ], 400);
             }
-    
+
             $updatedData = $this->productServices->updateDataByProductIdServices($id, $data);
-    
+
             if (!$updatedData) {
                 return $this->fail([
                     'status'  => false,
                     'message' => 'Failed to update product'
                 ], 400);
             }
-    
+
             return $this->respondUpdated([
                 'status'  => true,
                 'data'    => $updatedData,
                 'message' => 'Data updated successfully'
             ]);
-    
+
         } catch (\Exception $e) {
             return $this->fail([
                 'status'  => false,
@@ -187,6 +197,7 @@ class ProductController extends ResourceController {
             ], 500);
         }
     }
+
 
     public function countProduct(){
         try{

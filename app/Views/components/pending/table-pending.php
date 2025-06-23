@@ -3,7 +3,6 @@
                     <div class="col-12">
                         <div class="card border border-0">
                             <div class="card-header bg-white">
-                                <h4 class="card-title">Pending Datatable</h4>
                                 <div class="row mb-3">
                                     <div class="col-md-3">
                                         <label for="startDate" class="form-label">Start Date</label>
@@ -17,6 +16,7 @@
                                         <button id="filterBtn" onclick="filter()" class="btn btn-primary w-100">Filter</button>
                                     </div>
                                 </div>
+                                <h4 class="card-title">Pending Datatable</h4>
                                 <input type="text" id="searchInput" class="form-control w-25" placeholder="Cari transaksi pending...">
                                 <div>
                                     <div class="btn-group" role="group">
