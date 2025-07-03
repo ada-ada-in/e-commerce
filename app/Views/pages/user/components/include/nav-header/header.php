@@ -62,55 +62,90 @@
       </defs>
     </svg>
 
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+      <div class="container-fluid py-2">
 
-      <div class="container-fluid">
-    <div class="row py-3 align-items-center justify-content-between">
-
-      <!-- Logo -->
-      <div class="col-6 col-md-4 col-lg-2 text-start">
-        <a href="<?= base_url('/') ?>">
+        <!-- Logo -->
+        <a class="navbar-brand" href="<?= base_url('/') ?>">
           <img src="/images/mmbarokah-logo.png" alt="logo" class="img-fluid" style="height: 60px; object-fit: cover;">
         </a>
-      </div>
 
-      <!-- Navigation Menu -->
-      <div class="d-none d-lg-block col-lg-6">
-        <ul class="navbar-nav d-flex flex-row gap-3 justify-content-center align-items-center mb-0 fw-bold text-uppercase text-dark">
-          <li class="nav-item"><a href="<?= base_url('/') ?>" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="<?= base_url('/about') ?>" class="nav-link">About</a></li>
-          <?php if (session()->get('isLoggedIn')): ?>
-            <li class="nav-item"><a href="<?= base_url('/payment') ?>" class="nav-link">Payment</a></li>
-          <?php endif; ?>
-        </ul>
-      </div>
+        <!-- Toggler for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <!-- Account & Cart -->
-      <div class="col-6 col-md-8 col-lg-4 d-flex justify-content-end align-items-center gap-3">
-        <?php if (session()->get('isLoggedIn')): ?>
-          <!-- Logged-in User -->
-          <div class="dropdown">
-            <a href="#" class="nav-link dropdown-toggle text-black" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <svg width="24" height="24"><use xlink:href="#user"></use></svg>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item" href="<?= base_url('/profile') ?>">Profile</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item text-danger" id="logout" onclick="logout()">Logout</a></li>
-            </ul>
+        <!-- Navbar Content -->
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+
+          <!-- Navigation Links -->
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-bold text-uppercase text-dark gap-lg-3 text-center">
+            <li class="nav-item">
+              <a class="nav-link" href="<?= base_url('/') ?>">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?= base_url('/about') ?>">About</a>
+            </li>
+            <?php if (session()->get('isLoggedIn')): ?>
+              <li class="nav-item">
+                <a class="nav-link" href="<?= base_url('/payment') ?>">Payment</a>
+              </li>
+            <?php endif; ?>
+          </ul>
+
+          <!-- Buttons: User & Cart -->
+          <div class="d-flex flex-column flex-lg-row align-items-center gap-2 mt-3 mt-lg-0">
+
+            <?php if (session()->get('isLoggedIn')): ?>
+              <!-- MOBILE: Akun Button (tanpa ikon) -->
+              <a href="<?= base_url('/profile') ?>" class="btn btn-outline-secondary w-100 d-block d-lg-none text-center">
+                Profile
+              </a>
+
+              <!-- MOBILE: Cart Button (tanpa ikon) -->
+              <button class="btn btn-outline-secondary w-100 d-block d-lg-none text-center"
+                data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                Keranjang
+              </button>
+
+              <a  id="logoutmobile" onclick="logout()" class="btn btn-outline-danger w-100 d-block d-lg-none text-center hover-text-danger">
+                Logout
+              </a>
+
+
+              <!-- DESKTOP: Dropdown user -->
+              <div class="dropdown d-none d-lg-block">
+                <a href="#" class="nav-link dropdown-toggle text-black d-flex align-items-center" id="userDropdown"
+                  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg width="24" height="24"><use xlink:href="#user"></use></svg>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                  <li><a class="dropdown-item" href="<?= base_url('/profile') ?>">Profile</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item text-danger" id="logout" onclick="logout()">Logout</a></li>
+                </ul>
+              </div>
+
+              <!-- DESKTOP: Cart icon -->
+              <a href="#" class="nav-link p-1 d-none d-lg-block" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                aria-controls="offcanvasCart">
+                <svg width="24" height="24"><use xlink:href="#shopping-bag"></use></svg>
+              </a>
+
+            <?php else: ?>
+              <!-- GUEST (Login/Register) -->
+              <a href="<?= base_url('/auth/login') ?>" class="btn btn-sm btn-outline-primary w-100 w-lg-auto">Login</a>
+              <a href="<?= base_url('/auth/register') ?>" class="btn btn-sm btn-primary w-100 w-lg-auto">Register</a>
+            <?php endif; ?>
+
           </div>
-
-          <a href="#" class="p-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-            <svg width="24" height="24"><use xlink:href="#shopping-bag"></use></svg>
-          </a>
-
-        <?php else: ?>
-          <!-- Guest User -->
-          <a href="<?= base_url('/auth/login') ?>" class="btn btn-sm btn-outline-primary">Login</a>
-          <a href="<?= base_url('/auth/register') ?>" class="btn btn-sm btn-primary">Register</a>
-        <?php endif; ?>
+        </div>
       </div>
-    </div>
-  </div>
+    </nav>
+
+
+
 </header>
 
 <?= view('auth/script-auth') ?>

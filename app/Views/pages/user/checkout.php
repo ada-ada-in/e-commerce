@@ -12,51 +12,55 @@
     <?= view('pages/user/components/include/nav-header/header') ?>
 
     <div class="container rounded bg-white mb-5">
-        <div class="row">
-            <div class="col-7">
-                <div class="card shadow-sm border-1 mb-3">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                            <input type="checkbox" class="me-3" id="select-all">
-                            <div class="card-title mb-0">Pilih Semua (0)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="checkout-data">
-                    <!-- Data keranjang akan dimuat di sini -->
-                </div>
+    <div class="row gy-4">
+        <!-- Keranjang (Kolom Kiri) -->
+        <div class="col-12 col-lg-7">
+        <div class="card shadow-sm border-1 mb-3">
+            <div class="card-body">
+            <div class="d-flex align-items-center">
+                <input type="checkbox" class="me-3" id="select-all">
+                <div class="card-title mb-0">Pilih Semua (0)</div>
             </div>
-
-            <div class="col-5">
-                <div class="card shadow-sm border-1">
-                    <div class="card-body">
-                        <hr>
-                        <h4 class="card-title text-center mb-4">Detail Pembayaran</h4>
-                        <div class="mb-3" id="payment-details">
-                            <!-- Rincian item akan muncul di sini -->
-                        </div>
-                        <form>
-                            <div class="mb-3">
-                                <p class="mb-1"><strong>Total Harga:</strong> <span id="total-price">Rp 0</span></p>
-                                <p class="mb-1" id="ongkos"><strong>Ongkos Kirim:</strong> Rp 10.000</p>
-                                <p><strong>Total Pembayaran:</strong> <span class="text-success" id="final-price">Rp 10.000</span></p>
-                                <select class="form-select" required id="delivery-option" aria-label="Default select example">
-                                    <option selected disabled>Pilih Metode Pengantaran</option>
-                                    <option value="order">Diantar</option>
-                                    <option value="pickup">Ambil Sendiri</option>
-                                </select>
-                                <label for="delivery-note" class="form-label"><strong>Alamat Pengiriman :</strong></label>
-                                <textarea class="form-control mb-3 shadow-sm" rows="3" id="delivery-note" placeholder="Contoh: Jl. Raya No. 123, Jambi"></textarea>
-                                </div>
-                            <div class="text-center">
-                                <button class="btn btn-primary w-100" id="payment-button" disabled>Lanjutkan Pembayaran</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
+
+        <div id="checkout-data">
+            <!-- Data keranjang akan dimuat di sini -->
+        </div>
+        </div>
+
+        <!-- Detail Pembayaran (Kolom Kanan) -->
+        <div class="col-12 col-lg-5">
+        <div class="card shadow-sm border-1">
+            <div class="card-body">
+            <hr>
+            <h4 class="card-title text-center mb-4">Detail Pembayaran</h4>
+            <div class="mb-3" id="payment-details">
+                <!-- Rincian item akan muncul di sini -->
+            </div>
+            <form>
+                <div class="mb-3">
+                <p class="mb-1"><strong>Total Harga:</strong> <span id="total-price">Rp 0</span></p>
+                <p class="mb-1" id="ongkos"><strong>Ongkos Kirim:</strong> Rp 10.000</p>
+                <p><strong>Total Pembayaran:</strong> <span class="text-success" id="final-price">Rp 10.000</span></p>
+
+                <select class="form-select" required id="delivery-option" aria-label="Pilih metode pengantaran">
+                    <option selected disabled>Pilih Metode Pengantaran</option>
+                    <option value="order">Diantar</option>
+                    <option value="pickup">Ambil Sendiri</option>
+                </select>
+
+                <label for="delivery-note" class="form-label mt-3"><strong>Alamat Pengiriman :</strong></label>
+                <textarea class="form-control mb-3 shadow-sm" rows="3" id="delivery-note" placeholder="Contoh: Jl. Raya No. 123, Jambi"></textarea>
+                </div>
+                <div class="text-center">
+                <button class="btn btn-primary w-100" id="payment-button" disabled>Lanjutkan Pembayaran</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
     </div>
 
     <script>

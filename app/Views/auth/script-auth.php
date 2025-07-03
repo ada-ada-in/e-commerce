@@ -147,6 +147,45 @@
 
         logout(); 
 
+
+        function logoutmobile() {
+            $('#logoutmobile').on('click', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: '/api/v1/auth/logout',
+                    type: 'POST',
+                    success: function(response) {
+                        const message = response.message;
+                        alert(message);
+                        window.location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        try {
+                            const response = JSON.parse(xhr.responseText);
+                            let errorMessage = '';
+                            if (response.messages) {
+                                for (const key in response.messages) {
+                                    if (response.messages.hasOwnProperty(key)) {
+                                        errorMessage += `${response.messages[key]}\n`;
+                                    }
+                                }
+                            } else if (response.message) {
+                                errorMessage = response.message;
+                            } else {
+                                errorMessage = 'Terjadi kesalahan yang tidak diketahui.';
+                            }
+                            alert(errorMessage);
+                        } catch (e) {
+                            console.error('Gagal parse response error:', e);
+                            alert('Terjadi kesalahan saat memproses respons error.');
+                        }
+                    }
+                });
+            });
+        }
+
+        logoutmobile(); 
+
     })
 
 </script>

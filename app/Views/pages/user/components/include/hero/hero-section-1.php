@@ -1,42 +1,42 @@
-<section style="background-image: url('/assets/organic/images/banner-1.jpg'); background-repeat: no-repeat; background-size: cover;">
+<section style="background-image: url('/assets/organic/images/toko.png'); background-repeat: no-repeat; background-size: cover;">
   <div class="container-lg">
     <div class="row">
       <div class="col-lg-6 pt-5 mt-5 text-white">
-        <h2 class="display-1 ls-1">
+        <h2 class="display-1 ls-1 text-white">
           Belanja Hemat di <span class="fw-bold text-primary">Minimarket Barokah</span><br>
           <span class="fw-bold">Desa Setris</span>
         </h2>
         <div class="d-flex gap-3">
-          <a href="#" class="btn btn-primary text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">Pesan Sekarang</a>
+          <a href="#viewall" class="btn btn-primary text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">Pesan Sekarang</a>
         </div>
         <div class="row my-5">
           <div class="col">
             <div class="row text-dark">
               <div class="col-auto">
-                <p class="fs-1 fw-bold lh-sm mb-0">100+</p>
+                <p class="fs-1 fw-bold lh-sm mb-0 text-white">100+</p>
               </div>
               <div class="col">
-                <p class="text-uppercase lh-sm mb-0">Pilihan Produk</p>
+                <p class="text-uppercase lh-sm mb-0 text-white">Pilihan Produk</p>
               </div>
             </div>
           </div>
           <div class="col">
             <div class="row text-dark">
               <div class="col-auto">
-                <p class="fs-1 fw-bold lh-sm mb-0">50rb+</p>
+                <p class="fs-1 fw-bold lh-sm mb-0 text-white">50rb+</p>
               </div>
               <div class="col">
-                <p class="text-uppercase lh-sm mb-0">Pelanggan Puas</p>
+                <p class="text-uppercase lh-sm mb-0 text-white">Pelanggan Puas</p>
               </div>
             </div>
           </div>
           <div class="col">
             <div class="row text-dark">
               <div class="col-auto">
-                <p class="fs-1 fw-bold lh-sm mb-0">10+</p>
+                <p class="fs-1 fw-bold lh-sm mb-0 text-white">10+</p>
               </div>
               <div class="col">
-                <p class="text-uppercase lh-sm mb-0">Lokasi Toko</p>
+                <p class="text-uppercase lh-sm mb-0 text-white">Lokasi Toko</p>
               </div>
             </div>
           </div>

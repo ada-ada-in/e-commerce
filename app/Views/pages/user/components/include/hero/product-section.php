@@ -5,7 +5,7 @@
                 <div class="section-header d-flex flex-wrap justify-content-between my-4">
                     <h2 class="section-title">Products</h2>
                     <div class="d-flex align-items-center">
-                        <a href="<?= base_url('/allproduct') ?>" class="btn btn-primary rounded-1">View All</a>
+                        <a href="<?= base_url('/allproduct') ?>" class="btn btn-primary rounded-1" id="viewall">View All</a>
                     </div>
                 </div>
             </div>

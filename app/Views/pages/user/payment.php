@@ -5,6 +5,19 @@
   <?= view('pages/user/components/include/nav-header/cart') ?>
   <?= view('/pages/user/components/include/nav-header/header') ?>
 
+  <style>
+  @media (max-width: 576px) {
+    .btn {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+    h3 {
+      font-size: 1.25rem;
+    }
+  }
+</style>
+
+
   <div class="container rounded bg-white mb-5">
     <div class="card shadow-sm border-0" id="payment-data">
       <!-- payment data will be injected here -->
@@ -163,20 +176,23 @@ function printSelected(id) {
     function displayItems(items) {
     let totalHarga = 0;
     let html = `
-        <div class="container mt-5">
-            <h3>Daftar Barang</h3>
-            <button class="btn btn-primary mb-3" onclick="window.location.reload()">Kembali</button>
+        <div class="container-fluid px-2 px-md-5 mt-5">
+        <h3 class="text-center mb-4">Daftar Barang</h3>
+        <div class="text-end mb-3">
+            <button class="btn btn-primary" onclick="window.location.reload()">Kembali</button>
+        </div>
+        <div class="table-responsive">
             <table id="itemsTable" class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Gambar</th>
-                        <th>Nama Barang</th>
-                        <th>Harga</th>
-                        <th>Jumlah</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <thead class="table-dark text-center align-middle">
+                <tr>
+                <th>Gambar</th>
+                <th>Nama Barang</th>
+                <th>Harga</th>
+                <th>Jumlah</th>
+                <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
     `;
 
     items.forEach(function(item) {
@@ -184,29 +200,30 @@ function printSelected(id) {
         totalHarga += subtotal;
 
         html += `
-            <tr>
-                <td><img src="${item.item_image_url}" alt="${item.productitems_name}" style="max-width: 80px; height: auto;"></td>
-                <td>${item.productitems_name}</td>
-                <td>${formatRupiah(item.items_price)}</td>
-                <td>${item.quantity}</td>
-                <td>${formatRupiah(subtotal)}</td>
-            </tr>
+        <tr>
+            <td class="text-center"><img src="${item.item_image_url}" alt="${item.productitems_name}" class="img-fluid" style="max-width: 80px;"></td>
+            <td>${item.productitems_name}</td>
+            <td>${formatRupiah(item.items_price)}</td>
+            <td>${item.quantity}</td>
+            <td>${formatRupiah(subtotal)}</td>
+        </tr>
         `;
     });
 
     html += `
-                </tbody>
+            </tbody>
             </table>
-            <div class="text-end fw-bold">
-                Total Harga: ${formatRupiah(totalHarga)}
-            </div>
+        </div>
+        <div class="text-end fw-bold mt-3">
+            Total Harga: ${formatRupiah(totalHarga)}
+        </div>
         </div>
     `;
 
     $('#payment-data').html(html); 
-
     $('#itemsTable').DataTable();
-}
+    }
+
 
 
 

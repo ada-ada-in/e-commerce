@@ -17,7 +17,7 @@
 
     <!-- best selling products -->
     <?= view('/pages/user/components/include/hero/product-section') ?>
- 
+
 
     <section class="py-5">
       <div class="container-lg">
@@ -29,7 +29,7 @@
               </div>
               <div class="card-body p-0">
                 <h5>Delivery</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+                <p class="card-text">Pengiriman cepat dan aman langsung ke lokasi Anda.</p>
               </div>
             </div>
           </div>
@@ -40,7 +40,7 @@
               </div>
               <div class="card-body p-0">
                 <h5>100% secure payment</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+                <p class="card-text">Pembayaran dijamin aman dengan sistem terenkripsi.</p>
               </div>
             </div>
           </div>
@@ -51,7 +51,7 @@
               </div>
               <div class="card-body p-0">
                 <h5>Quality guarantee</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+                <p class="card-text">Produk berkualitas dengan standar terbaik dan terpercaya.</p>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
               </div>
               <div class="card-body p-0">
                 <h5>guaranteed savings</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+                <p class="card-text">Hemat lebih banyak dengan penawaran harga terbaik.</p>
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@
               </div>
               <div class="card-body p-0">
                 <h5>Daily offers</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
+                <p class="card-text">Nikmati promo menarik dan penawaran terbaru setiap hari.</p>
               </div>
             </div>
           </div>
