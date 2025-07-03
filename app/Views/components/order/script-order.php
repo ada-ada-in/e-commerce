@@ -337,7 +337,7 @@
                         <td>${item.address}</td>
                         <td>
                         ${item.status}
-                        </td>
+                            </td>
                         <td>${item.updated_at}</td>
                         <td>
                         <button type="button" class="btn btn-primary px-3 transaction-items" data-bs-toggle="modal" data-bs-target="#transactionitems" data-id="${item.transactions_id}">Detail Barang</button>
