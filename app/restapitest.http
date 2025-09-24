@@ -1,18 +1,18 @@
 
 # # AUTH
 
-# POST http://localhost:8080/api/v1/auth/register
-# content-type: application/json
+POST http://16.78.27.193/api/v1/auth/register
+content-type: application/json
 
-# {
-#    "name": "admin",
-#    "email": "admin@example.com",
-#    "password": "password",
-#    "confirm_password": "password",
-#    "role": "admin",
-#    "address": "address Example",
-#    "phone": "081234567890"
-# }
+{
+   "name": "admin",
+   "email": "admin@gmail.com",
+   "password": "password",
+   "confirm_password": "password",
+   "role": "admin",
+   "address": "address",
+   "phone": "081234567890"
+}
 
 # POST http://localhost:8080/api/v1/auth/login
 # content-type: application/json
